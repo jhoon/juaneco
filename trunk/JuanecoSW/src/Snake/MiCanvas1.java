@@ -120,22 +120,22 @@ flushGraphics();
 
 private void cambio_coor (int estado_boton){
 
-if ((estado_boton &LEFT_PRESSED) != 0){
+if (((estado_boton &LEFT_PRESSED) != 0)&&(mov !=1)){
 if (mov != 2) {
     juaneco.movizq(escenario.getBorde());
     mov = 1;
 }
-} else if ((estado_boton &RIGHT_PRESSED) != 0){
+} else if (((estado_boton &RIGHT_PRESSED) != 0  )&&(mov !=2)){
 if (mov != 1) {
     juaneco.movder(escenario.getBorde());
     mov = 2;
 }
-} else if ((estado_boton &UP_PRESSED) != 0){
+} else if (((estado_boton &UP_PRESSED) != 0)&&(mov !=3)){
 if (mov != 4) {
     juaneco.movup(escenario.getBorde());
     mov = 3;
 }
-} else if ((estado_boton &DOWN_PRESSED) != 0){
+} else if (((estado_boton &DOWN_PRESSED) != 0)&&(mov !=4)){
 if (mov != 3) {
     juaneco.movdwn(escenario.getBorde());
     mov = 4;
