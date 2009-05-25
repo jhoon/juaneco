@@ -108,7 +108,7 @@ private void verifyGameState(){
 }
 
 private void updateGameScreen(Graphics g){
-g.setColor(0xffffff);
+g.setColor(0x00acde);
 g.fillRect(0, 0, getWidth(), getHeight());
 
 g.drawImage(juaneco.getCabeza(),juaneco.getPosicionX() , juaneco.getPosicionY(), Graphics.HCENTER|Graphics.BOTTOM);
