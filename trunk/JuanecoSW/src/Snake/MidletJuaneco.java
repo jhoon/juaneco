@@ -11,12 +11,12 @@ import javax.microedition.lcdui.Display;
 /**
  * @author Manuel Sotelo A
  */
-public class JuegoMidlet extends MIDlet {
+public class MidletJuaneco extends MIDlet {
 
-    private MiCanvas1 gamecanvas;
+    private Canvas gamecanvas;
 
-    public JuegoMidlet(){
-    gamecanvas = new MiCanvas1();
+    public MidletJuaneco(){
+    gamecanvas = new Canvas();
 
     }
 
