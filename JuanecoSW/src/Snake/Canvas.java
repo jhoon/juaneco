@@ -13,7 +13,7 @@ import java.io.IOException;
  *
  * @author Manuel Sotelo A
  */
-public class MiCanvas1 extends GameCanvas implements Runnable {
+public class Canvas extends GameCanvas implements Runnable {
 private int tiempo_ms = 50;
 private int mov;
 Juaneco juaneco = new Juaneco();
@@ -24,7 +24,7 @@ Escenario escenario = new Escenario();
 
 
 
- public MiCanvas1() {
+ public Canvas() {
  super(true);
 
  }
@@ -33,10 +33,10 @@ try{
 
 
 //Se cargan las imagenes de la cabeza de Juaneco por cada punto cardinal
-juaneco.setCabezaIzq(Image.createImage(MiCanvas1.class.getResourceAsStream("/worm2.gif")));
-juaneco.setCabezaAba(Image.createImage(MiCanvas1.class.getResourceAsStream("/worm3.gif")));
-juaneco.setCabezaDer(Image.createImage(MiCanvas1.class.getResourceAsStream("/worm4.gif")));
-juaneco.setCabezaArr(Image.createImage(MiCanvas1.class.getResourceAsStream("/worm1.gif")));
+juaneco.setCabezaIzq(Image.createImage(Canvas.class.getResourceAsStream("/worm2.gif")));
+juaneco.setCabezaAba(Image.createImage(Canvas.class.getResourceAsStream("/worm3.gif")));
+juaneco.setCabezaDer(Image.createImage(Canvas.class.getResourceAsStream("/worm4.gif")));
+juaneco.setCabezaArr(Image.createImage(Canvas.class.getResourceAsStream("/worm1.gif")));
 
 //Se carga la cabeza principal de juaneco como la cabezaIzq para empezar
 juaneco.setCabeza(juaneco.getCabezaIzq());
