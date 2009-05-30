@@ -2,104 +2,117 @@
  * To change this template, choose Tools | Templates
  * and open the template in the editor.
  */
-
 package Snake;
+
 import javax.microedition.lcdui.Image;
+import javax.microedition.lcdui.game.Sprite;
+
 /**
  *
  * @author Manuel Sotelo A
  */
 public class Juaneco extends Personajes {
-private Image cabeza;
-private Image cabezaIzq;
-private Image cabezaDer;
-private Image cabezaArr;
-private Image cabezaAba;
-private Image tronco;
-private Image troncoH;
-private Image troncoV;
-private Image cola;
-private Image colaIzq;
-private Image colaDer;
-private Image colaArr;
-private Image colaAba;
-private int Velocidad;
-private int Incremento;
 
-public Juaneco(){
-super();
-}
+    private Image cabeza;
+    private Image cabezaIzq;
+    private Image cabezaDer;
+    private Image cabezaArr;
+    private Image cabezaAba;
+    private Image tronco;
+    private Image troncoH;
+    private Image troncoV;
+    private Image cola;
+    private Image colaIzq;
+    private Image colaDer;
+    private Image colaArr;
+    private Image colaAba;
+    private int Velocidad;
+    private int Incremento;
 
- public void movder(int borde ){
-switch (borde)
-{ case 0:
-  { if ( this.getPosicionX() <= 240)
-    this.setPosicionX( this.getPosicionX() + 10);
-    else
-    this.setPosicionX(0) ;
-    break;
-  }
+    public Juaneco() {
+        super();
+    }
 
-    case 1:
-  { if ( this.getPosicionX() <= 240)
-    this.setPosicionX( this.getPosicionX() + 10);
-    break;
-  }
-}
- }
+    public void movder(int borde) {
+        switch (borde) {
+            case 0: {
+                if (this.getPosicionX() <= 240) {
+                    this.setPosicionX(this.getPosicionX() + 10);
+                } else {
+                    this.setPosicionX(0);
+                }
+                break;
+            }
 
-  public void movizq(int borde ){
-switch (borde)
-{ case 0:
-  { if ( this.getPosicionX() >= 0)
-    this.setPosicionX( this.getPosicionX() - 10);
-    else
-    this.setPosicionX(240) ;
-    break;
-  }
+            case 1: {
+                if (this.getPosicionX() <= 240) {
+                    this.setPosicionX(this.getPosicionX() + 10);
+                }
+                break;
+            }
+        }
+    }
 
-    case 1:
-  { if ( this.getPosicionX() >= 0)
-    this.setPosicionX( this.getPosicionX() - 10);
-    break;
-  }
-}
- }
-  
-public void movup(int borde ){
-switch (borde)
-{ case 0:
-  { if ( this.getPosicionY() >= 0)
-    this.setPosicionY( this.getPosicionY() - 10);
-    else
-    this.setPosicionY(290) ;
-    break;
-  }
+    public void movizq(int borde) {
+        switch (borde) {
+            case 0: {
+                if (this.getPosicionX() >= 0) {
+                    this.setPosicionX(this.getPosicionX() - 10);
+                } else {
+                    this.setPosicionX(240);
+                }
+                break;
+            }
 
-    case 1:
-  { if ( this.getPosicionY() >= 0)
-    this.setPosicionY( this.getPosicionX() - 10);
-    break;
-  }
-}
- }  
-public void movdwn(int borde ){
-switch (borde)
-{ case 0:
-  { if ( this.getPosicionY() <= 290)
-    this.setPosicionY( this.getPosicionY() + 10);
-    else
-    this.setPosicionY(0) ;
-    break;
-  }
+            case 1: {
+                if (this.getPosicionX() >= 0) {
+                    this.setPosicionX(this.getPosicionX() - 10);
+                }
+                break;
+            }
+        }
+    }
 
-    case 1:
-  { if ( this.getPosicionY() <= 290)
-    this.setPosicionY( this.getPosicionX() + 10);
-    break;
-  }
-}
- }
+    public void movup(int borde) {
+        switch (borde) {
+            case 0: {
+                if (this.getPosicionY() >= 0) {
+                    this.setPosicionY(this.getPosicionY() - 10);
+                } else {
+                    this.setPosicionY(290);
+                }
+                break;
+            }
+
+            case 1: {
+                if (this.getPosicionY() >= 0) {
+                    this.setPosicionY(this.getPosicionX() - 10);
+                }
+                break;
+            }
+        }
+    }
+
+    public void movdwn(int borde) {
+        switch (borde) {
+            case 0: {
+                if (this.getPosicionY() <= 290) {
+                    this.setPosicionY(this.getPosicionY() + 10);
+                } else {
+                    this.setPosicionY(0);
+                }
+                break;
+            }
+
+            case 1: {
+                if (this.getPosicionY() <= 290) {
+                    this.setPosicionY(this.getPosicionX() + 10);
+                }
+                break;
+            }
+        }
+    }
+
     /**
      * @return the Velocidad
      */
@@ -309,5 +322,4 @@ switch (borde)
     public void setColaAba(Image colaAba) {
         this.colaAba = colaAba;
     }
-
 }
