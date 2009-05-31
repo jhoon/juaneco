@@ -28,11 +28,13 @@ public class Canvas extends GameCanvas implements Runnable {
     private final int centrox = getWidth() / 2;
     private final int centroy = getHeight() / 2;
     private final int tiempo_ms = 50;
-    private final int posicion1 = lado / 10;
+    private final int posicion1 = lado / 40;
 // Variables del juego
     private int mov;
     private int choque = 0;
-    private int[][] posicion = new int[lado / 5][lado / 5];
+    private int[][] posicion = new int[lado / 20][lado / 20];
+    int arx ;//Lo del arreglo pra X
+    int ary ;//Lo del arrego para Y
 
     public Canvas() {
         super(true);
@@ -49,20 +51,22 @@ public class Canvas extends GameCanvas implements Runnable {
             escenario.setFondo(Image.createImage(Canvas.class.getResourceAsStream("/fondo1.jpg")));
 // Se inicializa a juaneco, escenario y comida
             juaneco.setIncremento(0);
-            juaneco.setPosicionX(lado / 10);
-            juaneco.setPosicionY(lado / 10);
+            juaneco.setPosicionX(lado / 40);
+            juaneco.setPosicionY(lado / 40);
             animal.setPosicionX(rndx.nextInt(getWidth()));
             animal.setPosicionY(rndy.nextInt(getHeight()));
             escenario.setBorde(0);
             juaneco.setVelocidad(5);
-
+            arx =  ((juaneco.getPosicionX()) -1);
+            ary =  ((juaneco.getPosicionY()) -1);
 // Se crea la matriz de movimiento
-            for (int i = 0; i < lado/5; i++) {
-                for (int j = 0; j < lado/5; j++) {
-                    if ((i == (juaneco.getPosicionX()/5-1))&(j == (juaneco.getPosicionY()/5)-1))
-                    posicion[i][j] = 1;
-                    else
-                    posicion[i][j] = 0;
+            for (int i = 0; i < lado / 20; i++) {
+                for (int j = 0; j < lado / 20; j++) {
+                    if ((i == (lado/20 - 1)) & (j == (lado/20 - 1))) {
+                        posicion[i][j] = 1;
+                    } else {
+                        posicion[i][j] = 0;
+                    }
                 }
             }
 
@@ -104,7 +108,7 @@ public class Canvas extends GameCanvas implements Runnable {
         if (mov == 1) {
             juaneco.movizq(escenario.getBorde(), lado);
             juaneco.setCabeza(juaneco.getCabezaIzq());
-            posicion[juaneco.getPosicionX()][juaneco.getPosicionY()] = 1;
+            //posicion[arx/20][ary/20] = 1;
 
         }
 
@@ -150,33 +154,30 @@ public class Canvas extends GameCanvas implements Runnable {
             g.drawImage(animal.getFigura(), animal.getPosicionX(), animal.getPosicionY(), Graphics.HCENTER | Graphics.BOTTOM);
         }
 
-        g.drawString("posicion1posicion2" + posicion[juaneco.getPosicionX() / 5 - 1][juaneco.getPosicionY() / 5 - 1], centrox, centroy - juaneco.getVelocidad(), Graphics.BASELINE | Graphics.HCENTER);
+
+        g.drawString("posicion1posicion2 "+posicion[arx][ary], centrox, centroy - juaneco.getVelocidad(), Graphics.BASELINE | Graphics.HCENTER);
         flushGraphics();
 
     }
 
     private void cambio_coor(int estado_boton) {
+if ((arx >= 0)&(arx <= lado/40)&(ary >= 0)&(ary <= lado/40))
+        if (((estado_boton & LEFT_PRESSED) != 0)&(posicion[arx - 1][ary] == 0)) {
 
-        if (((estado_boton & LEFT_PRESSED) != 0) && (mov != 1)) {
-            if (mov != 2) {
-                juaneco.movizq(escenario.getBorde(), lado);
-                mov = 1;
-            }
-        } else if (((estado_boton & RIGHT_PRESSED) != 0) && (mov != 2)) {
-            if (mov != 1) {
-                juaneco.movder(escenario.getBorde(), lado);
-                mov = 2;
-            }
-        } else if (((estado_boton & UP_PRESSED) != 0) && (mov != 3)) {
-            if (mov != 4) {
-                juaneco.movup(escenario.getBorde(), lado);
-                mov = 3;
-            }
-        } else if (((estado_boton & DOWN_PRESSED) != 0) && (mov != 4)) {
-            if (mov != 3) {
-                juaneco.movdwn(escenario.getBorde(), lado);
-                mov = 4;
-            }
+            juaneco.movizq(escenario.getBorde(), lado);
+            mov =1 ;
+        } else if (((estado_boton & RIGHT_PRESSED) != 0)&(posicion[arx + 1][ary] == 0)) {
+
+            juaneco.movder(escenario.getBorde(), lado);
+            mov = 2;
+        } else if (((estado_boton & UP_PRESSED) != 0)&(posicion[arx][ary - 1] == 0)) {
+
+            juaneco.movup(escenario.getBorde(), lado);
+            mov =3;
+        } else if (((estado_boton & DOWN_PRESSED) != 0)&(posicion[arx][ary + 1] == 0)) {
+
+            juaneco.movdwn(escenario.getBorde(), lado);
+            mov =4;
         }
 
     }
