@@ -4,8 +4,8 @@
  */
 package Snake;
 
+import java.io.IOException;
 import javax.microedition.lcdui.Image;
-import javax.microedition.lcdui.game.Sprite;
 
 /**
  *
@@ -33,11 +33,11 @@ public class Juaneco extends Personajes {
         super();
     }
 
-    public void movder(int borde) {
+    public void movder(int borde, int lado) {
         switch (borde) {
             case 0: {
-                if (this.getPosicionX() <= 240) {
-                    this.setPosicionX(this.getPosicionX() + 10);
+                if (this.getPosicionX() <= lado) {
+                    this.setPosicionX(this.getPosicionX() + this.getVelocidad());
                 } else {
                     this.setPosicionX(0);
                 }
@@ -45,59 +45,66 @@ public class Juaneco extends Personajes {
             }
 
             case 1: {
-                if (this.getPosicionX() <= 240) {
-                    this.setPosicionX(this.getPosicionX() + 10);
+                if (this.getPosicionX() <= lado) {
+                    this.setPosicionX(this.getPosicionX() + this.getVelocidad());
                 }
                 break;
             }
         }
     }
 
-    public void movizq(int borde) {
+    public void movizq(int borde, int lado) {
         switch (borde) {
             case 0: {
                 if (this.getPosicionX() >= 0) {
-                    this.setPosicionX(this.getPosicionX() - 10);
+                    this.setPosicionX(this.getPosicionX() - this.getVelocidad());
                 } else {
-                    this.setPosicionX(240);
+                    this.setPosicionX(lado);
                 }
                 break;
             }
 
             case 1: {
                 if (this.getPosicionX() >= 0) {
-                    this.setPosicionX(this.getPosicionX() - 10);
+                    this.setPosicionX(this.getPosicionX() - this.getVelocidad());
                 }
                 break;
             }
         }
     }
+    public void cargaim() throws IOException{
+            this.setCabezaIzq(Image.createImage(Canvas.class.getResourceAsStream("/worm2.gif")));
+            this.setCabezaAba(Image.createImage(Canvas.class.getResourceAsStream("/worm3.gif")));
+            this.setCabezaDer(Image.createImage(Canvas.class.getResourceAsStream("/worm4.gif")));
+            this.setCabezaArr(Image.createImage(Canvas.class.getResourceAsStream("/worm1.gif")));
+                        this.setCabeza(this.getCabezaArr());
 
-    public void movup(int borde) {
+    }
+    public void movup(int borde, int lado) {
         switch (borde) {
             case 0: {
                 if (this.getPosicionY() >= 0) {
-                    this.setPosicionY(this.getPosicionY() - 10);
+                    this.setPosicionY(this.getPosicionY() - this.getVelocidad());
                 } else {
-                    this.setPosicionY(290);
+                    this.setPosicionY(lado);
                 }
                 break;
             }
 
             case 1: {
                 if (this.getPosicionY() >= 0) {
-                    this.setPosicionY(this.getPosicionX() - 10);
+                    this.setPosicionY(this.getPosicionX() - this.getVelocidad());
                 }
                 break;
             }
         }
     }
 
-    public void movdwn(int borde) {
+    public void movdwn(int borde, int lado) {
         switch (borde) {
             case 0: {
-                if (this.getPosicionY() <= 290) {
-                    this.setPosicionY(this.getPosicionY() + 10);
+                if (this.getPosicionY() <= lado) {
+                    this.setPosicionY(this.getPosicionY() + this.getVelocidad());
                 } else {
                     this.setPosicionY(0);
                 }
@@ -105,7 +112,7 @@ public class Juaneco extends Personajes {
             }
 
             case 1: {
-                if (this.getPosicionY() <= 290) {
+                if (this.getPosicionY() <= lado) {
                     this.setPosicionY(this.getPosicionX() + 10);
                 }
                 break;
