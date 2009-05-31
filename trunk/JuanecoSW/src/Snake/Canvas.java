@@ -28,11 +28,10 @@ public class Canvas extends GameCanvas implements Runnable {
     private final int centrox = getWidth() / 2;
     private final int centroy = getHeight() / 2;
     private final int tiempo_ms = 50;
-    private final int posicion1 = lado / 40;
 // Variables del juego
     private int mov;
     private int choque = 0;
-    private int[][] posicion = new int[lado / 20][lado / 20];
+    private int[][] posicion = new int[lado / 16][lado / 16];
     int arx ;//Lo del arreglo pra X
     int ary ;//Lo del arrego para Y
 
@@ -51,18 +50,18 @@ public class Canvas extends GameCanvas implements Runnable {
             escenario.setFondo(Image.createImage(Canvas.class.getResourceAsStream("/fondo1.jpg")));
 // Se inicializa a juaneco, escenario y comida
             juaneco.setIncremento(0);
-            juaneco.setPosicionX(lado / 40);
-            juaneco.setPosicionY(lado / 40);
+            juaneco.setPosicionX(lado/2);
+            juaneco.setPosicionY(lado/2);
             animal.setPosicionX(rndx.nextInt(getWidth()));
             animal.setPosicionY(rndy.nextInt(getHeight()));
-            escenario.setBorde(0);
+            escenario.setBorde(1);
             juaneco.setVelocidad(5);
-            arx =  ((juaneco.getPosicionX()) -1);
-            ary =  ((juaneco.getPosicionY()) -1);
+            arx =  lado/32 -1;
+            ary =  lado/32 -1;
 // Se crea la matriz de movimiento
-            for (int i = 0; i < lado / 20; i++) {
-                for (int j = 0; j < lado / 20; j++) {
-                    if ((i == (lado/20 - 1)) & (j == (lado/20 - 1))) {
+            for (int i = 0; i < lado / 16; i++) {
+                for (int j = 0; j < lado / 16; j++) {
+                    if ((i == (arx)) & (j == (ary - 1))) {
                         posicion[i][j] = 1;
                     } else {
                         posicion[i][j] = 0;
@@ -140,6 +139,7 @@ public class Canvas extends GameCanvas implements Runnable {
     }
 
     private void verifyGameState() {
+        
     }
 
     private void updateGameScreen(Graphics g) {
@@ -161,7 +161,6 @@ public class Canvas extends GameCanvas implements Runnable {
     }
 
     private void cambio_coor(int estado_boton) {
-if ((arx >= 0)&(arx <= lado/40)&(ary >= 0)&(ary <= lado/40))
         if (((estado_boton & LEFT_PRESSED) != 0)&(posicion[arx - 1][ary] == 0)) {
 
             juaneco.movizq(escenario.getBorde(), lado);
