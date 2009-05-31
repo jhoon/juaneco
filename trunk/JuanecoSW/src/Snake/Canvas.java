@@ -104,25 +104,25 @@ public class Canvas extends GameCanvas implements Runnable {
     }
 
     private void movcon() {
-        if (mov == 1) {
+        arx = juaneco.getPosicionX()/16;
+        ary = juaneco.getPosicionY()/16;
+        if (posicion[arx-1][ary]==0) {
             juaneco.movizq(escenario.getBorde(), lado);
             juaneco.setCabeza(juaneco.getCabezaIzq());
             //posicion[arx/20][ary/20] = 1;
 
         }
 
-        if (mov == 2) {
+        if (posicion[arx+1][ary]==0) {
             juaneco.movder(escenario.getBorde(), lado);
             juaneco.setCabeza(juaneco.getCabezaDer());
         }
-        if (mov == 3) {
+        if (posicion[arx][ary-1]==0) {
 
             juaneco.movup(escenario.getBorde(), lado);
             juaneco.setCabeza(juaneco.getCabezaArr());
-
-
         }
-        if (mov == 4) {
+        if (posicion[arx][ary+1]==0) {
 
             juaneco.movdwn(escenario.getBorde(), lado);
             juaneco.setCabeza(juaneco.getCabezaAba());
@@ -162,21 +162,24 @@ public class Canvas extends GameCanvas implements Runnable {
 
     private void cambio_coor(int estado_boton) {
         if (((estado_boton & LEFT_PRESSED) != 0)&(posicion[arx - 1][ary] == 0)) {
-
             juaneco.movizq(escenario.getBorde(), lado);
-            mov =1 ;
+            posicion[arx][ary] = 1;
+            posicion[arx+1][ary]=0;
         } else if (((estado_boton & RIGHT_PRESSED) != 0)&(posicion[arx + 1][ary] == 0)) {
 
             juaneco.movder(escenario.getBorde(), lado);
-            mov = 2;
+            posicion[arx][ary] = 1;
+            posicion[arx-1][ary]=0;
         } else if (((estado_boton & UP_PRESSED) != 0)&(posicion[arx][ary - 1] == 0)) {
 
             juaneco.movup(escenario.getBorde(), lado);
-            mov =3;
+            posicion[arx][ary] = 1;
+            posicion[arx][ary+1]=0;
         } else if (((estado_boton & DOWN_PRESSED) != 0)&(posicion[arx][ary + 1] == 0)) {
 
             juaneco.movdwn(escenario.getBorde(), lado);
-            mov =4;
+            posicion[arx][ary] = 1;
+            posicion[arx][ary-1]=0;
         }
 
     }
