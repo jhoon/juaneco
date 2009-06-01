@@ -81,6 +81,15 @@ public class Juaneco extends Personajes {
             this.setCabezaArr(Image.createImage(Canvas.class.getResourceAsStream("/cab2.gif")));
             this.setTroncoH(Image.createImage(Canvas.class.getResourceAsStream("/cuerpo1.gif")));
             this.setTroncoV(Image.createImage(Canvas.class.getResourceAsStream("/cuerpo2.gif")));
+            this.setCodo1(Image.createImage(Canvas.class.getResourceAsStream("/codo1.gif")));
+            this.setCodo2(Image.createImage(Canvas.class.getResourceAsStream("/codo2.gif")));
+            this.setCodo3(Image.createImage(Canvas.class.getResourceAsStream("/codo3.gif")));
+            this.setCodo4(Image.createImage(Canvas.class.getResourceAsStream("/codo4.gif")));
+            this.setColaDer(Image.createImage(Canvas.class.getResourceAsStream("/cola1.gif")));
+            this.setColaAba(Image.createImage(Canvas.class.getResourceAsStream("/cola2.gif")));
+            this.setColaIzq(Image.createImage(Canvas.class.getResourceAsStream("/cola3.gif")));
+            this.setColaArr(Image.createImage(Canvas.class.getResourceAsStream("/cola4.gif")));
+
             this.setCabeza(this.getCabezaArr());
 
     }
