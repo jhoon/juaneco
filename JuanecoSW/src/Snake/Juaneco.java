@@ -73,10 +73,12 @@ public class Juaneco extends Personajes {
         }
     }
     public void cargaim() throws IOException{
-            this.setCabezaIzq(Image.createImage(Canvas.class.getResourceAsStream("/cabezitaa1.gif")));
-            this.setCabezaAba(Image.createImage(Canvas.class.getResourceAsStream("/cabezitaa4.gif")));
-            this.setCabezaDer(Image.createImage(Canvas.class.getResourceAsStream("/cabezitaa3.gif")));
-            this.setCabezaArr(Image.createImage(Canvas.class.getResourceAsStream("/cabezitaa2.gif")));
+            this.setCabezaIzq(Image.createImage(Canvas.class.getResourceAsStream("/cab1.gif")));
+            this.setCabezaAba(Image.createImage(Canvas.class.getResourceAsStream("/cab4.gif")));
+            this.setCabezaDer(Image.createImage(Canvas.class.getResourceAsStream("/cab3.gif")));
+            this.setCabezaArr(Image.createImage(Canvas.class.getResourceAsStream("/cab2.gif")));
+            this.setTroncoH(Image.createImage(Canvas.class.getResourceAsStream("/cuerpo1.gif")));
+            this.setTroncoV(Image.createImage(Canvas.class.getResourceAsStream("/cuerpo2.gif")));
                         this.setCabeza(this.getCabezaArr());
 
     }
