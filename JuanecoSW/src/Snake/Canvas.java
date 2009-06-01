@@ -21,7 +21,6 @@ public class Canvas extends GameCanvas implements Runnable {
 
     Random rnd = new Random();
 // Atributos de escenario (animales, jugador, fondo, etc)
-    Juaneco juan = new Juaneco();
     Juaneco juaneco = new Juaneco();
     Escenario escenario = new Escenario();
     Animales animal1 = new Animales();
@@ -303,11 +302,11 @@ public class Canvas extends GameCanvas implements Runnable {
                         mov = 2;
                         cabeza = true;
                         break;
-                    }
+                    }}
                     if (cabeza) {
                         break;
                     }
-                }
+                
             }
 
         } else if ((estado_boton & UP_PRESSED) != 0) {
