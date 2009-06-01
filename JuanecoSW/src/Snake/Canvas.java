@@ -53,7 +53,7 @@ public class Canvas extends GameCanvas implements Runnable {
             juaneco.cargaim();
             animal1.setFigura(Image.createImage(Canvas.class.getResourceAsStream("/rat.jpg")));
             animal2.setFigura(Image.createImage(Canvas.class.getResourceAsStream("/rat.jpg")));
-            escenario.setFondo(Image.createImage(Canvas.class.getResourceAsStream("/fondo111.jpg")));
+            escenario.setFondo(Image.createImage(Canvas.class.getResourceAsStream("/fondito.jpg")));
             obsta1.setObstaculo(Image.createImage(Canvas.class.getResourceAsStream("/rat.jpg")));
             obsta2.setObstaculo(Image.createImage(Canvas.class.getResourceAsStream("/rat.jpg")));
             obsta3.setObstaculo(Image.createImage(Canvas.class.getResourceAsStream("/rat.jpg")));
