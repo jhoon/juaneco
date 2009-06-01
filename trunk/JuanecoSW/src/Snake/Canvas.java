@@ -34,7 +34,6 @@ public class Canvas extends GameCanvas implements Runnable {
     private int mov;
     private int[][] posesc = new int[lado / 16][lado / 16]; // posicion escenario
     private int[][] poscel = new int[lado / 16][lado / 16]; //posicion celular px
-    
 
     public Canvas() {
         super(true);
@@ -59,7 +58,7 @@ public class Canvas extends GameCanvas implements Runnable {
 
             for (int i = 0; i < lado / 16; i++) {
                 for (int j = 0; j < lado / 16; j++) {
-                    poscel[i][j] = i * j * 8;
+                    poscel[i][j] = (i+1) * (j+1) * 8;
 
                 }
             }
@@ -144,25 +143,19 @@ public class Canvas extends GameCanvas implements Runnable {
 
     private void cambio_coor(int estado_boton) {
 
-
         if (((estado_boton & LEFT_PRESSED) != 0)) {
-
-
-            if (((estado_boton & LEFT_PRESSED) != 0)) {
-
-                juaneco.movizq(escenario.getBorde(), lado);
-                mov = 1;
-            } else if (((estado_boton & RIGHT_PRESSED) != 0)) {
-                juaneco.movder(escenario.getBorde(), lado);
-                mov = 2;
-            } else if (((estado_boton & UP_PRESSED) != 0)) {
-                juaneco.movup(escenario.getBorde(), lado);
-                mov = 3;
-            } else if (((estado_boton & DOWN_PRESSED) != 0)) {
-                juaneco.movdwn(escenario.getBorde(), lado);
-                mov = 4;
-            }
-
+            juaneco.movizq(escenario.getBorde(), lado);
+            mov = 1;
+        } else if (((estado_boton & RIGHT_PRESSED) != 0)) {
+            juaneco.movder(escenario.getBorde(), lado);
+            mov = 2;
+        } else if (((estado_boton & UP_PRESSED) != 0)) {
+            juaneco.movup(escenario.getBorde(), lado);
+            mov = 3;
+        } else if (((estado_boton & DOWN_PRESSED) != 0)) {
+            juaneco.movdwn(escenario.getBorde(), lado);
+            mov = 4;
         }
+
     }
 }
