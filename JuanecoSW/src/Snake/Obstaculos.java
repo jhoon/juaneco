@@ -4,12 +4,14 @@
  */
 
 package Snake;
+import javax.microedition.lcdui.Image;
 
 /**
  *
  * @author Manuel Sotelo A
  */
-public class Obstaculos extends Escenario {
+public class Obstaculos extends ElementoJuego {
+private Image Obstaculo;
 private int tipo;
 private int tamano;
 
@@ -43,6 +45,20 @@ super();
      */
     public void setTamano(int tamano) {
         this.tamano = tamano;
+    }
+
+    /**
+     * @return the Obstaculo
+     */
+    public Image getObstaculo() {
+        return Obstaculo;
+    }
+
+    /**
+     * @param Obstaculo the Obstaculo to set
+     */
+    public void setObstaculo(Image Obstaculo) {
+        this.Obstaculo = Obstaculo;
     }
 
 }

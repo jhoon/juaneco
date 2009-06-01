@@ -18,14 +18,16 @@ public class Juaneco extends Personajes {
     private Image cabezaDer;
     private Image cabezaArr;
     private Image cabezaAba;
-    private Image tronco;
     private Image troncoH;
     private Image troncoV;
-    private Image cola;
     private Image colaIzq;
     private Image colaDer;
     private Image colaArr;
     private Image colaAba;
+    private Image codo1;
+    private Image codo2;
+    private Image codo3;
+    private Image codo4;
     private int Velocidad;
     private int Incremento;
 
@@ -79,7 +81,7 @@ public class Juaneco extends Personajes {
             this.setCabezaArr(Image.createImage(Canvas.class.getResourceAsStream("/cab2.gif")));
             this.setTroncoH(Image.createImage(Canvas.class.getResourceAsStream("/cuerpo1.gif")));
             this.setTroncoV(Image.createImage(Canvas.class.getResourceAsStream("/cuerpo2.gif")));
-                        this.setCabeza(this.getCabezaArr());
+            this.setCabeza(this.getCabezaArr());
 
     }
     public void movup(int borde, int lado) {
@@ -164,35 +166,7 @@ public class Juaneco extends Personajes {
         this.cabeza = cabeza;
     }
 
-    /**
-     * @return the tronco
-     */
-    public Image getTronco() {
-        return tronco;
-    }
-
-    /**
-     * @param tronco the tronco to set
-     */
-    public void setTronco(Image tronco) {
-        this.tronco = tronco;
-    }
-
-    /**
-     * @return the cola
-     */
-    public Image getCola() {
-        return cola;
-    }
-
-    /**
-     * @param cola the cola to set
-     */
-    public void setCola(Image cola) {
-        this.cola = cola;
-    }
-
-    /**
+      /**
      * @return the cabezaIzq
      */
     public Image getCabezaIzq() {
@@ -330,5 +304,37 @@ public class Juaneco extends Personajes {
      */
     public void setColaAba(Image colaAba) {
         this.colaAba = colaAba;
+    }
+
+    public Image getCodo1() {
+        return codo1;
+    }
+
+    public void setCodo1(Image codo1) {
+        this.codo1 = codo1;
+    }
+
+    public Image getCodo2() {
+        return codo2;
+    }
+
+    public void setCodo2(Image codo2) {
+        this.codo2 = codo2;
+    }
+
+    public Image getCodo3() {
+        return codo3;
+    }
+
+    public void setCodo3(Image codo3) {
+        this.codo3 = codo3;
+    }
+
+    public Image getCodo4() {
+        return codo4;
+    }
+
+    public void setCodo4(Image codo4) {
+        this.codo4 = codo4;
     }
 }
