@@ -30,8 +30,10 @@ public class Canvas extends GameCanvas implements Runnable {
     private final int tiempo_ms = 50;
 // Variables del juego
     private int mov;
+    private int movant;
     private int[][] posesc = new int[lado / 16][lado / 16];
     private int[][] poscel = new int[lado / 16][lado / 16];
+    
 
     public Canvas() {
         super(true);
@@ -52,6 +54,7 @@ public class Canvas extends GameCanvas implements Runnable {
             juaneco.setVelocidad(5);
 
 // Se crea la matriz de movimiento
+
             for (int i = 0; i < lado / 16; i++) {
                 for (int j = 0; j < lado / 16; j++) {
                     poscel[i][j] = i * j * 8;
