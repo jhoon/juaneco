@@ -10,7 +10,9 @@ import javax.microedition.lcdui.game.GameCanvas;
 import java.io.IOException;
 import java.util.Random;
 
-/**
+/**a
+ *
+
  *
  * @author Manuel Sotelo A
  */
@@ -30,9 +32,8 @@ public class Canvas extends GameCanvas implements Runnable {
     private final int tiempo_ms = 50;
 // Variables del juego
     private int mov;
-
-    private int[][] posesc = new int[lado / 16][lado / 16];
-    private int[][] poscel = new int[lado / 16][lado / 16];
+    private int[][] posesc = new int[lado / 16][lado / 16]; // posicion escenario
+    private int[][] poscel = new int[lado / 16][lado / 16]; //posicion celular px
     
 
     public Canvas() {
@@ -43,21 +44,23 @@ public class Canvas extends GameCanvas implements Runnable {
     public void start() {
         try {
 
-
 //Se cargan las imagenes de la cabeza de Juaneco por cada punto cardinal
             juaneco.cargaim();
-            animal.setFigura(Image.createImage(Canvas.class.getResourceAsStream("/link.gif")));
-            escenario.setFondo(Image.createImage(Canvas.class.getResourceAsStream("/fondo1.jpg")));
+            animal.setFigura(Image.createImage(Canvas.class.getResourceAsStream("/rat.jpg")));
+            escenario.setFondo(Image.createImage(Canvas.class.getResourceAsStream("/fondo111.jpg")));
 // Se inicializa a juaneco, escenario y comida
             juaneco.setIncremento(0);
+
+
             escenario.setBorde(1);
-            juaneco.setVelocidad(5);
+
 
 // Se crea la matriz de movimiento
 
             for (int i = 0; i < lado / 16; i++) {
                 for (int j = 0; j < lado / 16; j++) {
                     poscel[i][j] = i * j * 8;
+
                 }
             }
 // Se crea la matriz de posiciones de objetos (inicializa)            
@@ -140,19 +143,26 @@ public class Canvas extends GameCanvas implements Runnable {
     }
 
     private void cambio_coor(int estado_boton) {
-        if (((estado_boton & LEFT_PRESSED) != 0)) {
-            juaneco.movizq(escenario.getBorde(), lado);
-            mov = 1;
-        } else if (((estado_boton & RIGHT_PRESSED) != 0)) {
-            juaneco.movder(escenario.getBorde(), lado);
-            mov = 2;
-        } else if (((estado_boton & UP_PRESSED) != 0)) {
-            juaneco.movup(escenario.getBorde(), lado);
-            mov = 3;
-        } else if (((estado_boton & DOWN_PRESSED) != 0)) {
-            juaneco.movdwn(escenario.getBorde(), lado);
-            mov = 4;
-        }
 
+
+        if (((estado_boton & LEFT_PRESSED) != 0)) {
+
+
+            if (((estado_boton & LEFT_PRESSED) != 0)) {
+
+                juaneco.movizq(escenario.getBorde(), lado);
+                mov = 1;
+            } else if (((estado_boton & RIGHT_PRESSED) != 0)) {
+                juaneco.movder(escenario.getBorde(), lado);
+                mov = 2;
+            } else if (((estado_boton & UP_PRESSED) != 0)) {
+                juaneco.movup(escenario.getBorde(), lado);
+                mov = 3;
+            } else if (((estado_boton & DOWN_PRESSED) != 0)) {
+                juaneco.movdwn(escenario.getBorde(), lado);
+                mov = 4;
+            }
+
+        }
     }
 }
