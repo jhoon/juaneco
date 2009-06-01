@@ -36,8 +36,10 @@ public class Canvas extends GameCanvas implements Runnable {
 // Variables del juego
     private int mov;
     private int[][] posesc = new int[lado / 16][lado / 16]; // posicion escenario
-    private int [] posx = new int[lado/16];
-    private int [] posy = new int[lado/16];
+    private int[] posx = new int[lado / 16];
+    private int[] posy = new int[lado / 16];
+    private int puntaje;
+    private boolean cabeza = false;
 
     public Canvas() {
         super(true);
@@ -64,8 +66,8 @@ public class Canvas extends GameCanvas implements Runnable {
 
             for (int i = 0; i < lado / 16; i++) {
                 for (int j = 0; j < lado / 16; j++) {
-                    posx[i]= 8 + 16*i;
-                    posy[j] = 8 + 16*j;
+                    posx[i] = 8 + 16 * i;
+                    posy[j] = 16 + 16 * j;
                     posesc[i][j] = 0;
 
                 }
@@ -73,13 +75,16 @@ public class Canvas extends GameCanvas implements Runnable {
 
 // Se colocan las primeras posiciones de juaneco
 
-            posesc[5][5] = 1;
-            posesc[5][6] = 3;
-            posesc[5][7] = 9;
+            posesc[8][8] = 1;
+            posesc[8][9] = 3;
+            posesc[8][10] = 9;
 
             if ((posesc[rnd.nextInt(lado / 16)][rnd.nextInt(lado / 16)] != 1) & (posesc[rnd.nextInt(lado / 16)][rnd.nextInt(lado / 16)] != 2) & (posesc[rnd.nextInt(lado / 16)][rnd.nextInt(lado / 16)] != 3)) {
                 posesc[rnd.nextInt(lado / 16)][rnd.nextInt(lado / 16)] = 12;
+                posesc[rnd.nextInt(lado / 16)][rnd.nextInt(lado / 16)] = 13;
             }
+            animal1.setPuntaje(100);
+            animal2.setPuntaje(200);
 
         } catch (IOException e) {
             System.err.println(e);
@@ -100,7 +105,7 @@ public class Canvas extends GameCanvas implements Runnable {
 
             updateGameScreen(getGraphics());
             try {
-                Thread.sleep(tiempo_ms);
+                Thread.sleep(100);
             } catch (InterruptedException e) {
                 e.printStackTrace();
             }
@@ -116,19 +121,18 @@ public class Canvas extends GameCanvas implements Runnable {
 
     private void movcon() {
         if (mov == 1) {
-            juaneco.movizq(escenario.getBorde(), lado);
             juaneco.setCabeza(juaneco.getCabezaIzq());
         }
         if (mov == 2) {
-            juaneco.movder(escenario.getBorde(), lado);
             juaneco.setCabeza(juaneco.getCabezaDer());
+
+
         }
         if (mov == 3) {
-            juaneco.movup(escenario.getBorde(), lado);
             juaneco.setCabeza(juaneco.getCabezaArr());
+
         }
         if (mov == 4) {
-            juaneco.movdwn(escenario.getBorde(), lado);
             juaneco.setCabeza(juaneco.getCabezaAba());
         }
 
@@ -146,8 +150,9 @@ public class Canvas extends GameCanvas implements Runnable {
         g.setColor(0xffffff);
 
         g.fillRect(0, 0, getWidth(), getHeight());
-         g.drawImage(escenario.getFondo(), lado/2, lado, Graphics.HCENTER | Graphics.BOTTOM);
+        g.drawImage(escenario.getFondo(), lado / 2, getHeight(), Graphics.HCENTER | Graphics.BOTTOM);
         dibuja(g);
+        g.drawString("Puntaje: " + puntaje, 8*lado / 9, 15*getHeight()/16  , Graphics.HCENTER | Graphics.BOTTOM);
         flushGraphics();
 
     }
@@ -156,12 +161,13 @@ public class Canvas extends GameCanvas implements Runnable {
         for (int i = 0; i < lado / 16; i++) {
             for (int j = 0; j < lado / 16; j++) {
                 switch (posesc[i][j]) {
+
                     case 1: {
                         g.drawImage(juaneco.getCabeza(), posx[i], posy[j], Graphics.HCENTER | Graphics.BOTTOM);
                         break;
                     } // Caso 1: Cabeza
                     case 2: {
-                        g.drawImage(juaneco.getTroncoH(),posx[i], posy[j], Graphics.HCENTER | Graphics.BOTTOM);
+                        g.drawImage(juaneco.getTroncoH(), posx[i], posy[j], Graphics.HCENTER | Graphics.BOTTOM);
                         break;
                     }// Caso 2: Tronco Horizonal
                     case 3: {
@@ -232,26 +238,144 @@ public class Canvas extends GameCanvas implements Runnable {
                 }
             }
         }
-
-
-
-
     }
 
     private void cambio_coor(int estado_boton) {
+        cabeza = false;
+        if ((estado_boton & LEFT_PRESSED) != 0) {
+            for (int i = 1; i < lado / 16; i++) {
+                for (int j = 0; j < lado / 16; j++) {
+                    if (posesc[i][j] == 1) {
+                        switch (posesc[i - 1][j]) {
+                            case 12: {
+                                puntaje = animal1.getPuntaje() + puntaje;
+                                posesc[i - 1][j] = 1;
+                                posesc[i][j] = 0;
+                                break;
+                            }
 
-        if (((estado_boton & LEFT_PRESSED) != 0)) {
-            juaneco.movizq(escenario.getBorde(), lado);
-            mov = 1;
-        } else if (((estado_boton & RIGHT_PRESSED) != 0)) {
-            juaneco.movder(escenario.getBorde(), lado);
-            mov = 2;
-        } else if (((estado_boton & UP_PRESSED) != 0)) {
-            juaneco.movup(escenario.getBorde(), lado);
-            mov = 3;
-        } else if (((estado_boton & DOWN_PRESSED) != 0)) {
-            juaneco.movdwn(escenario.getBorde(), lado);
-            mov = 4;
+                            case 13: {
+                                puntaje = animal2.getPuntaje() + puntaje;
+
+                                posesc[i - 1][j] = 1;
+                                posesc[i][j] = 0;
+                                break;
+                            }
+
+                        }
+                        posesc[i - 1][j] = 1;
+                        posesc[i][j] = 0;
+                        mov = 1;
+                        cabeza = true;
+                        break;
+                    }
+                    if (cabeza) {
+                        break;
+                    }
+
+
+                }
+            }
+        } else if ((estado_boton & RIGHT_PRESSED) != 0) {
+            for (int i = 0; i < (lado / 16 - 1); i++) {
+                for (int j = 0; j < lado / 16; j++) {
+                    if (posesc[i][j] == 1) {
+                        switch (posesc[i + 1][j]) {
+                            case 12: {
+                                puntaje = animal1.getPuntaje() + puntaje;
+                                posesc[i + 1][j] = 1;
+                                posesc[i][j] = 0;
+                                break;
+                            }
+
+                            case 13: {
+                                puntaje = animal2.getPuntaje() + puntaje;
+
+                                posesc[i + 1][j] = 1;
+                                posesc[i][j] = 0;
+                                break;
+                            }
+
+                        }
+                        posesc[i + 1][j] = 1;
+                        posesc[i][j] = 0;
+                        mov = 2;
+                        cabeza = true;
+                        break;
+                    }
+                    if (cabeza) {
+                        break;
+                    }
+                }
+            }
+
+        } else if ((estado_boton & UP_PRESSED) != 0) {
+            for (int i = 0; i < lado / 16; i++) {
+                for (int j = 1; j < lado / 16; j++) {
+
+                    if (posesc[i][j] == 1) {
+                      switch (posesc[i][j-1]) {
+                            case 12: {
+                                puntaje = animal1.getPuntaje() + puntaje;
+                                posesc[i][j-1] = 1;
+                                posesc[i][j] = 0;
+                                break;
+                            }
+
+                            case 13: {
+                                puntaje = animal2.getPuntaje() + puntaje;
+
+                                posesc[i][j-1] = 1;
+                                posesc[i][j] = 0;
+                                break;
+                            }
+
+                        }
+                        posesc[i][j - 1] = 1;
+                        posesc[i][j] = 0;
+                        mov = 3;
+                        cabeza = true;
+                        break;
+                    }
+                    if (cabeza) {
+                        break;
+                    }
+                }
+            }
+
+        } else if ((estado_boton & DOWN_PRESSED) != 0) {
+            for (int i = 0; i < lado / 16; i++) {
+                for (int j = 0; j < (lado / 16 - 1); j++) {
+                    if (posesc[i][j] == 1) {
+                        switch (posesc[i][j+1]) {
+                            case 12: {
+                                puntaje = animal1.getPuntaje() + puntaje;
+                                posesc[i][j+1] = 1;
+                                posesc[i][j] = 0;
+                                break;
+                            }
+
+                            case 13: {
+                                puntaje = animal2.getPuntaje() + puntaje;
+
+                                posesc[i][j+1] = 1;
+                                posesc[i][j] = 0;
+                                break;
+                            }
+
+                        }
+                        posesc[i][j + 1] = 1;
+                        posesc[i][j] = 0;
+                        mov = 4;
+                        cabeza = true;
+                        break;
+                    }
+                    if (cabeza) {
+                        break;
+                    }
+                }
+            }
+
         }
 
     }
