@@ -12,7 +12,7 @@ package Snake;
 public class Bonos extends Animales {
 private int tiempo;
 
-private Bonos()
+public Bonos()
 {
 super();
 }
