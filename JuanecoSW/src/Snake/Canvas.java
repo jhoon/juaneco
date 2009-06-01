@@ -30,7 +30,7 @@ public class Canvas extends GameCanvas implements Runnable {
     private final int tiempo_ms = 50;
 // Variables del juego
     private int mov;
-    private int movant;
+
     private int[][] posesc = new int[lado / 16][lado / 16];
     private int[][] poscel = new int[lado / 16][lado / 16];
     
