@@ -53,7 +53,7 @@ public class Canvas extends GameCanvas implements Runnable {
             escenario.setFondo(Image.createImage(Canvas.class.getResourceAsStream("/fondo111.jpg")));
             obsta1.setObstaculo(Image.createImage(Canvas.class.getResourceAsStream("/rat.jpg")));
             obsta2.setObstaculo(Image.createImage(Canvas.class.getResourceAsStream("/rat.jpg")));
-            obsta3.setObstaculo(Image.createImage(Canvas.class.getResourceAsStream("/fondo111.jpg")));
+            obsta3.setObstaculo(Image.createImage(Canvas.class.getResourceAsStream("/rat.jpg")));
 // Se inicializa a juaneco, escenario y comida
             juaneco.setIncremento(0);
             escenario.setBorde(1);
@@ -71,12 +71,12 @@ public class Canvas extends GameCanvas implements Runnable {
 
 // Se colocan las primeras posiciones de juaneco
 
-            posesc[lado / 32][lado / 32] = 1;
-            posesc[lado / 32][lado / 32 + 1] = 4;
-            posesc[lado / 32][lado / 32 + 2] = 8;
+            posesc[5][6] = 1;
+            posesc[5][7] = 2;
+            posesc[5][8] = 8;
 
             if ((posesc[rnd.nextInt(lado / 16)][rnd.nextInt(lado / 16)] != 1) & (posesc[rnd.nextInt(lado / 16)][rnd.nextInt(lado / 16)] != 2) & (posesc[rnd.nextInt(lado / 16)][rnd.nextInt(lado / 16)] != 3)) {
-                posesc[rnd.nextInt(lado / 16)][rnd.nextInt(lado / 16)] = 10;
+                posesc[rnd.nextInt(lado / 16)][rnd.nextInt(lado / 16)] = 12;
             }
 
         } catch (IOException e) {
@@ -153,73 +153,72 @@ public class Canvas extends GameCanvas implements Runnable {
         for (int i = 0; i < lado / 16; i++) {
             for (int j = 0; j < lado / 16; j++) {
                 switch (posesc[i][j]) {
-
                     case 1: {
-                        g.drawImage(juaneco.getCabeza(), poscel[i][j] / (i + 1), poscel[i][j] / (j + 1), Graphics.HCENTER | Graphics.BOTTOM);
+                        g.drawImage(juaneco.getCabeza(), poscel[i][j] / (j + 1), poscel[i][j] / (i + 1), Graphics.HCENTER | Graphics.BOTTOM);
                         break;
                     } // Caso 1: Cabeza
                     case 2: {
-                        g.drawImage(juaneco.getTroncoH(), poscel[i][j] / (i + 1), poscel[i][j] / (j + 1), Graphics.HCENTER | Graphics.BOTTOM);
+                        g.drawImage(juaneco.getTroncoH(), poscel[i][j] / (j + 1), poscel[i][j] / (i + 1), Graphics.HCENTER | Graphics.BOTTOM);
                         break;
                     }// Caso 2: Tronco Horizonal
                     case 3: {
-                        g.drawImage(juaneco.getTroncoV(), poscel[i][j] / (i + 1), poscel[i][j] / (j + 1), Graphics.HCENTER | Graphics.BOTTOM);
+                        g.drawImage(juaneco.getTroncoV(), poscel[i][j] / (j + 1), poscel[i][j] / (i + 1), Graphics.HCENTER | Graphics.BOTTOM);
                         break;
                     }// Caso 3: Tronco Vertial
                     case 4: {
-                        g.drawImage(juaneco.getCodo1(), poscel[i][j] / (i + 1), poscel[i][j] / (j + 1), Graphics.HCENTER | Graphics.BOTTOM);
+                        g.drawImage(juaneco.getCodo1(), poscel[i][j] / (j + 1), poscel[i][j] / (i + 1), Graphics.HCENTER | Graphics.BOTTOM);
                         break;
                     }// Caso 4: Codo Down-R / R-Up
                     case 5: {
-                        g.drawImage(juaneco.getCodo2(), poscel[i][j] / (i + 1), poscel[i][j] / (j + 1), Graphics.HCENTER | Graphics.BOTTOM);
+                        g.drawImage(juaneco.getCodo2(), poscel[i][j] / (j + 1), poscel[i][j] / (i + 1), Graphics.HCENTER | Graphics.BOTTOM);
                         break;
                     }// Caso 5: Codo Up-L / L-Down
                     case 6: {
-                        g.drawImage(juaneco.getCodo3(), poscel[i][j] / (i + 1), poscel[i][j] / (j + 1), Graphics.HCENTER | Graphics.BOTTOM);
+                        g.drawImage(juaneco.getCodo3(), poscel[i][j] / (j + 1), poscel[i][j] / (i + 1), Graphics.HCENTER | Graphics.BOTTOM);
                         break;
                     }// Caso 6: Codo Down - L / L -Up
                     case 7: {
-                        g.drawImage(juaneco.getCodo4(), poscel[i][j] / (i + 1), poscel[i][j] / (j + 1), Graphics.HCENTER | Graphics.BOTTOM);
+                        g.drawImage(juaneco.getCodo4(), poscel[i][j] / (j + 1), poscel[i][j] / (i + 1), Graphics.HCENTER | Graphics.BOTTOM);
                         break;
                     }// Caso 7: Codo Up - R / R - Down
                     case 8: {
-                        g.drawImage(juaneco.getColaArr(), poscel[i][j] / (i + 1), poscel[i][j] / (j + 1), Graphics.HCENTER | Graphics.BOTTOM);
+                        g.drawImage(juaneco.getColaArr(), poscel[i][j] / (j + 1), poscel[i][j] / (i + 1), Graphics.HCENTER | Graphics.BOTTOM);
                         break;
                     }// Caso 8: Cola Arriba
                     case 9: {
-                        g.drawImage(juaneco.getColaAba(), poscel[i][j] / (i + 1), poscel[i][j] / (j + 1), Graphics.HCENTER | Graphics.BOTTOM);
+                        g.drawImage(juaneco.getColaAba(), poscel[i][j] / (j + 1), poscel[i][j] / (i + 1), Graphics.HCENTER | Graphics.BOTTOM);
                         break;
                     }// Caso 9: Cola Abajo
                     case 10: {
-                        g.drawImage(juaneco.getColaDer(), poscel[i][j] / (i + 1), poscel[i][j] / (j + 1), Graphics.HCENTER | Graphics.BOTTOM);
+                        g.drawImage(juaneco.getColaDer(), poscel[i][j] / (j + 1), poscel[i][j] / (i + 1), Graphics.HCENTER | Graphics.BOTTOM);
                         break;
                     }// Caso 10: Cola Derecha
                     case 11: {
-                        g.drawImage(juaneco.getColaIzq(), poscel[i][j] / (i + 1), poscel[i][j] / (j + 1), Graphics.HCENTER | Graphics.BOTTOM);
+                        g.drawImage(juaneco.getColaIzq(), poscel[i][j] / (j + 1), poscel[i][j] / (i + 1), Graphics.HCENTER | Graphics.BOTTOM);
                         break;
                     }// Caso 11: Cola Izquierda
                     case 12: {
-                        g.drawImage(animal1.getFigura(), poscel[i][j] / (i + 1), poscel[i][j] / (j + 1), Graphics.HCENTER | Graphics.BOTTOM);
+                        g.drawImage(animal1.getFigura(), poscel[i][j] / (j + 1), poscel[i][j] / (i + 1), Graphics.HCENTER | Graphics.BOTTOM);
                         break;
                     }// Caso 12: Animal 1
                     case 13: {
-                        g.drawImage(animal2.getFigura(), poscel[i][j] / (i + 1), poscel[i][j] / (j + 1), Graphics.HCENTER | Graphics.BOTTOM);
+                        g.drawImage(animal2.getFigura(), poscel[i][j] / (j + 1), poscel[i][j] / (i + 1), Graphics.HCENTER | Graphics.BOTTOM);
                         break;
                     }// Caso 13: Animal 2
                     case 14: {
-                        g.drawImage(bono.getFigura(), poscel[i][j] / (i + 1), poscel[i][j] / (j + 1), Graphics.HCENTER | Graphics.BOTTOM);
+                        g.drawImage(bono.getFigura(), poscel[i][j] / (j + 1), poscel[i][j] / (i + 1), Graphics.HCENTER | Graphics.BOTTOM);
                         break;
                     }// Caso 14: Bono
                     case 15: {
-                        g.drawImage(obsta1.getObstaculo(), poscel[i][j] / (i + 1), poscel[i][j] / (j + 1), Graphics.HCENTER | Graphics.BOTTOM);
+                        g.drawImage(obsta1.getObstaculo(), poscel[i][j] / (j + 1), poscel[i][j] / (i + 1), Graphics.HCENTER | Graphics.BOTTOM);
                         break;
                     }// Caso 15: Obstaculo 1
                     case 16: {
-                        g.drawImage(obsta2.getObstaculo(), poscel[i][j] / (i + 1), poscel[i][j] / (j + 1), Graphics.HCENTER | Graphics.BOTTOM);
+                        g.drawImage(obsta2.getObstaculo(), poscel[i][j] / (j + 1), poscel[i][j] / (i + 1), Graphics.HCENTER | Graphics.BOTTOM);
                         break;
                     }// Caso 16: Obstaculo 2
                     case 17: {
-                        g.drawImage(obsta3.getObstaculo(), poscel[i][j] / (i + 1), poscel[i][j] / (j + 1), Graphics.HCENTER | Graphics.BOTTOM);
+                        g.drawImage(obsta3.getObstaculo(), poscel[i][j] / (j + 1), poscel[i][j] / (i + 1), Graphics.HCENTER | Graphics.BOTTOM);
                         break;
                     }// Caso 17: Obstaculo 3
                     default: {
