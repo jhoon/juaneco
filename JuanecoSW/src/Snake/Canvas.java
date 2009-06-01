@@ -187,7 +187,7 @@ public class Canvas extends GameCanvas implements Runnable {
                         break;
                     }// Caso 8: Cola Arriba
                     case 9: {
-                        g.drawImage(juaneco.getCabezaAba(), poscel[i][j] / (i + 1), poscel[i][j] / (j + 1), Graphics.HCENTER | Graphics.BOTTOM);
+                        g.drawImage(juaneco.getColaAba(), poscel[i][j] / (i + 1), poscel[i][j] / (j + 1), Graphics.HCENTER | Graphics.BOTTOM);
                         break;
                     }// Caso 9: Cola Abajo
                     case 10: {
