@@ -53,7 +53,7 @@ public class Canvas extends GameCanvas implements Runnable {
             juaneco.cargaim();
             animal1.setFigura(Image.createImage(Canvas.class.getResourceAsStream("/rat.jpg")));
             animal2.setFigura(Image.createImage(Canvas.class.getResourceAsStream("/rat.jpg")));
-            escenario.setFondo(Image.createImage(Canvas.class.getResourceAsStream("/fondito.jpg")));
+            escenario.setFondo(Image.createImage(Canvas.class.getResourceAsStream("/costa.jpg")));
             obsta1.setObstaculo(Image.createImage(Canvas.class.getResourceAsStream("/rat.jpg")));
             obsta2.setObstaculo(Image.createImage(Canvas.class.getResourceAsStream("/rat.jpg")));
             obsta3.setObstaculo(Image.createImage(Canvas.class.getResourceAsStream("/rat.jpg")));
@@ -152,7 +152,8 @@ public class Canvas extends GameCanvas implements Runnable {
         g.fillRect(0, 0, getWidth(), getHeight());
         g.drawImage(escenario.getFondo(), lado / 2, getHeight(), Graphics.HCENTER | Graphics.BOTTOM);
         dibuja(g);
-        g.drawString("Puntaje: " + puntaje, lado / 9 + 5, 15 * getHeight() / 16, Graphics.HCENTER | Graphics.BOTTOM);
+        g.drawString("Puntaje", 7*lado / 9 +9, 14*getHeight() / 16+15, Graphics.HCENTER | Graphics.BOTTOM);
+        g.drawString("" + puntaje, 7*lado /9 +9 , 15 * getHeight() / 16+10, Graphics.HCENTER | Graphics.BOTTOM);
         flushGraphics();
 
     }
