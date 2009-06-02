@@ -152,7 +152,7 @@ public class Canvas extends GameCanvas implements Runnable {
         g.fillRect(0, 0, getWidth(), getHeight());
         g.drawImage(escenario.getFondo(), lado / 2, getHeight(), Graphics.HCENTER | Graphics.BOTTOM);
         dibuja(g);
-        g.drawString("Puntaje: " + puntaje, lado / 9+ 5, 15*getHeight()/16  , Graphics.HCENTER | Graphics.BOTTOM);
+        g.drawString("Puntaje: " + puntaje, lado / 9 + 5, 15 * getHeight() / 16, Graphics.HCENTER | Graphics.BOTTOM);
         flushGraphics();
 
     }
@@ -263,6 +263,7 @@ public class Canvas extends GameCanvas implements Runnable {
                             }
 
                         }
+                        
                         posesc[i - 1][j] = 1;
                         posesc[i][j] = 0;
                         mov = 1;
@@ -297,23 +298,20 @@ public class Canvas extends GameCanvas implements Runnable {
                             }
 
                         }
-                       
-
-
-                        
 
 
 
-                        posesc[i + 1][j] = 1;
                         posesc[i][j] = 0;
+                        posesc[i + 1][j] = 1;
                         mov = 2;
                         cabeza = true;
                         break;
-                    }}
-                    if (cabeza) {
-                        break;
                     }
-                
+                }
+                if (cabeza) {
+                    break;
+                }
+
             }
 
         } else if ((estado_boton & UP_PRESSED) != 0) {
@@ -321,10 +319,10 @@ public class Canvas extends GameCanvas implements Runnable {
                 for (int j = 1; j < lado / 16; j++) {
 
                     if (posesc[i][j] == 1) {
-                      switch (posesc[i][j-1]) {
+                        switch (posesc[i][j - 1]) {
                             case 12: {
                                 puntaje = animal1.getPuntaje() + puntaje;
-                                posesc[i][j-1] = 1;
+                                posesc[i][j - 1] = 1;
                                 posesc[i][j] = 0;
                                 break;
                             }
@@ -332,7 +330,7 @@ public class Canvas extends GameCanvas implements Runnable {
                             case 13: {
                                 puntaje = animal2.getPuntaje() + puntaje;
 
-                                posesc[i][j-1] = 1;
+                                posesc[i][j - 1] = 1;
                                 posesc[i][j] = 0;
                                 break;
                             }
@@ -354,10 +352,10 @@ public class Canvas extends GameCanvas implements Runnable {
             for (int i = 0; i < lado / 16; i++) {
                 for (int j = 0; j < (lado / 16 - 1); j++) {
                     if (posesc[i][j] == 1) {
-                        switch (posesc[i][j+1]) {
+                        switch (posesc[i][j + 1]) {
                             case 12: {
                                 puntaje = animal1.getPuntaje() + puntaje;
-                                posesc[i][j+1] = 1;
+                                posesc[i][j + 1] = 1;
                                 posesc[i][j] = 0;
                                 break;
                             }
@@ -365,7 +363,7 @@ public class Canvas extends GameCanvas implements Runnable {
                             case 13: {
                                 puntaje = animal2.getPuntaje() + puntaje;
 
-                                posesc[i][j+1] = 1;
+                                posesc[i][j + 1] = 1;
                                 posesc[i][j] = 0;
                                 break;
                             }
