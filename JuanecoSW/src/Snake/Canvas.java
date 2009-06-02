@@ -51,8 +51,8 @@ public class Canvas extends GameCanvas implements Runnable {
 
 //Se cargan las imagenes de la cabeza de Juaneco por cada punto cardinal
             juaneco.cargaim();
-            animal1.setFigura(Image.createImage(Canvas.class.getResourceAsStream("/rat.jpg")));
-            animal2.setFigura(Image.createImage(Canvas.class.getResourceAsStream("/rat.jpg")));
+            animal1.setFigura(Image.createImage(Canvas.class.getResourceAsStream("/conejo.gif")));
+            animal2.setFigura(Image.createImage(Canvas.class.getResourceAsStream("/raton.gif")));
             escenario.setFondo(Image.createImage(Canvas.class.getResourceAsStream("/costa.jpg")));
             obsta1.setObstaculo(Image.createImage(Canvas.class.getResourceAsStream("/rat.jpg")));
             obsta2.setObstaculo(Image.createImage(Canvas.class.getResourceAsStream("/rat.jpg")));
