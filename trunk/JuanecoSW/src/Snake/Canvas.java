@@ -152,7 +152,7 @@ public class Canvas extends GameCanvas implements Runnable {
         g.fillRect(0, 0, getWidth(), getHeight());
         g.drawImage(escenario.getFondo(), lado / 2, getHeight(), Graphics.HCENTER | Graphics.BOTTOM);
         dibuja(g);
-        g.drawString("Puntaje: " + puntaje, 8*lado / 9, 15*getHeight()/16  , Graphics.HCENTER | Graphics.BOTTOM);
+        g.drawString("Puntaje: " + puntaje, lado / 9+ 5, 15*getHeight()/16  , Graphics.HCENTER | Graphics.BOTTOM);
         flushGraphics();
 
     }
@@ -297,6 +297,13 @@ public class Canvas extends GameCanvas implements Runnable {
                             }
 
                         }
+                       
+
+
+                        
+
+
+
                         posesc[i + 1][j] = 1;
                         posesc[i][j] = 0;
                         mov = 2;
