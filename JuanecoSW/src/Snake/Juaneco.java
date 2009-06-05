@@ -130,8 +130,8 @@ public class Juaneco extends Personajes {
                 }
                 break;
             }
+            }
         }
-    }
 
     /**
      * @return the Velocidad
