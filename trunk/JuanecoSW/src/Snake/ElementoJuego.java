@@ -12,7 +12,7 @@ package Snake;
 public abstract class ElementoJuego {
 private int PosicionX;
 private int PosicionY;
-
+// ahora esto no indica las posiciones en pixeles, sino implica celda que ocpa en la matriz encontrada en el Canvas
 public ElementoJuego(){
 
 }
