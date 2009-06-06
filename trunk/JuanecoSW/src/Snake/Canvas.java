@@ -1,6 +1,5 @@
 package Snake;
 
-import javax.microedition.lcdui.Image;
 import javax.microedition.lcdui.Graphics;
 import javax.microedition.lcdui.game.GameCanvas;
 import java.io.IOException;
@@ -54,7 +53,7 @@ public class Canvas extends GameCanvas implements Runnable {
             bono.setPuntaje(200);
 
         } catch (IOException e) {
-            System.err.println(e);
+            e.printStackTrace();
         }
         Thread hilo = new Thread(this);
 
@@ -62,20 +61,22 @@ public class Canvas extends GameCanvas implements Runnable {
     }
 
     public void run() {
-        Graphics g = getGraphics();
+        try {
+            Graphics g = getGraphics();
 
-        while (true) {
+            while (true) {
 
-            verifyGameState();
+                verifyGameState();
 
-            checkUserInput();
+                checkUserInput();
 
-            updateGameScreen(getGraphics());
-            try {
+                updateGameScreen(getGraphics());
+
                 Thread.sleep(juaneco.getVelocidad());
-            } catch (InterruptedException e) {
-                e.printStackTrace();
+
             }
+        } catch (Exception e) {
+            e.printStackTrace();
         }
     }
 
@@ -98,10 +99,10 @@ public class Canvas extends GameCanvas implements Runnable {
         escenario.dibuja(g);
         shock();
 
-        g.setColor(0xffffff);
+        /*g.setColor(0xffffff);
 
         g.fillRect(0, 0, getWidth(), getHeight());
-
+        */
 
         g.drawString("Puntuacion:", 7 * lado / 9 + 9, 14 * getHeight() / 16 + 15, Graphics.HCENTER | Graphics.BOTTOM);
         g.drawString("" + puntaje, 7 * lado / 9 + 9, 15 * getHeight() / 16 + 10, Graphics.HCENTER | Graphics.BOTTOM);

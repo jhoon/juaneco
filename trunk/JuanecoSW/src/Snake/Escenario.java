@@ -37,7 +37,11 @@ public class Escenario {
 
     public Escenario() {
         super();
-
+        try {
+            juaneco.cargaim();
+        } catch (IOException ex) {
+            ex.printStackTrace();
+        }
     }
 
     public void inicializa() throws IOException {
