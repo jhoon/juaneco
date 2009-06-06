@@ -48,7 +48,7 @@ public class Escenario {
         this.setFondo(Image.createImage(Canvas.class.getResourceAsStream("/fondoGame.jpg")));
         for (int i = 0; i < getLado() / 16; i++) {
             for (int j = 0; j < getLado() / 16; j++) {
-                posx[i]=(8 + 16 * i) ;
+                posx[i] = (8 + 16 * i);
                 posy[j] = 16 + 16 * j;
                 posesc[i][j] = 0;
             }
@@ -122,9 +122,9 @@ public class Escenario {
                         }
 
 
-posesc[i + 1][j] = 2;
-                        posesc[i][j] = 0;
-                        
+                        posesc[i + 1][j] = 1;
+                        posesc[i][j] = 2;
+
 
                         cabeza = true;
                         break;
@@ -155,7 +155,7 @@ posesc[i + 1][j] = 2;
 
                             case 13: {
                                 puntaje = animal2.getPuntaje() + puntaje;
-                               posesc[1 + rnd.nextInt(lado / 16 - 2)][1 + rnd.nextInt(lado / 16 - 2)] = 12;
+                                posesc[1 + rnd.nextInt(lado / 16 - 2)][1 + rnd.nextInt(lado / 16 - 2)] = 12;
 
 
                                 break;
@@ -221,14 +221,14 @@ posesc[i + 1][j] = 2;
     }
 
     public void dibuja(Graphics g) {
-                g.drawImage(this.getFondo(), lado/2, 290, Graphics.HCENTER | Graphics.BOTTOM);
+        g.drawImage(this.getFondo(), lado / 2, 290, Graphics.HCENTER | Graphics.BOTTOM);
         for (int i = 0; i <
                 getLado() / 16; i++) {
             for (int j = 0; j < lado / 16; j++) {
                 switch (posesc[i][j]) {
 
                     case 1: {
-                        g.drawImage(juaneco.getCabeza(), posx[i],posy[j], Graphics.HCENTER | Graphics.BOTTOM);
+                        g.drawImage(juaneco.getCabeza(), posx[i], posy[j], Graphics.HCENTER | Graphics.BOTTOM);
                         break;
 
                     } // Caso 1: Cabeza
@@ -241,7 +241,7 @@ posesc[i + 1][j] = 2;
 
 
                     case 3: {
-                        g.drawImage(juaneco.getTroncoV(),posx[i], posy[j], Graphics.HCENTER | Graphics.BOTTOM);
+                        g.drawImage(juaneco.getTroncoV(), posx[i], posy[j], Graphics.HCENTER | Graphics.BOTTOM);
                         break;
 
                     }// Caso 3: Tronco Vertial
@@ -290,14 +290,14 @@ posesc[i + 1][j] = 2;
 
 
                     case 10: {
-                        g.drawImage(juaneco.getColaDer(),posx[i], posy[j], Graphics.HCENTER | Graphics.BOTTOM);
+                        g.drawImage(juaneco.getColaDer(), posx[i], posy[j], Graphics.HCENTER | Graphics.BOTTOM);
                         break;
 
                     }// Caso 10: Cola Derecha
 
 
                     case 11: {
-                        g.drawImage(juaneco.getColaIzq(), posx[i], posy[j],Graphics.HCENTER | Graphics.BOTTOM);
+                        g.drawImage(juaneco.getColaIzq(), posx[i], posy[j], Graphics.HCENTER | Graphics.BOTTOM);
                         break;
 
                     }// Caso 11: Cola Izquierda
@@ -325,21 +325,21 @@ posesc[i + 1][j] = 2;
 
 
                     case 15: {
-                        g.drawImage(obsta1.getObstaculo(),posx[i], posy[j], Graphics.HCENTER | Graphics.BOTTOM);
+                        g.drawImage(obsta1.getObstaculo(), posx[i], posy[j], Graphics.HCENTER | Graphics.BOTTOM);
                         break;
 
                     }// Caso 15: Obstaculo 1
 
 
                     case 16: {
-                        g.drawImage(obsta1.getObstaculo(),posx[i], posy[j], Graphics.HCENTER | Graphics.BOTTOM);
+                        g.drawImage(obsta1.getObstaculo(), posx[i], posy[j], Graphics.HCENTER | Graphics.BOTTOM);
                         break;
 
                     }// Caso 16: Obstaculo 2
 
 
                     case 17: {
-                        g.drawImage(obsta1.getObstaculo(),posx[i], posy[j], Graphics.HCENTER | Graphics.BOTTOM);
+                        g.drawImage(obsta1.getObstaculo(), posx[i], posy[j], Graphics.HCENTER | Graphics.BOTTOM);
                         break;
 
                     }// Caso 17: Obstaculo 3
@@ -381,8 +381,6 @@ posesc[i + 1][j] = 2;
     public void setDimensiones(int dimensiones) {
         this.dimensiones = dimensiones;
     }
-
-  
 
     /**
      * @return the fondo
@@ -468,5 +466,4 @@ posesc[i + 1][j] = 2;
     public void setLado(int lado) {
         this.lado = lado;
     }
-
 }
