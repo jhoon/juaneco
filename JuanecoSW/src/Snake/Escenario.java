@@ -14,6 +14,11 @@ private int borde;
 private int dimensiones;
 private int tipoesc;
 private Image fondo;
+//private Image fondoPant;
+private Image nuevoJuego;
+private Image ayuda;
+private Image opciones;
+
 
 public Escenario(){
 super();
@@ -66,6 +71,7 @@ super();
      * @return the fondo
      */
     public Image getFondo() {
+
         return fondo;
     }
 
@@ -74,6 +80,48 @@ super();
      */
     public void setFondo(Image fondo) {
         this.fondo = fondo;
+    }
+
+    /**
+     * @return the nuevoJuego
+     */
+    public Image getNuevoJuego() {
+        return nuevoJuego;
+    }
+
+    /**
+     * @param nuevoJuego the nuevoJuego to set
+     */
+    public void setNuevoJuego(Image nuevoJuego) {
+        this.nuevoJuego = nuevoJuego;
+    }
+
+    /**
+     * @return the ayuda
+     */
+    public Image getAyuda() {
+        return ayuda;
+    }
+
+    /**
+     * @param ayuda the ayuda to set
+     */
+    public void setAyuda(Image ayuda) {
+        this.ayuda = ayuda;
+    }
+
+    /**
+     * @return the opciones
+     */
+    public Image getOpciones() {
+        return opciones;
+    }
+
+    /**
+     * @param opciones the opciones to set
+     */
+    public void setOpciones(Image opciones) {
+        this.opciones = opciones;
     }
 
 
