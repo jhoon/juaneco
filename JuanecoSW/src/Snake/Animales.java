@@ -4,6 +4,7 @@
  */
 
 package Snake;
+import java.io.IOException;
 import javax.microedition.lcdui.Image;
 /**
  *
@@ -14,10 +15,23 @@ private int puntaje;
 private int animal;
 private int visibilidad;
 private Image figura;
+private Image animal1;
+private Image animal2;
+private Image animal3;
 
 public Animales(){
 super();
 }
+
+public void cargaanimal() throws IOException{
+            this.setAnimal1(Image.createImage(Canvas.class.getResourceAsStream("/vizcacha.gif")));
+            this.setAnimal2(Image.createImage(Canvas.class.getResourceAsStream("/cuy.gif")));
+            this.setAnimal3(Image.createImage(Canvas.class.getResourceAsStream("/raton.gif")));
+           
+
+            this.setFigura(this.getAnimal1());
+
+    }
 
     /**
      * @return the puntaje
@@ -73,6 +87,48 @@ super();
      */
     public void setFigura(Image figura) {
         this.figura = figura;
+    }
+
+    /**
+     * @return the animal1
+     */
+    public Image getAnimal1() {
+        return animal1;
+    }
+
+    /**
+     * @param animal1 the animal1 to set
+     */
+    public void setAnimal1(Image animal1) {
+        this.animal1 = animal1;
+    }
+
+    /**
+     * @return the animal2
+     */
+    public Image getAnimal2() {
+        return animal2;
+    }
+
+    /**
+     * @param animal2 the animal2 to set
+     */
+    public void setAnimal2(Image animal2) {
+        this.animal2 = animal2;
+    }
+
+    /**
+     * @return the animal3
+     */
+    public Image getAnimal3() {
+        return animal3;
+    }
+
+    /**
+     * @param animal3 the animal3 to set
+     */
+    public void setAnimal3(Image animal3) {
+        this.animal3 = animal3;
     }
 
 
