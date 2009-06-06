@@ -75,20 +75,20 @@ public class Juaneco extends Personajes {
         }
     }
     public void cargaim() throws IOException{
-            this.setCabezaIzq(Image.createImage(Canvas.class.getResourceAsStream("/cab1.gif")));
-            this.setCabezaAba(Image.createImage(Canvas.class.getResourceAsStream("/cab4.gif")));
-            this.setCabezaDer(Image.createImage(Canvas.class.getResourceAsStream("/cab3.gif")));
-            this.setCabezaArr(Image.createImage(Canvas.class.getResourceAsStream("/cab2.gif")));
-            this.setTroncoH(Image.createImage(Canvas.class.getResourceAsStream("/cuerpo1.gif")));
-            this.setTroncoV(Image.createImage(Canvas.class.getResourceAsStream("/cuerpo2.gif")));
-            this.setCodo1(Image.createImage(Canvas.class.getResourceAsStream("/codo1.gif")));
-            this.setCodo2(Image.createImage(Canvas.class.getResourceAsStream("/codo2.gif")));
-            this.setCodo3(Image.createImage(Canvas.class.getResourceAsStream("/codo3.gif")));
-            this.setCodo4(Image.createImage(Canvas.class.getResourceAsStream("/codo4.gif")));
-            this.setColaDer(Image.createImage(Canvas.class.getResourceAsStream("/cola1.gif")));
-            this.setColaAba(Image.createImage(Canvas.class.getResourceAsStream("/cola2.gif")));
-            this.setColaIzq(Image.createImage(Canvas.class.getResourceAsStream("/cola3.gif")));
-            this.setColaArr(Image.createImage(Canvas.class.getResourceAsStream("/cola4.gif")));
+            this.setCabezaIzq(Image.createImage(Canvas.class.getResourceAsStream("/cabeza1.gif")));
+            this.setCabezaAba(Image.createImage(Canvas.class.getResourceAsStream("/cabeza4.gif")));
+            this.setCabezaDer(Image.createImage(Canvas.class.getResourceAsStream("/cabeza3.gif")));
+            this.setCabezaArr(Image.createImage(Canvas.class.getResourceAsStream("/cabeza2.gif")));
+            this.setTroncoH(Image.createImage(Canvas.class.getResourceAsStream("/cuerpoh.gif")));
+            this.setTroncoV(Image.createImage(Canvas.class.getResourceAsStream("/cuerpov.gif")));
+            this.setCodo1(Image.createImage(Canvas.class.getResourceAsStream("/cod1.gif")));
+            this.setCodo2(Image.createImage(Canvas.class.getResourceAsStream("/cod2.gif")));
+            this.setCodo3(Image.createImage(Canvas.class.getResourceAsStream("/cod3.gif")));
+            this.setCodo4(Image.createImage(Canvas.class.getResourceAsStream("/cod4.gif")));
+            this.setColaDer(Image.createImage(Canvas.class.getResourceAsStream("/col1.gif")));
+            this.setColaAba(Image.createImage(Canvas.class.getResourceAsStream("/col2.gif")));
+            this.setColaIzq(Image.createImage(Canvas.class.getResourceAsStream("/col3.gif")));
+            this.setColaArr(Image.createImage(Canvas.class.getResourceAsStream("/col4.gif")));
 
             this.setCabeza(this.getCabezaArr());
 
@@ -96,6 +96,7 @@ public class Juaneco extends Personajes {
     public void movup(int borde, int lado) {
         switch (borde) {
             case 0: {
+
                 if (this.getPosicionY() >= 0) {
                     this.setPosicionY(this.getPosicionY() - this.getVelocidad());
                 } else {

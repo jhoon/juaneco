@@ -41,6 +41,7 @@ public class Canvas extends GameCanvas implements Runnable {
     private int[] posy = new int[lado / 16];
     private int puntaje;
     private boolean cabeza = false;
+    private int choque = 0;
 
     public Canvas() {
         super(true);
@@ -52,8 +53,8 @@ public class Canvas extends GameCanvas implements Runnable {
 
 //Se cargan las imagenes de la cabeza de Juaneco por cada punto cardinal
             juaneco.cargaim();
-            animal1.setFigura(Image.createImage(Canvas.class.getResourceAsStream("/conejo.gif")));
-            animal2.setFigura(Image.createImage(Canvas.class.getResourceAsStream("/raton.gif")));
+            animal1.setFigura(Image.createImage(Canvas.class.getResourceAsStream("/vizcacha.gif")));
+            animal2.setFigura(Image.createImage(Canvas.class.getResourceAsStream("/raton1.gif")));
             escenario.setFondo(Image.createImage(Canvas.class.getResourceAsStream("/costa.jpg")));
             obsta1.setObstaculo(Image.createImage(Canvas.class.getResourceAsStream("/rat.jpg")));
             obsta2.setObstaculo(Image.createImage(Canvas.class.getResourceAsStream("/rat.jpg")));
@@ -124,6 +125,7 @@ public class Canvas extends GameCanvas implements Runnable {
             juaneco.setCabeza(juaneco.getCabezaIzq());
             for (int i = 1; i < lado / 16; i++) {
                 for (int j = 0; j < lado / 16; j++) {
+
                     if (posesc[i][j] == 1) {
                         if (mov != movant);
                         switch (posesc[i - 1][j]) {
@@ -170,6 +172,7 @@ public class Canvas extends GameCanvas implements Runnable {
                                 posesc[i + 1][j] = 1;
                                 posesc[i][j] = 0;
                                 break;
+
                             }
 
                             case 13: {
@@ -202,6 +205,8 @@ public class Canvas extends GameCanvas implements Runnable {
             juaneco.setCabeza(juaneco.getCabezaArr());
             for (int i = 0; i < lado / 16; i++) {
                 for (int j = 1; j < lado / 16; j++) {
+                   
+
 
                     if (posesc[i][j] == 1) {
                         switch (posesc[i][j - 1]) {
@@ -222,18 +227,25 @@ public class Canvas extends GameCanvas implements Runnable {
                                 break;
                             }
 
+
                         }
+
+                        
                         posesc[i][j - 1] = 1;
                         posesc[i][j] = 0;
+//<<<<<<< .mine
+                    
+                        mov = 3;
+//=======
 
+//>>>>>>> .r32
                         cabeza = true;
-                        break;
-                    }
+                        break;}
+                        }
                     if (cabeza) {
                         break;
                     }
-                }
-            }
+                }            
         }
         if (mov == 4) {
             juaneco.setCabeza(juaneco.getCabezaAba());
