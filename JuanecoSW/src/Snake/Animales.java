@@ -2,43 +2,46 @@
  * To change this template, choose Tools | Templates
  * and open the template in the editor.
  */
-
 package Snake;
+
+import Snake.util.SnakeUtil;
 import java.io.IOException;
 import java.util.Random;
 import javax.microedition.lcdui.Image;
+
 /**
  *
  * @author Manuel Sotelo A
  */
-public class Animales extends Personajes{
-private int puntaje;
-private int animal;
-private int visibilidad;
-private Image figura;
-private Image animal1;
-private Image animal2;
-private Image animal3;
+public class Animales extends Personajes {
 
-public Animales(){
-super();
-}
+    private int puntaje;
+    private int animal;
+    private int visibilidad;
+    private Image figura;
+    private Image animal1;
+    private Image animal2;
+    private Image animal3;
 
-public void cargaanimal() throws IOException{
-            this.setAnimal1(Image.createImage(Canvas.class.getResourceAsStream("/vizcacha.gif")));
-            this.setAnimal2(Image.createImage(Canvas.class.getResourceAsStream("/cuy.gif")));
-            this.setAnimal3(Image.createImage(Canvas.class.getResourceAsStream("/raton.gif")));
+    public Animales() {
+        super();
+    }
 
-
-            this.setFigura(this.getAnimal1());
+    public void cargaanimal() {
+        this.setAnimal1(SnakeUtil.createImage("/vizcacha.gif"));
+        this.setAnimal2(SnakeUtil.createImage("/cuy.gif"));
+        this.setAnimal3(SnakeUtil.createImage("/raton.gif"));
+        this.setFigura(this.getAnimal1());
 
     }
-public void primeranimal(Random rnd, int posesc[][], int lado){
-if ((posesc[rnd.nextInt(lado / 16)][rnd.nextInt(lado / 16)] != 1) & (posesc[rnd.nextInt(lado / 16)][rnd.nextInt(lado / 16)] != 2) & (posesc[rnd.nextInt(lado / 16)][rnd.nextInt(lado / 16)] != 3)) {
-                posesc[1 + rnd.nextInt(lado / 16 - 2)][1 + rnd.nextInt(lado / 16 - 2)] = 12;
-            }
 
-}
+    public void primeranimal(Random rnd, int posesc[][], int lado) {
+        if ((posesc[rnd.nextInt(lado / 16)][rnd.nextInt(lado / 16)] != 1) & (posesc[rnd.nextInt(lado / 16)][rnd.nextInt(lado / 16)] != 2) & (posesc[rnd.nextInt(lado / 16)][rnd.nextInt(lado / 16)] != 3)) {
+            posesc[1 + rnd.nextInt(lado / 16 - 2)][1 + rnd.nextInt(lado / 16 - 2)] = 12;
+        }
+
+    }
+
     /**
      * @return the puntaje
      */
@@ -137,6 +140,4 @@ if ((posesc[rnd.nextInt(lado / 16)][rnd.nextInt(lado / 16)] != 1) & (posesc[rnd.
     public void setAnimal3(Image animal3) {
         this.animal3 = animal3;
     }
-
-
 }
