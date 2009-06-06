@@ -80,6 +80,7 @@ public void cargaanimal() throws IOException{
      */
     public Image getFigura() {
         return figura;
+
     }
 
     /**
