@@ -1,7 +1,4 @@
-/*
- * To change this template, choose Tools | Templates
- * and open the template in the editor.
- */
+
 package Snake;
 
 import javax.microedition.lcdui.Image;
@@ -55,7 +52,7 @@ public class Canvas extends GameCanvas implements Runnable {
             juaneco.cargaim();
             animal1.setFigura(Image.createImage(Canvas.class.getResourceAsStream("/vizcacha.gif")));
             animal2.setFigura(Image.createImage(Canvas.class.getResourceAsStream("/raton1.gif")));
-            escenario.setFondo(Image.createImage(Canvas.class.getResourceAsStream("/costa.jpg")));
+            escenario.setFondo(Image.createImage(Canvas.class.getResourceAsStream("/fondoGame.jpg")));
             obsta1.setObstaculo(Image.createImage(Canvas.class.getResourceAsStream("/rat.jpg")));
             obsta2.setObstaculo(Image.createImage(Canvas.class.getResourceAsStream("/rat.jpg")));
             obsta3.setObstaculo(Image.createImage(Canvas.class.getResourceAsStream("/rat.jpg")));
@@ -464,3 +461,4 @@ public class Canvas extends GameCanvas implements Runnable {
         }
     }
 }
+
