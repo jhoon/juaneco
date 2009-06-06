@@ -87,7 +87,7 @@ public class Escenario {
                         }
 
                         posesc[i - 1][j] = 1;
-                        posesc[i][j] = 0;
+                        posesc[i][j] = 2;
                         cabeza = true;
                         break;
                     }
@@ -122,9 +122,9 @@ public class Escenario {
                         }
 
 
-
+posesc[i + 1][j] = 2;
                         posesc[i][j] = 0;
-                        posesc[i + 1][j] = 1;
+                        
 
                         cabeza = true;
                         break;
@@ -166,7 +166,7 @@ public class Escenario {
 
 
                         posesc[i][j - 1] = 1;
-                        posesc[i][j] = 0;
+                        posesc[i][j] = 3;
 
 
 
@@ -205,7 +205,7 @@ public class Escenario {
 
                         }
                         posesc[i][j + 1] = 1;
-                        posesc[i][j] = 0;
+                        posesc[i][j] = 3;
 
                         cabeza = true;
                         break;
