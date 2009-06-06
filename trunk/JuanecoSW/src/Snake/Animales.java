@@ -5,6 +5,7 @@
 
 package Snake;
 import java.io.IOException;
+import java.util.Random;
 import javax.microedition.lcdui.Image;
 /**
  *
@@ -27,12 +28,17 @@ public void cargaanimal() throws IOException{
             this.setAnimal1(Image.createImage(Canvas.class.getResourceAsStream("/vizcacha.gif")));
             this.setAnimal2(Image.createImage(Canvas.class.getResourceAsStream("/cuy.gif")));
             this.setAnimal3(Image.createImage(Canvas.class.getResourceAsStream("/raton.gif")));
-           
+
 
             this.setFigura(this.getAnimal1());
 
     }
+public void primeranimal(Random rnd, int posesc[][], int lado){
+if ((posesc[rnd.nextInt(lado / 16)][rnd.nextInt(lado / 16)] != 1) & (posesc[rnd.nextInt(lado / 16)][rnd.nextInt(lado / 16)] != 2) & (posesc[rnd.nextInt(lado / 16)][rnd.nextInt(lado / 16)] != 3)) {
+                posesc[1 + rnd.nextInt(lado / 16 - 2)][1 + rnd.nextInt(lado / 16 - 2)] = 12;
+            }
 
+}
     /**
      * @return the puntaje
      */
