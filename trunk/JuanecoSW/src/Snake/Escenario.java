@@ -119,7 +119,7 @@ public class Escenario {
             // Asigna dichas posiciones
             ((ElementoJuego) juaneco.getTronquitoXY().elementAt(i)).setPosicionX(x);
             ((ElementoJuego) juaneco.getTronquitoXY().elementAt(i)).setPosicionY(y);
-            ((ElementoJuego) juaneco.getTronquitoXY().elementAt(i)).setPosicionY(movi);
+            ((ElementoJuego) juaneco.getTronquitoXY().elementAt(i)).setDireccion(movi);
 
         }
         ((ElementoJuego) juaneco.getTronquitoXY().elementAt(0)).setPosicionX(cabezax);
@@ -257,6 +257,7 @@ public class Escenario {
                             case 0: {
                                 posesc[i + 1][j] = 1;
                                 posesc[i][j] = 0;
+
                                 break;
 
                             }
@@ -317,6 +318,7 @@ public class Escenario {
 
                                 posesc[i][j - 1] = 1;
                                 posesc[i][j] = 0;
+
                                 break;
 
                             }
@@ -352,8 +354,7 @@ public class Escenario {
                         }
 
                         mov = 3;
-                        cabeza =
-                                true;
+                        cabeza = true;
                         break;
 
                     }
@@ -379,6 +380,7 @@ public class Escenario {
 
                                 posesc[i][j + 1] = 1;
                                 posesc[i][j] = 0;
+
                                 break;
 
                             }
