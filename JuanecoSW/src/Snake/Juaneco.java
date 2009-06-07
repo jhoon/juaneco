@@ -5,6 +5,7 @@
 package Snake;
 
 import java.io.IOException;
+import java.util.Vector;
 import javax.microedition.lcdui.Image;
 
 /**
@@ -12,7 +13,9 @@ import javax.microedition.lcdui.Image;
  * @author Manuel Sotelo A
  */
 public class Juaneco extends Personajes {
-
+    private Vector tronquitoXY = new Vector (10,1);
+    private Vector colitaXY = new Vector (1);
+    
     private Image cabeza;
     private Image cabezaIzq;
     private Image cabezaDer;
@@ -347,4 +350,23 @@ public class Juaneco extends Personajes {
     public void setCodo4(Image codo4) {
         this.codo4 = codo4;
     }
+
+    public Vector getTronquitoXY() {
+        return tronquitoXY;
+    }
+
+    public void setTronquitoXY(Vector tronquitoXY) {
+        this.tronquitoXY = tronquitoXY;
+    }
+
+  
+
+    public Vector getColitaXY() {
+        return colitaXY;
+    }
+
+    public void setColitaXY(Vector colitaXY) {
+        this.colitaXY = colitaXY;
+    }
+
 }
