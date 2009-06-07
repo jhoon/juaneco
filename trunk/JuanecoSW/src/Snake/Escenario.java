@@ -18,14 +18,15 @@ public class Escenario {
     Juaneco juaneco = new Juaneco();
     Obstaculos obsta1 = new Obstaculos();
     Bonos bono = new Bonos();
-    Animales animal1 = new Animales();
-    Animales animal2 = new Animales();
+    Animales animal = new Animales();
     private int borde;
     private int dimensiones;
     private Image Tipo1;
     private Image Tipo3;
     private Image Tipo2;
     private Image fondo;
+    private int cuenta;
+    Random rnd = new Random();
 //private Image fondoPant;
     private Image nuevoJuego;
     private Image ayuda;
@@ -39,6 +40,8 @@ public class Escenario {
         super();
         try {
             juaneco.cargaim();
+            animal.cargaanimal();
+            bono.cargabono();
         } catch (IOException ex) {
             ex.printStackTrace();
         }
@@ -56,6 +59,65 @@ public class Escenario {
 
         posesc[8][8] = 1;   /*La posicion i=8, j=8 es la cabeza*/
         posesc[8][9] = 9;     /*La posicion i=8, j=9 es el tronco en horizontal*/
+        animal.primeranimal(rnd, posesc, lado);
+        juaneco.setVelocidad(100);
+
+    }
+
+    public void movotronco(int mov) {
+        boolean Condicion = false;
+        int x;
+        int y;
+        int xx;
+        int yy;
+        int movi;
+        int movii;
+        int cabezax = 0;
+        int cabezay = 0;
+        for (int i = 1; i < getLado() / 16; i++) {
+            for (int j = 0; j < getLado() / 16; j++) {
+                if (posesc[i][j] == 1) {
+                    cabezax = i;
+                    cabezay = j;
+                    Condicion = true;
+                    break;
+                }
+
+            }
+
+            if (Condicion) {
+                break;
+            }
+        }
+        if ((mov ==1)|(mov==3))
+        {}else{}
+
+        for (int i = (juaneco.getTronquitoXY().capacity() - 2); i > 0; i--) {
+            x = ((ElementoJuego) juaneco.getTronquitoXY().elementAt(i - 1)).getPosicionX();
+            y = ((ElementoJuego) juaneco.getTronquitoXY().elementAt(i - 1)).getPosicionY();
+           movi = ((ElementoJuego) juaneco.getTronquitoXY().elementAt(i - 1)).getDireccion();
+            ((ElementoJuego) juaneco.getTronquitoXY().elementAt(i)).setPosicionX(x);
+            ((ElementoJuego) juaneco.getTronquitoXY().elementAt(i)).setPosicionY(y);
+            ((ElementoJuego) juaneco.getTronquitoXY().elementAt(i)).setPosicionY(movi);
+
+        }
+        ((ElementoJuego) juaneco.getTronquitoXY().elementAt(0)).setPosicionX(cabezax);
+        ((ElementoJuego) juaneco.getTronquitoXY().elementAt(0)).setPosicionY(cabezay);
+        
+
+        for (int i = 0; i < (juaneco.getTronquitoXY().capacity() - 1); i++) {
+            xx = ((ElementoJuego) juaneco.getTronquitoXY().elementAt(i)).getPosicionX();
+            yy = ((ElementoJuego) juaneco.getTronquitoXY().elementAt(i)).getPosicionY();
+            movii = ((ElementoJuego) juaneco.getTronquitoXY().elementAt(i)).getDireccion();
+            
+            posesc[xx][yy]=movii;
+  
+
+
+
+       
+        }
+
 
     }
 
@@ -68,26 +130,34 @@ public class Escenario {
                 for (int j = 0; j < getLado() / 16; j++) {
 
                     if (posesc[i][j] == 1) {
-                        if (mov != movant);
+
                         switch (posesc[i - 1][j]) {
+                            case 0: {
+                                posesc[i - 1][j] = 1;
+                                posesc[i][j] = 0;
+                                break;
+                            }
                             case 12: {
-                                puntaje = animal1.getPuntaje() + puntaje;
-                                posesc[1 + rnd.nextInt(lado / 16 - 2)][1 + rnd.nextInt(lado / 16 - 2)] = 13;
+                                puntaje = animal.getPuntaje() + puntaje;
+                                animal.primeranimal(rnd, posesc, lado);
+                                posesc[i - 1][j] = 1;
+                                juaneco.getTronquitoXY().addElement(new ElementoJuego(i, j, 2 ));
 
                                 break;
                             }
 
                             case 13: {
-                                puntaje = animal2.getPuntaje() + puntaje;
-                                posesc[1 + rnd.nextInt(lado / 16 - 2)][1 + rnd.nextInt(lado / 16 - 2)] = 12;
+                                puntaje = animal.getPuntaje() + puntaje;
 
+                                posesc[i - 1][j] = 1;
+
+                                juaneco.getTronquitoXY().addElement(new ElementoJuego(i, j, 2 ));
                                 break;
                             }
 
                         }
 
-                        posesc[i - 1][j] = 1;
-                        posesc[i][j] = 2;
+
                         cabeza = true;
                         break;
                     }
@@ -105,25 +175,32 @@ public class Escenario {
                 for (int j = 0; j < getLado() / 16; j++) {
                     if (posesc[i][j] == 1) {
                         switch (posesc[i + 1][j]) {
+                            case 0: {
+                                posesc[i + 1][j] = 1;
+                                posesc[i][j] = 0;
+                                break;
+                            }
                             case 12: {
-                                puntaje = animal1.getPuntaje() + puntaje;
+                                puntaje = animal.getPuntaje() + puntaje;
                                 posesc[1 + rnd.nextInt(lado / 16 - 2)][1 + rnd.nextInt(lado / 16 - 2)] = 13;
-
+                                posesc[i + 1][j] = 1;
+                                juaneco.getTronquitoXY().addElement(new ElementoJuego(i, j, 2 ));
                                 break;
 
                             }
 
                             case 13: {
-                                puntaje = animal2.getPuntaje() + puntaje;
+                                puntaje = bono.getPuntaje() + puntaje;
                                 posesc[1 + rnd.nextInt(lado / 16 - 2)][1 + rnd.nextInt(lado / 16 - 2)] = 12;
+                                posesc[i + 1][j] = 1;
+                                juaneco.getTronquitoXY().addElement(new ElementoJuego(i, j, 2 ));
                                 break;
                             }
 
                         }
 
 
-                        posesc[i + 1][j] = 1;
-                        posesc[i][j] = 2;
+
 
 
                         cabeza = true;
@@ -146,32 +223,34 @@ public class Escenario {
 
                     if (posesc[i][j] == 1) {
                         switch (posesc[i][j - 1]) {
+                            case 0: {
+
+                                posesc[i][j - 1] = 1;
+                                posesc[i][j] = 0;
+                                break;
+                            }
                             case 12: {
-                                puntaje = animal1.getPuntaje() + puntaje;
+                                puntaje = animal.getPuntaje() + puntaje;
                                 posesc[1 + rnd.nextInt(lado / 16 - 2)][1 + rnd.nextInt(lado / 16 - 2)] = 13;
 
+                                posesc[i][j - 1] = 1;
+                                juaneco.getTronquitoXY().addElement(new ElementoJuego(i, j, 3 ));
                                 break;
                             }
 
                             case 13: {
-                                puntaje = animal2.getPuntaje() + puntaje;
+                                puntaje = bono.getPuntaje() + puntaje;
                                 posesc[1 + rnd.nextInt(lado / 16 - 2)][1 + rnd.nextInt(lado / 16 - 2)] = 12;
 
-
+                                posesc[i][j - 1] = 1;
+                                juaneco.getTronquitoXY().addElement(new ElementoJuego(i, j, 3 ));
                                 break;
                             }
 
 
                         }
 
-
-                        posesc[i][j - 1] = 1;
-                        posesc[i][j] = 3;
-
-
-
                         mov = 3;
-
                         cabeza = true;
                         break;
                     }
@@ -187,25 +266,32 @@ public class Escenario {
                 for (int j = 0; j < (getLado() / 16 - 1); j++) {
                     if (posesc[i][j] == 1) {
                         switch (posesc[i][j + 1]) {
+
+                            case 0: {
+
+                                posesc[i][j + 1] = 1;
+                                posesc[i][j] = 0;
+                                break;
+                            }
                             case 12: {
-                                puntaje = animal1.getPuntaje() + puntaje;
+                                puntaje = animal.getPuntaje() + puntaje;
                                 posesc[1 + rnd.nextInt(lado / 16 - 2)][1 + rnd.nextInt(lado / 16 - 2)] = 13;
-
-
+                                posesc[i][j + 1] = 1;
+                                juaneco.getTronquitoXY().addElement(new ElementoJuego(i, j, 3 ));
                                 break;
                             }
 
                             case 13: {
-                                puntaje = animal2.getPuntaje() + puntaje;
+                                puntaje = bono.getPuntaje() + puntaje;
                                 posesc[1 + rnd.nextInt(lado / 16 - 2)][ 1 + rnd.nextInt(lado / 16 - 2)] = 12;
 
-
+                                posesc[i][j + 1] = 1;
+                                juaneco.getTronquitoXY().addElement(new ElementoJuego(i, j, 3 ));
                                 break;
                             }
 
                         }
-                        posesc[i][j + 1] = 1;
-                        posesc[i][j] = 3;
+
 
                         cabeza = true;
                         break;
@@ -304,46 +390,31 @@ public class Escenario {
 
 
                     case 12: {
-                        g.drawImage(animal1.getFigura(), posx[i], posy[j], Graphics.HCENTER | Graphics.BOTTOM);
+                        g.drawImage(animal.getFigura(), posx[i], posy[j], Graphics.HCENTER | Graphics.BOTTOM);
                         break;
 
-                    }// Caso 12: Animal 1
+                    }// Caso 12: Animal
 
 
                     case 13: {
-                        g.drawImage(animal2.getFigura(), posx[i], posy[j], Graphics.HCENTER | Graphics.BOTTOM);
+                        g.drawImage(bono.getBono(), posx[i], posy[j], Graphics.HCENTER | Graphics.BOTTOM);
                         break;
 
-                    }// Caso 13: Animal 2
+                    }// Caso 13: Bono
 
 
                     case 14: {
-                        g.drawImage(bono.getFigura(), posx[i], posy[j], Graphics.HCENTER | Graphics.BOTTOM);
-                        break;
-
-                    }// Caso 14: Bono
-
-
-                    case 15: {
                         g.drawImage(obsta1.getObstaculo(), posx[i], posy[j], Graphics.HCENTER | Graphics.BOTTOM);
                         break;
 
                     }// Caso 15: Obstaculo 1
 
 
-                    case 16: {
+                    case 15: {
                         g.drawImage(obsta1.getObstaculo(), posx[i], posy[j], Graphics.HCENTER | Graphics.BOTTOM);
                         break;
 
-                    }// Caso 16: Obstaculo 2
-
-
-                    case 17: {
-                        g.drawImage(obsta1.getObstaculo(), posx[i], posy[j], Graphics.HCENTER | Graphics.BOTTOM);
-                        break;
-
-                    }// Caso 17: Obstaculo 3
-
+                    }// Caso 15: Obstaculo 2
 
                     default: {
                         break;

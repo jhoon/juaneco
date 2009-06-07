@@ -16,9 +16,9 @@ public class Canvas extends GameCanvas implements Runnable {
 
     Random rnd = new Random();
 // Atributos de escenario (animales, jugador, fondo, etc)
-    Juaneco juaneco = new Juaneco();
+
     Escenario escenario = new Escenario();
-    Animales animal = new Animales();
+    
     Bonos bono = new Bonos();
     Obstaculos obsta1 = new Obstaculos();
 // Constantes del juego
@@ -26,7 +26,7 @@ public class Canvas extends GameCanvas implements Runnable {
     // Variables del juego
     private int mov = 3;
     private int movant = 3;
-    private int lado = getWidth() / 16;
+    private int lado = getWidth();
     private int puntaje;
     private boolean cabeza = false;
     private int choque = 0;
@@ -40,16 +40,15 @@ public class Canvas extends GameCanvas implements Runnable {
         try {
 
 //Se cargan las imagenes de la cabeza de Juaneco por cada punto cardinal
-            juaneco.cargaim();
-            animal.cargaanimal();
+    
+    
             obsta1.inicializar();
             escenario.inicializa();
 
 // Se inicializa a juaneco, escenario y comida
-            juaneco.setIncremento(0);
+    
             escenario.setBorde(1);
-            juaneco.setVelocidad(100);
-            animal.setPuntaje(100);
+    
             bono.setPuntaje(200);
 
         } catch (IOException e) {
@@ -72,7 +71,7 @@ public class Canvas extends GameCanvas implements Runnable {
 
                 updateGameScreen(getGraphics());
 
-                Thread.sleep(juaneco.getVelocidad());
+                Thread.sleep(escenario.juaneco.getVelocidad());
 
             }
         } catch (Exception e) {
@@ -96,7 +95,9 @@ public class Canvas extends GameCanvas implements Runnable {
     /**************************************************************/
     private void updateGameScreen(Graphics g) {
         escenario.movcabeza(mov, cabeza, movant, puntaje, rnd);
+        escenario.movotronco(mov);
         escenario.dibuja(g);
+
         shock();
 
         /*g.setColor(0xffffff);
