@@ -35,11 +35,17 @@ public class Animales extends Personajes {
 
     }
 
-    public void primeranimal(Random rnd, int posesc[][], int lado) {
-        if ((posesc[rnd.nextInt(lado / 16)][rnd.nextInt(lado / 16)] != 1) & (posesc[rnd.nextInt(lado / 16)][rnd.nextInt(lado / 16)] != 2) & (posesc[rnd.nextInt(lado / 16)][rnd.nextInt(lado / 16)] != 3)) {
-            posesc[1 + rnd.nextInt(lado / 16 - 2)][1 + rnd.nextInt(lado / 16 - 2)] = 12;
+    public void apareceanimal(Random rnd, int posesc[][], int lado, int tipo) {
+        int a;
+        int b;
+        while (true) {
+            a = rnd.nextInt(lado / 16 - 1);
+            b = rnd.nextInt(lado / 16 - 1);
+            if (posesc[a][b] == 0) {
+                posesc[a][b] = tipo;
+                break;
+            }
         }
-
     }
 
     /**
