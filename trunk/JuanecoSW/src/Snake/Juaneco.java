@@ -13,8 +13,8 @@ import javax.microedition.lcdui.Image;
  * @author Manuel Sotelo A
  */
 public class Juaneco extends Personajes {
-    private Vector tronquitoXY = new Vector (10,1);
-    private Vector colitaXY = new Vector (1);
+    private Vector tronquitoXY = new Vector (0,1);
+    private Vector colitaXY = new Vector (0,1);
     
     private Image cabeza;
     private Image cabezaIzq;

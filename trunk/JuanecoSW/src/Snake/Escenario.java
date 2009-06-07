@@ -59,7 +59,7 @@ public class Escenario {
 
         posesc[8][8] = 1;   /*La posicion i=8, j=8 es la cabeza*/
         posesc[8][9] = 9;     /*La posicion i=8, j=9 es el tronco en horizontal*/
-        animal.primeranimal(rnd, posesc, lado);
+        animal.apareceanimal(rnd, posesc, lado, 12);
         juaneco.setVelocidad(100);
 
     }
@@ -74,28 +74,49 @@ public class Escenario {
         int movii;
         int cabezax = 0;
         int cabezay = 0;
-        for (int i = 1; i < getLado() / 16; i++) {
-            for (int j = 0; j < getLado() / 16; j++) {
+        for (int i = 0; i < (this.getLado() / 16 - 1); i++) {
+            for (int j = 0; j < (this.getLado() / 16 - 1); j++) {
                 if (posesc[i][j] == 1) {
-                    cabezax = i;
-                    cabezay = j;
+                    // Se busca la cabeza anterior
+                    switch (mov) {
+                        //si se movio izq, quiero la posicion q estaba a la derecha
+                        case 1:
+                            cabezax = i + 1;
+                            cabezay = j;
+                            break;
+                        //si se movio der, quiero la posicion q estaba a la izq
+                        case 2:
+                            cabezax = i - 1;
+                            cabezay = j;
+                            break;
+                        //si se movio arr, quiero la posicion q estaba abajo
+                        case 3:
+                            cabezax = i;
+                            cabezay = j + 1;
+                            break;
+                        //si se movio aba, quiero la posicion q estaba arriba
+                        case 4:
+                            cabezax = i;
+                            cabezay = j - 1;
+                            break;
+                    }
                     Condicion = true;
                     break;
                 }
-
             }
 
             if (Condicion) {
                 break;
             }
         }
-        if ((mov ==1)|(mov==3))
-        {}else{}
 
-        for (int i = (juaneco.getTronquitoXY().capacity() - 2); i > 0; i--) {
+
+        for (int i = (juaneco.getTronquitoXY().capacity() - 1); i > 0; i--) {
+            //saca las posiciones del movimiento anterior
             x = ((ElementoJuego) juaneco.getTronquitoXY().elementAt(i - 1)).getPosicionX();
             y = ((ElementoJuego) juaneco.getTronquitoXY().elementAt(i - 1)).getPosicionY();
-           movi = ((ElementoJuego) juaneco.getTronquitoXY().elementAt(i - 1)).getDireccion();
+            movi = ((ElementoJuego) juaneco.getTronquitoXY().elementAt(i - 1)).getDireccion();
+            // Asigna dichas posiciones
             ((ElementoJuego) juaneco.getTronquitoXY().elementAt(i)).setPosicionX(x);
             ((ElementoJuego) juaneco.getTronquitoXY().elementAt(i)).setPosicionY(y);
             ((ElementoJuego) juaneco.getTronquitoXY().elementAt(i)).setPosicionY(movi);
@@ -103,22 +124,62 @@ public class Escenario {
         }
         ((ElementoJuego) juaneco.getTronquitoXY().elementAt(0)).setPosicionX(cabezax);
         ((ElementoJuego) juaneco.getTronquitoXY().elementAt(0)).setPosicionY(cabezay);
-        
 
-        for (int i = 0; i < (juaneco.getTronquitoXY().capacity() - 1); i++) {
+        ((ElementoJuego) juaneco.getTronquitoXY().elementAt(0)).setDireccion(mov);
+
+        //Volvemos a limpiar la matriz colocandole valor 0 solo si encuentra tronco
+        for (int k = 1; k < getLado() / 16; k++) {
+            for (int m = 0; m < getLado() / 16; m++) {
+                if (posesc[k][m] == 2 || posesc[k][m] == 3) {
+                    posesc[k][m] = 0;
+                }
+            }
+        }
+        // Colocamos los nuevos valores
+        for (int i = 0; i < (juaneco.getTronquitoXY().capacity()); i++) {
             xx = ((ElementoJuego) juaneco.getTronquitoXY().elementAt(i)).getPosicionX();
             yy = ((ElementoJuego) juaneco.getTronquitoXY().elementAt(i)).getPosicionY();
             movii = ((ElementoJuego) juaneco.getTronquitoXY().elementAt(i)).getDireccion();
-            
-            posesc[xx][yy]=movii;
-  
 
-
-
-       
+            if (movii == 1 || movii == 2) {
+                posesc[xx][yy] = 2;
+            } else if (movii == 3 || movii == 4) {
+                posesc[xx][yy] = 3;
+            }
         }
 
 
+    }
+
+    private void agregaTronco(int i, int j, int mov) {
+        // Se encarga de juntar el tronco con la cabeza
+        int xTronco = 0;
+        int yTronco = 0;
+        if (juaneco.getTronquitoXY().capacity() > 0) {
+
+            ElementoJuego aux = (ElementoJuego) juaneco.getTronquitoXY().lastElement();
+            switch (aux.getDireccion()) {
+                case 1:
+                    xTronco = aux.getPosicionX() + 1;
+                    yTronco = aux.getPosicionY();
+                    break;
+                case 2:
+                    xTronco = aux.getPosicionX() - 1;
+                    yTronco = aux.getPosicionY();
+                    break;
+                case 3:
+                    xTronco = aux.getPosicionX();
+                    yTronco = aux.getPosicionY() + 1;
+                    break;
+                case 4:
+                    xTronco = aux.getPosicionX();
+                    yTronco = aux.getPosicionY() - 1;
+                    break;
+            }
+            juaneco.getTronquitoXY().addElement(new ElementoJuego(xTronco, yTronco, aux.getDireccion()));
+        } else {
+            juaneco.getTronquitoXY().addElement(new ElementoJuego(i, j, mov));
+        }
     }
 
     public void movcabeza(int mov, boolean cabeza, int movant, int puntaje, Random rnd) {
@@ -126,8 +187,10 @@ public class Escenario {
         cabeza = false;
         if (mov == 1) {
             juaneco.setCabeza(juaneco.getCabezaIzq());
-            for (int i = 1; i < getLado() / 16; i++) {
-                for (int j = 0; j < getLado() / 16; j++) {
+            for (int i = 1; i <
+                    getLado() / 16; i++) {
+                for (int j = 0; j <
+                        getLado() / 16; j++) {
 
                     if (posesc[i][j] == 1) {
 
@@ -135,77 +198,102 @@ public class Escenario {
                             case 0: {
                                 posesc[i - 1][j] = 1;
                                 posesc[i][j] = 0;
+
                                 break;
+
                             }
+
+
                             case 12: {
                                 puntaje = animal.getPuntaje() + puntaje;
-                                animal.primeranimal(rnd, posesc, lado);
+                                animal.apareceanimal(rnd, posesc, lado, 12);
                                 posesc[i - 1][j] = 1;
-                                juaneco.getTronquitoXY().addElement(new ElementoJuego(i, j, 2 ));
+                                agregaTronco(i, j, mov);
 
                                 break;
+
                             }
+
+
 
                             case 13: {
-                                puntaje = animal.getPuntaje() + puntaje;
+                                animal.apareceanimal(rnd, posesc, lado, 12);
+                                puntaje = bono.getPuntaje() + puntaje;
 
                                 posesc[i - 1][j] = 1;
+                                posesc[i][j] = 0;
+                                agregaTronco(i, j, mov);
 
-                                juaneco.getTronquitoXY().addElement(new ElementoJuego(i, j, 2 ));
                                 break;
+
                             }
+
+
 
                         }
 
 
                         cabeza = true;
                         break;
+
                     }
+
+
                     if (cabeza) {
                         break;
                     }
-
 
                 }
             }
         }
         if (mov == 2) {
             juaneco.setCabeza(juaneco.getCabezaDer());
-            for (int i = 0; i < (getLado() / 16 - 1); i++) {
-                for (int j = 0; j < getLado() / 16; j++) {
+            for (int i = 0; i <
+                    (getLado() / 16 - 1); i++) {
+                for (int j = 0; j <
+                        getLado() / 16; j++) {
                     if (posesc[i][j] == 1) {
                         switch (posesc[i + 1][j]) {
                             case 0: {
                                 posesc[i + 1][j] = 1;
                                 posesc[i][j] = 0;
                                 break;
+
                             }
+
+
                             case 12: {
                                 puntaje = animal.getPuntaje() + puntaje;
-                                posesc[1 + rnd.nextInt(lado / 16 - 2)][1 + rnd.nextInt(lado / 16 - 2)] = 13;
+                                animal.apareceanimal(rnd, posesc, lado, 12);
                                 posesc[i + 1][j] = 1;
-                                juaneco.getTronquitoXY().addElement(new ElementoJuego(i, j, 2 ));
+                                posesc[i][j] = 0;
+                                agregaTronco(i, j, mov);
                                 break;
 
                             }
+
+
 
                             case 13: {
                                 puntaje = bono.getPuntaje() + puntaje;
-                                posesc[1 + rnd.nextInt(lado / 16 - 2)][1 + rnd.nextInt(lado / 16 - 2)] = 12;
+                                animal.apareceanimal(rnd, posesc, lado, 12);
                                 posesc[i + 1][j] = 1;
-                                juaneco.getTronquitoXY().addElement(new ElementoJuego(i, j, 2 ));
+                                posesc[i][j] = 0;
+                                agregaTronco(i, j, mov);
                                 break;
+
                             }
+
+
 
                         }
 
-
-
-
-
                         cabeza = true;
                         break;
+
                     }
+
+
                 }
                 if (cabeza) {
                     break;
@@ -216,8 +304,10 @@ public class Escenario {
         }
         if (mov == 3) {
             juaneco.setCabeza(juaneco.getCabezaArr());
-            for (int i = 0; i < getLado() / 16; i++) {
-                for (int j = 1; j < getLado() / 16; j++) {
+            for (int i = 0; i <
+                    getLado() / 16; i++) {
+                for (int j = 1; j <
+                        getLado() / 16; j++) {
 
 
 
@@ -228,42 +318,60 @@ public class Escenario {
                                 posesc[i][j - 1] = 1;
                                 posesc[i][j] = 0;
                                 break;
+
                             }
+
+
                             case 12: {
                                 puntaje = animal.getPuntaje() + puntaje;
-                                posesc[1 + rnd.nextInt(lado / 16 - 2)][1 + rnd.nextInt(lado / 16 - 2)] = 13;
+                                animal.apareceanimal(rnd, posesc, lado, 12);
 
                                 posesc[i][j - 1] = 1;
-                                juaneco.getTronquitoXY().addElement(new ElementoJuego(i, j, 3 ));
+                                posesc[i][j] = 0;
+                                agregaTronco(i, j, mov);
                                 break;
+
                             }
+
+
 
                             case 13: {
                                 puntaje = bono.getPuntaje() + puntaje;
-                                posesc[1 + rnd.nextInt(lado / 16 - 2)][1 + rnd.nextInt(lado / 16 - 2)] = 12;
+                                animal.apareceanimal(rnd, posesc, lado, 12);
 
                                 posesc[i][j - 1] = 1;
-                                juaneco.getTronquitoXY().addElement(new ElementoJuego(i, j, 3 ));
+                                posesc[i][j] = 0;
+                                agregaTronco(i, j, mov);
                                 break;
+
                             }
+
+
 
 
                         }
 
                         mov = 3;
-                        cabeza = true;
+                        cabeza =
+                                true;
                         break;
+
                     }
+
+
                 }
                 if (cabeza) {
                     break;
                 }
+
             }
         }
         if (mov == 4) {
             juaneco.setCabeza(juaneco.getCabezaAba());
-            for (int i = 0; i < getLado() / 16; i++) {
-                for (int j = 0; j < (getLado() / 16 - 1); j++) {
+            for (int i = 0; i <
+                    getLado() / 16; i++) {
+                for (int j = 0; j <
+                        (getLado() / 16 - 1); j++) {
                     if (posesc[i][j] == 1) {
                         switch (posesc[i][j + 1]) {
 
@@ -272,33 +380,48 @@ public class Escenario {
                                 posesc[i][j + 1] = 1;
                                 posesc[i][j] = 0;
                                 break;
+
                             }
+
+
                             case 12: {
                                 puntaje = animal.getPuntaje() + puntaje;
-                                posesc[1 + rnd.nextInt(lado / 16 - 2)][1 + rnd.nextInt(lado / 16 - 2)] = 13;
+                                animal.apareceanimal(rnd, posesc, lado, 12);
                                 posesc[i][j + 1] = 1;
-                                juaneco.getTronquitoXY().addElement(new ElementoJuego(i, j, 3 ));
+                                posesc[i][j] = 0;
+                                agregaTronco(i, j, mov);
                                 break;
+
                             }
+
+
 
                             case 13: {
                                 puntaje = bono.getPuntaje() + puntaje;
-                                posesc[1 + rnd.nextInt(lado / 16 - 2)][ 1 + rnd.nextInt(lado / 16 - 2)] = 12;
+                                animal.apareceanimal(rnd, posesc, lado, 12);
 
                                 posesc[i][j + 1] = 1;
-                                juaneco.getTronquitoXY().addElement(new ElementoJuego(i, j, 3 ));
+                                posesc[i][j] = 0;
+                                agregaTronco(i, j, mov);
                                 break;
+
                             }
+
+
 
                         }
 
 
                         cabeza = true;
                         break;
+
                     }
+
+
                     if (cabeza) {
                         break;
                     }
+
                 }
             }
 
@@ -310,7 +433,8 @@ public class Escenario {
         g.drawImage(this.getFondo(), lado / 2, 290, Graphics.HCENTER | Graphics.BOTTOM);
         for (int i = 0; i <
                 getLado() / 16; i++) {
-            for (int j = 0; j < lado / 16; j++) {
+            for (int j = 0; j <
+                    lado / 16; j++) {
                 switch (posesc[i][j]) {
 
                     case 1: {
@@ -415,6 +539,7 @@ public class Escenario {
                         break;
 
                     }// Caso 15: Obstaculo 2
+
 
                     default: {
                         break;

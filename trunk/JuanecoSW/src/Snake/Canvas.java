@@ -95,7 +95,9 @@ public class Canvas extends GameCanvas implements Runnable {
     /**************************************************************/
     private void updateGameScreen(Graphics g) {
         escenario.movcabeza(mov, cabeza, movant, puntaje, rnd);
+       if(escenario.juaneco.getTronquitoXY().capacity()>0){
         escenario.movotronco(mov);
+       }
         escenario.dibuja(g);
 
         shock();
