@@ -38,6 +38,7 @@ public class MidletJuaneco extends MIDlet implements CommandListener {
     private StringItem stcreditos;
     private StringItem stayuda;
     private Image fondo;
+    private ImageItem imagenAyuda;
     private Canvas gamecanvas;
     private ChoiceGroup lista;
     private ImageItem imagenMenu;
@@ -174,8 +175,13 @@ public class MidletJuaneco extends MIDlet implements CommandListener {
         ayuda = new Form("Ayuda");
         stayuda = new StringItem(" Instrucciones de Juego", "");
         stayuda.setLayout(StringItem.LAYOUT_CENTER);
+        try {
+                imagenAyuda = new ImageItem("AYUDA", Image.createImage("/ayuda.jpg"), ImageItem.LAYOUT_BOTTOM, "AYUDA");
+            } catch (Exception e){}
         ayuda.append(stayuda);
+        ayuda.append(imagenAyuda);
         ayuda.addCommand(getBackCommand());
+        ayuda.addCommand(getOkCommand());
         ayuda.setCommandListener(this);
 
         return ayuda;
