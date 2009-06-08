@@ -75,6 +75,7 @@ public class Escenario {
         int yy;
         int movi;
         int movii;
+        int moviant;
         int cabezax = 0;
         int cabezay = 0;
         for (int i = 0; i < (this.getLado() / 16); i++) {
@@ -144,11 +145,39 @@ public class Escenario {
             yy = ((ElementoJuego) juaneco.getTronquitoXY().elementAt(i)).getPosicionY();
             movii = ((ElementoJuego) juaneco.getTronquitoXY().elementAt(i)).getDireccion();
 
+
+
             if (movii == 1 || movii == 2) {
                 posesc[xx][yy] = 2;
             } else if (movii == 3 || movii == 4) {
                 posesc[xx][yy] = 3;
+            }//Caso 4: Codo Down-R / R-Up
+            if (i > 0) {
+                moviant = ((ElementoJuego) juaneco.getTronquitoXY().elementAt(i - 1)).getDireccion();
+//                if (moviant != movii) {
+//                    if (((moviant == 4) & (movii == 1))|((moviant == 2) & (movii == 3))) {
+//                    posesc[xx][yy] = 6;
+//                    }
+//                    if (((moviant == 4) & (movii == 2))|((moviant == 1) & (movii == 3))) {
+//                    posesc[xx][yy] = 4;
+//                    }
+//                    if (((moviant == 3) & (movii == 1))|((moviant == 2) & (movii == 4))) {
+//                    posesc[xx][yy] = 5;
+//                    }
+//                    if (((moviant == 3) & (movii == 2))|((moviant == 1) & (movii == 4))) {
+//                    posesc[xx][yy] = 7;
+//                    }
+//                    // Caso 4: Codo Down-R / L-Up
+//                    // Caso 5: Codo Up-L / L-Down
+//                    // Caso 6: Codo Down - L / R -Up
+//                    // Caso 7: Codo Up - R / R - Down
+//
+//
+//
+//                }
             }
+
+
         }
 
 
@@ -222,7 +251,7 @@ public class Escenario {
     }
 
     public void movcabeza(int mov, boolean cabeza, int movant, int puntaje, Random rnd) {
-     //   bordes(mov);
+        //   bordes(mov);
         bono.bontim(posesc, lado);
         cabeza = false;
         if (mov == 1) {
@@ -245,12 +274,12 @@ public class Escenario {
                                 break;
                             }
                             case 13: {
-                                
+
                                 puntaje = bono.getPuntaje() + puntaje;
                                 posesc[i - 1][j] = 1;
                                 posesc[i][j] = 0;
                                 agregaTronco(i, j, movant);
-                         
+
                                 break;
                             }
                             default: {
@@ -291,11 +320,11 @@ public class Escenario {
                             }
                             case 13: {
                                 puntaje = bono.getPuntaje() + puntaje;
-                                
+
                                 posesc[i + 1][j] = 1;
                                 posesc[i][j] = 0;
                                 agregaTronco(i, j, movant);
-                         
+
                                 break;
                             }
                             default: {
@@ -336,11 +365,11 @@ public class Escenario {
                             }
                             case 13: {
                                 puntaje = bono.getPuntaje() + puntaje;
-                                
+
                                 posesc[i][j - 1] = 1;
                                 posesc[i][j] = 0;
                                 agregaTronco(i, j, movant);
-                                
+
                                 break;
                             }
                             default: {
@@ -382,11 +411,11 @@ public class Escenario {
                             }
                             case 13: {
                                 puntaje = bono.getPuntaje() + puntaje;
-                                
+
                                 posesc[i][j + 1] = 1;
                                 posesc[i][j] = 0;
                                 agregaTronco(i, j, mov);
-                                
+
                                 break;
                             }
                             default: {
@@ -403,7 +432,7 @@ public class Escenario {
                 }
             }
         }
-       // bordes(mov);
+    // bordes(mov);
     }
 
     public void dibuja(Graphics g) {

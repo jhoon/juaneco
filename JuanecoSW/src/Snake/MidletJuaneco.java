@@ -30,6 +30,7 @@ public class MidletJuaneco extends MIDlet implements CommandListener {
     private Form creditos;
     private Form ayuda;
     private Form menu;
+    private Form perdiste;
     private StringItem stringItem;
     private StringItem alu1;
     private StringItem alu2;
@@ -42,6 +43,7 @@ public class MidletJuaneco extends MIDlet implements CommandListener {
     private Canvas gamecanvas;
     private ChoiceGroup lista;
     private ImageItem imagenMenu;
+    private ImageItem imagenPerdi;
 
     public MidletJuaneco() {
         // gamecanvas = new Canvas();
@@ -71,6 +73,8 @@ public class MidletJuaneco extends MIDlet implements CommandListener {
         } else if (displayable == creditos && command == backCommand) {
             cambiaPantalla(null, getMenu());
         } else if (displayable == ayuda && command == backCommand) {
+            cambiaPantalla(null, getMenu());
+        } else if (displayable == perdiste && command == okCommand) {
             cambiaPantalla(null, getMenu());
         }
 
@@ -143,6 +147,22 @@ public class MidletJuaneco extends MIDlet implements CommandListener {
         return menu;
     }
 
+    public Form getPerdiste() {
+        if (perdiste == null) {
+            perdiste = new Form("Perdiste");
+            try {
+                imagenPerdi = new ImageItem("Perdiste", Image.createImage("/perdiste.jpg"), ImageItem.LAYOUT_BOTTOM, "PERDISTE");
+            } catch (Exception e) {
+            }
+            perdiste.append(imagenPerdi);
+            perdiste.addCommand(getOkCommand());
+            perdiste.setCommandListener(this);
+
+        }
+
+        return perdiste;
+    }
+
     public Form getHistoria() {
 
         historia = new Form("Historia");
@@ -176,8 +196,9 @@ public class MidletJuaneco extends MIDlet implements CommandListener {
         stayuda = new StringItem(" Instrucciones de Juego", "");
         stayuda.setLayout(StringItem.LAYOUT_CENTER);
         try {
-                imagenAyuda = new ImageItem("AYUDA", Image.createImage("/ayuda.jpg"), ImageItem.LAYOUT_BOTTOM, "AYUDA");
-            } catch (Exception e){}
+            imagenAyuda = new ImageItem("AYUDA", Image.createImage("/ayuda.jpg"), ImageItem.LAYOUT_BOTTOM, "AYUDA");
+        } catch (Exception e) {
+        }
         ayuda.append(stayuda);
         ayuda.append(imagenAyuda);
         ayuda.addCommand(getBackCommand());
@@ -243,9 +264,9 @@ public class MidletJuaneco extends MIDlet implements CommandListener {
     }
 
     public void pauseApp() {
-          try {
+        try {
             gamecanvas.wait();
-            //gCanvas.
+        //gCanvas.
         } catch (InterruptedException ex) {
             ex.printStackTrace();
         }
