@@ -71,7 +71,7 @@ public class Canvas extends GameCanvas implements Runnable {
 
             while (true) {
                 if (escenario.isFin() == true) {
-                    midletPadre.cambiaPantalla(null, this.midletPadre.getMenu());
+                    midletPadre.cambiaPantalla(null, this.midletPadre.getPerdiste());
                     break;
 // La funcion anterior se encarga de volver al menu, en el cambio de pantalla debe ir a la pantalla Perdiste y de ahi
                 //a la pantalla Menu
