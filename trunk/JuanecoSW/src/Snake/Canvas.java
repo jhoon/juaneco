@@ -114,7 +114,7 @@ public class Canvas extends GameCanvas implements Runnable {
          */
 
         g.drawString("Puntuacion:", 7 * lado / 9 + 9, 14 * getHeight() / 16 + 15, Graphics.HCENTER | Graphics.BOTTOM);
-        g.drawString("" + puntaje, 7 * lado / 9 + 9, 15 * getHeight() / 16 + 10, Graphics.HCENTER | Graphics.BOTTOM);
+        g.drawString(""+ puntaje, 7 * lado / 9 + 9, 15 * getHeight() / 16 + 10, Graphics.HCENTER | Graphics.BOTTOM);
         flushGraphics();
 
     }

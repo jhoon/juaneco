@@ -152,7 +152,7 @@ public class Escenario {
             } else if (movii == 3 || movii == 4) {
                 posesc[xx][yy] = 3;
             }//Caso 4: Codo Down-R / R-Up
-            if ( i <(juaneco.getTronquitoXY().capacity()-1)) {
+            if (i < (juaneco.getTronquitoXY().capacity() - 1)) {
                 moviant = ((ElementoJuego) juaneco.getTronquitoXY().elementAt(i + 1)).getDireccion();
                 if (moviant != movii) {
                     if (((moviant == 4) & (movii == 1)) | ((moviant == 2) & (movii == 3))) {
@@ -216,39 +216,29 @@ public class Escenario {
         // Se encarga de juntar el tronco con la cabeza
         }
 
-    private void bordes(int mov) {
-        for (int i = 0; i < getLado() / 16; i++) {
-            switch (mov) {
-                case 1: {
-                    if (posesc[i][0] == 1) {
-                        setFin(true);
-                        break;
-                    }
-                    break;
-                }
-                case 2: {
-                    if (posesc[i][lado / 16 - 1] == 1) {
-                        setFin(true);
-                        break;
-                    }
-                    break;
-                }
-                case 3: {
-                    if (posesc[0][i] == 1) {
-                        setFin(true);
-                        break;
-                    }
-                    break;
-                }
-                case 4: {
-                    if (posesc[lado / 16 - 1][i] == 1) {
-                        setFin(true);
-                        break;
-                    }
-                    break;
-                }
+    private void choqueborde(int i, int j, int mov, int movant) {
+        if (i == 0) {
+            if (mov == movant) {
+                this.setFin(true);
             }
         }
+        if (i == (lado / 16 - 1)) {
+            if (mov == movant) {
+                this.setFin(true);
+            }
+
+        }
+        if (j == 0) {
+            if (mov == movant) {
+                this.setFin(true);
+            }
+        }
+        if (j == (lado / 16 - 1)) {
+            if (mov == movant) {
+                this.setFin(true);
+            }
+        }
+
 
     }
 
@@ -301,10 +291,8 @@ public class Escenario {
         }
         if (mov == 2) {
             juaneco.setCabeza(juaneco.getCabezaDer());
-            for (int i = 0; i <
-                    (getLado() / 16 - 1); i++) {
-                for (int j = 0; j <
-                        getLado() / 16; j++) {
+            for (int i = 0; i < (getLado() / 16 - 1); i++) {
+                for (int j = 0; j < getLado() / 16; j++) {
                     if (posesc[i][j] == 1) {
                         switch (posesc[i + 1][j]) {
                             case 0: {
@@ -347,10 +335,8 @@ public class Escenario {
         }
         if (mov == 3) {
             juaneco.setCabeza(juaneco.getCabezaArr());
-            for (int i = 0; i <
-                    getLado() / 16; i++) {
-                for (int j = 1; j <
-                        getLado() / 16; j++) {
+            for (int i = 0; i < getLado() / 16; i++) {
+                for (int j = 1; j < getLado() / 16; j++) {
                     if (posesc[i][j] == 1) {
                         switch (posesc[i][j - 1]) {
                             case 0: {
@@ -393,10 +379,8 @@ public class Escenario {
         }
         if (mov == 4) {
             juaneco.setCabeza(juaneco.getCabezaAba());
-            for (int i = 0; i <
-                    getLado() / 16; i++) {
-                for (int j = 0; j <
-                        (getLado() / 16 - 1); j++) {
+            for (int i = 0; i < getLado() / 16; i++) {
+                for (int j = 0; j < (getLado() / 16 - 1); j++) {
                     if (posesc[i][j] == 1) {
                         switch (posesc[i][j + 1]) {
                             case 0: {
@@ -437,7 +421,6 @@ public class Escenario {
                 }
             }
         }
-    // bordes(mov);
     }
 
     public void dibuja(Graphics g) {
