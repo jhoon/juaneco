@@ -13,9 +13,9 @@ import javax.microedition.lcdui.Image;
  * @author Manuel Sotelo A
  */
 public class Juaneco extends Personajes {
-    private Vector tronquitoXY = new Vector (0,1);
-    private Vector colitaXY = new Vector (0,1);
-    
+
+    private Vector tronquitoXY = new Vector(0, 1);
+    private int[][] cola = new int[1][1];
     private Image cabeza;
     private Image cabezaIzq;
     private Image cabezaDer;
@@ -77,25 +77,27 @@ public class Juaneco extends Personajes {
             }
         }
     }
-    public void cargaim() throws IOException{
-            this.setCabezaIzq(Image.createImage(Canvas.class.getResourceAsStream("/cabeza1.gif")));
-            this.setCabezaAba(Image.createImage(Canvas.class.getResourceAsStream("/cabeza4.gif")));
-            this.setCabezaDer(Image.createImage(Canvas.class.getResourceAsStream("/cabeza3.gif")));
-            this.setCabezaArr(Image.createImage(Canvas.class.getResourceAsStream("/cabeza2.gif")));
-            this.setTroncoH(Image.createImage(Canvas.class.getResourceAsStream("/cuerpoh.gif")));
-            this.setTroncoV(Image.createImage(Canvas.class.getResourceAsStream("/cuerpov.gif")));
-            this.setCodo1(Image.createImage(Canvas.class.getResourceAsStream("/cod1.gif")));
-            this.setCodo2(Image.createImage(Canvas.class.getResourceAsStream("/cod2.gif")));
-            this.setCodo3(Image.createImage(Canvas.class.getResourceAsStream("/cod3.gif")));
-            this.setCodo4(Image.createImage(Canvas.class.getResourceAsStream("/cod4.gif")));
-            this.setColaDer(Image.createImage(Canvas.class.getResourceAsStream("/col1.gif")));
-            this.setColaAba(Image.createImage(Canvas.class.getResourceAsStream("/col2.gif")));
-            this.setColaIzq(Image.createImage(Canvas.class.getResourceAsStream("/col3.gif")));
-            this.setColaArr(Image.createImage(Canvas.class.getResourceAsStream("/col4.gif")));
 
-            this.setCabeza(this.getCabezaArr());
+    public void cargaim() throws IOException {
+        this.setCabezaIzq(Image.createImage(Canvas.class.getResourceAsStream("/cabeza1.gif")));
+        this.setCabezaAba(Image.createImage(Canvas.class.getResourceAsStream("/cabeza4.gif")));
+        this.setCabezaDer(Image.createImage(Canvas.class.getResourceAsStream("/cabeza3.gif")));
+        this.setCabezaArr(Image.createImage(Canvas.class.getResourceAsStream("/cabeza2.gif")));
+        this.setTroncoH(Image.createImage(Canvas.class.getResourceAsStream("/cuerpoh.gif")));
+        this.setTroncoV(Image.createImage(Canvas.class.getResourceAsStream("/cuerpov.gif")));
+        this.setCodo1(Image.createImage(Canvas.class.getResourceAsStream("/cod1.gif")));
+        this.setCodo2(Image.createImage(Canvas.class.getResourceAsStream("/cod2.gif")));
+        this.setCodo3(Image.createImage(Canvas.class.getResourceAsStream("/cod3.gif")));
+        this.setCodo4(Image.createImage(Canvas.class.getResourceAsStream("/cod4.gif")));
+        this.setColaDer(Image.createImage(Canvas.class.getResourceAsStream("/col1.gif")));
+        this.setColaAba(Image.createImage(Canvas.class.getResourceAsStream("/col2.gif")));
+        this.setColaIzq(Image.createImage(Canvas.class.getResourceAsStream("/col3.gif")));
+        this.setColaArr(Image.createImage(Canvas.class.getResourceAsStream("/col4.gif")));
+
+        this.setCabeza(this.getCabezaArr());
 
     }
+
     public void movup(int borde, int lado) {
         switch (borde) {
             case 0: {
@@ -134,8 +136,8 @@ public class Juaneco extends Personajes {
                 }
                 break;
             }
-            }
         }
+    }
 
     /**
      * @return the Velocidad
@@ -179,7 +181,7 @@ public class Juaneco extends Personajes {
         this.cabeza = cabeza;
     }
 
-      /**
+    /**
      * @return the cabezaIzq
      */
     public Image getCabezaIzq() {
@@ -358,15 +360,4 @@ public class Juaneco extends Personajes {
     public void setTronquitoXY(Vector tronquitoXY) {
         this.tronquitoXY = tronquitoXY;
     }
-
-  
-
-    public Vector getColitaXY() {
-        return colitaXY;
-    }
-
-    public void setColitaXY(Vector colitaXY) {
-        this.colitaXY = colitaXY;
-    }
-
 }
