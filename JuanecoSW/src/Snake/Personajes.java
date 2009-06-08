@@ -11,7 +11,7 @@ package Snake;
  */
 public class  Personajes extends ElementoJuego{
 
-    private int Estado;
+private int Estado;
 private int Tamano;
 
 public Personajes (){

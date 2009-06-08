@@ -19,10 +19,6 @@ import javax.microedition.lcdui.ImageItem;
 import java.io.IOException;
 import javax.microedition.lcdui.ChoiceGroup;
 
-
-
-
-
 public class MidletJuaneco extends MIDlet implements CommandListener {
 
     private Command exitCommand;
@@ -47,9 +43,7 @@ public class MidletJuaneco extends MIDlet implements CommandListener {
     private ImageItem imagenMenu;
 
     public MidletJuaneco() {
-       // gamecanvas = new Canvas();
-
-
+        // gamecanvas = new Canvas();
     }
 
     public void startApp() {
@@ -57,31 +51,27 @@ public class MidletJuaneco extends MIDlet implements CommandListener {
 
         cambiaPantalla(null, getMenu());
 
-        //Display display = Display.getDisplay(this);
-        //gamecanvas.start();
-        //display.setCurrent(gamecanvas);
-       
+    //Display display = Display.getDisplay(this);
+    //gamecanvas.start();
+    //display.setCurrent(gamecanvas);
+
 
 
     }
 
     public void commandAction(Command command, Displayable displayable) {
 
-        if (displayable == menu && command == okCommand)
-                listAction();
-
-
-        else if (displayable == menu && command == exitCommand)
-                exitMIDlet();
-
-        else if (displayable == historia && command == backCommand)
-                cambiaPantalla(null, getMenu());
-
-        else if (displayable == creditos && command == backCommand)
-                cambiaPantalla(null, getMenu());
-
-        else if (displayable == ayuda && command == backCommand)
-                cambiaPantalla(null, getMenu());
+        if (displayable == menu && command == okCommand) {
+            listAction();
+        } else if (displayable == menu && command == exitCommand) {
+            exitMIDlet();
+        } else if (displayable == historia && command == backCommand) {
+            cambiaPantalla(null, getMenu());
+        } else if (displayable == creditos && command == backCommand) {
+            cambiaPantalla(null, getMenu());
+        } else if (displayable == ayuda && command == backCommand) {
+            cambiaPantalla(null, getMenu());
+        }
 
 
     }
@@ -106,19 +96,21 @@ public class MidletJuaneco extends MIDlet implements CommandListener {
         if (opcionseleccionada != null) {
 
             if (opcionseleccionada.equals("Nuevo Juego")) {
+
                 gamecanvas = new Canvas();
                 gamecanvas.start();
+
                 cambiaPantalla(null, gamecanvas);
 
-            } else if (opcionseleccionada.equals("Historia")){
+            } else if (opcionseleccionada.equals("Historia")) {
 
                 cambiaPantalla(null, getHistoria());
 
-            } else if (opcionseleccionada.equals("Creditos")){
+            } else if (opcionseleccionada.equals("Creditos")) {
 
                 cambiaPantalla(null, getCreditos());
 
-            } else if (opcionseleccionada.equals("Ayuda")){
+            } else if (opcionseleccionada.equals("Ayuda")) {
 
                 cambiaPantalla(null, getAyuda());
             }
@@ -126,16 +118,15 @@ public class MidletJuaneco extends MIDlet implements CommandListener {
 
     }
 
-
-
     public Form getMenu() {
         if (menu == null) {
             menu = new Form("Menu Principal");
-            lista = new ChoiceGroup("", Choice.EXCLUSIVE, new String[] {"Nuevo Juego", "Historia", "Creditos", "Ayuda"}, null);
-        try{
-            imagenMenu = new ImageItem("Juaneco Tour Por el Perú", Image.createImage("/maya1.jpg"), ImageItem.LAYOUT_BOTTOM, "FONDO");
-        } catch(Exception e) {}
-            stringItem = new StringItem("Menu Principal","");
+            lista = new ChoiceGroup("", Choice.EXCLUSIVE, new String[]{"Nuevo Juego", "Historia", "Creditos", "Ayuda"}, null);
+            try {
+                imagenMenu = new ImageItem("Juaneco Tour Por el Perú", Image.createImage("/maya1.jpg"), ImageItem.LAYOUT_BOTTOM, "FONDO");
+            } catch (Exception e) {
+            }
+            stringItem = new StringItem("Menu Principal", "");
             //Font font = new Font();
             //stringItem.setFont(font)
             stringItem.setLayout(StringItem.LAYOUT_CENTER);
@@ -150,43 +141,46 @@ public class MidletJuaneco extends MIDlet implements CommandListener {
 
         return menu;
     }
-    public Form getHistoria(){
+
+    public Form getHistoria() {
 
         historia = new Form("Historia");
-        stHitoria = new StringItem(" historia de juaneco","");
+        stHitoria = new StringItem(" historia de juaneco", "");
         stHitoria.setLayout(StringItem.LAYOUT_CENTER);
         historia.append(stHitoria);
         historia.addCommand(getBackCommand());
         historia.setCommandListener(this);
 
-    return historia;
+        return historia;
     }
-public Form getCreditos(){
+
+    public Form getCreditos() {
 
         creditos = new Form("Creditos");
-        stcreditos = new StringItem(" Alumnos ","");
+        stcreditos = new StringItem(" Alumnos ", "");
         stcreditos.setLayout(StringItem.LAYOUT_CENTER);
         creditos.append(stcreditos);
-        alu1 = new StringItem(" Manuel Sotelo \n Diego Iparraguirre \n Maria Jesus Chamorro","");
+        alu1 = new StringItem(" Manuel Sotelo \n Diego Iparraguirre \n Maria Jesus Chamorro", "");
         alu1.setLayout(StringItem.LAYOUT_LEFT);
         creditos.append(alu1);
         creditos.addCommand(getBackCommand());
         creditos.setCommandListener(this);
 
-    return creditos;
+        return creditos;
     }
 
-public Form getAyuda(){
+    public Form getAyuda() {
 
         ayuda = new Form("Ayuda");
-        stayuda = new StringItem(" Instrucciones de Juego","");
+        stayuda = new StringItem(" Instrucciones de Juego", "");
         stayuda.setLayout(StringItem.LAYOUT_CENTER);
-        ayuda.append( stayuda);
+        ayuda.append(stayuda);
         ayuda.addCommand(getBackCommand());
         ayuda.setCommandListener(this);
 
-    return  ayuda;
+        return ayuda;
     }
+
     public Display getDisplay() {
 
         return Display.getDisplay(this);
@@ -202,7 +196,7 @@ public Form getAyuda(){
         return okCommand;
     }
 
-     public Command getOkCommand1() {
+    public Command getOkCommand1() {
 
         if (okCommand1 == null) {
 
@@ -211,6 +205,7 @@ public Form getAyuda(){
 
         return okCommand1;
     }
+
     public Command getExitCommand() {
 
         if (exitCommand == null) {
@@ -242,6 +237,13 @@ public Form getAyuda(){
     }
 
     public void pauseApp() {
+          try {
+            gamecanvas.wait();
+            //gCanvas.
+        } catch (InterruptedException ex) {
+            ex.printStackTrace();
+        }
+
     }
 
     public void destroyApp(boolean unconditional) {
@@ -274,7 +276,4 @@ public Form getAyuda(){
     private Displayable getForm1() {
         throw new UnsupportedOperationException("Not yet implemented");
     }
-
-    
-
 }

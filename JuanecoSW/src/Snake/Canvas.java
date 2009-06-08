@@ -16,9 +16,7 @@ public class Canvas extends GameCanvas implements Runnable {
 
     Random rnd = new Random();
 // Atributos de escenario (animales, jugador, fondo, etc)
-
     Escenario escenario = new Escenario();
-    
     Bonos bono = new Bonos();
     Obstaculos obsta1 = new Obstaculos();
 // Constantes del juego
@@ -40,15 +38,15 @@ public class Canvas extends GameCanvas implements Runnable {
         try {
 
 //Se cargan las imagenes de la cabeza de Juaneco por cada punto cardinal
-    
-    
+
+
             obsta1.inicializar();
             escenario.inicializa();
 
 // Se inicializa a juaneco, escenario y comida
-    
+
             escenario.setBorde(1);
-    
+
             bono.setPuntaje(200);
 
         } catch (IOException e) {
@@ -62,11 +60,11 @@ public class Canvas extends GameCanvas implements Runnable {
     public void run() {
         try {
             Graphics g = getGraphics();
-
+            verifyGameState(getGraphics());
             while (true) {
-
-                verifyGameState();
-
+                if (escenario.isFin() == true) {
+                    break;
+                }
                 checkUserInput();
 
                 updateGameScreen(getGraphics());
@@ -89,15 +87,29 @@ public class Canvas extends GameCanvas implements Runnable {
     private void shock() {
     }
 
-    private void verifyGameState() {
+    private void verifyGameState(Graphics g) {
+        int time = 0;
+        if (escenario.isFin() == true) {
+            g.drawString("Perdiste!!!", lado / 2, lado / 2, Graphics.HCENTER | Graphics.BOTTOM);
+            flushGraphics();
+            while (true) {
+                if (time == 10) {
+                    break;
+                }
+                time++;
+
+            }
+
+        }
+
     }
 
     /**************************************************************/
     private void updateGameScreen(Graphics g) {
         escenario.movcabeza(mov, cabeza, movant, puntaje, rnd);
-       if(escenario.juaneco.getTronquitoXY().capacity()>0){
-        escenario.movotronco(mov);
-       }
+        if (escenario.juaneco.getTronquitoXY().capacity() > 0) {
+            escenario.movotronco(mov);
+        }
         escenario.dibuja(g);
 
         shock();
@@ -105,7 +117,7 @@ public class Canvas extends GameCanvas implements Runnable {
         /*g.setColor(0xffffff);
 
         g.fillRect(0, 0, getWidth(), getHeight());
-        */
+         */
 
         g.drawString("Puntuacion:", 7 * lado / 9 + 9, 14 * getHeight() / 16 + 15, Graphics.HCENTER | Graphics.BOTTOM);
         g.drawString("" + puntaje, 7 * lado / 9 + 9, 15 * getHeight() / 16 + 10, Graphics.HCENTER | Graphics.BOTTOM);
