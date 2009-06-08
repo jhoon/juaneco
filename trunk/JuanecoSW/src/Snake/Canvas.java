@@ -19,19 +19,27 @@ public class Canvas extends GameCanvas implements Runnable {
     Escenario escenario = new Escenario();
     Bonos bono = new Bonos();
     Obstaculos obsta1 = new Obstaculos();
-// Constantes del juego
+// Llmando al midlet
+    private MidletJuaneco midletPadre;
+
+    // Constantes del juego
 
     // Variables del juego
     private int mov = 3;
     private int movant = 3;
     private int lado = getWidth();
-    private int puntaje;
+    private int puntaje = 0;
     private boolean cabeza = false;
     private int choque = 0;
 
     public Canvas() {
         super(true);
 
+    }
+
+    public Canvas(MidletJuaneco midlet) {
+        super(true);
+        this.midletPadre = midlet;
     }
 
     public void start() {
@@ -60,10 +68,13 @@ public class Canvas extends GameCanvas implements Runnable {
     public void run() {
         try {
             Graphics g = getGraphics();
-            verifyGameState(getGraphics());
+
             while (true) {
                 if (escenario.isFin() == true) {
+                    midletPadre.cambiaPantalla(null, this.midletPadre.getMenu());
                     break;
+// La funcion anterior se encarga de volver al menu, en el cambio de pantalla debe ir a la pantalla Perdiste y de ahi
+                //a la pantalla Menu
                 }
                 checkUserInput();
 
@@ -85,23 +96,6 @@ public class Canvas extends GameCanvas implements Runnable {
     }
 
     private void shock() {
-    }
-
-    private void verifyGameState(Graphics g) {
-        int time = 0;
-        if (escenario.isFin() == true) {
-            g.drawString("Perdiste!!!", lado / 2, lado / 2, Graphics.HCENTER | Graphics.BOTTOM);
-            flushGraphics();
-            while (true) {
-                if (time == 10) {
-                    break;
-                }
-                time++;
-
-            }
-
-        }
-
     }
 
     /**************************************************************/

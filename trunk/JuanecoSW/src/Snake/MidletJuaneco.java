@@ -97,7 +97,7 @@ public class MidletJuaneco extends MIDlet implements CommandListener {
 
             if (opcionseleccionada.equals("Nuevo Juego")) {
 
-                gamecanvas = new Canvas();
+                gamecanvas = new Canvas(this);
                 gamecanvas.start();
 
                 cambiaPantalla(null, gamecanvas);
