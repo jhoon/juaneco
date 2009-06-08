@@ -31,7 +31,7 @@ public class Animales extends Personajes {
         this.setAnimal1(SnakeUtil.createImage("/vizcacha.gif"));
         this.setAnimal2(SnakeUtil.createImage("/cuy.gif"));
         this.setAnimal3(SnakeUtil.createImage("/raton.gif"));
-        this.setFigura(this.getAnimal1());
+        this.setFigura(this.getAnimal2());
 
     }
 

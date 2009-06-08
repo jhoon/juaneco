@@ -134,7 +134,7 @@ public class Escenario {
         //Volvemos a limpiar la matriz colocandole valor 0 solo si encuentra tronco
         for (int k = 0; k < (getLado() / 16); k++) {
             for (int m = 0; m < (getLado() / 16); m++) {
-                if (posesc[k][m] == 2 || posesc[k][m] == 3) {
+                if (posesc[k][m] >= 2 & posesc[k][m] <= 11) {
                     posesc[k][m] = 0;
                 }
             }
@@ -152,29 +152,27 @@ public class Escenario {
             } else if (movii == 3 || movii == 4) {
                 posesc[xx][yy] = 3;
             }//Caso 4: Codo Down-R / R-Up
-            if (i > 0) {
-                moviant = ((ElementoJuego) juaneco.getTronquitoXY().elementAt(i - 1)).getDireccion();
-//                if (moviant != movii) {
-//                    if (((moviant == 4) & (movii == 1))|((moviant == 2) & (movii == 3))) {
-//                    posesc[xx][yy] = 6;
-//                    }
-//                    if (((moviant == 4) & (movii == 2))|((moviant == 1) & (movii == 3))) {
-//                    posesc[xx][yy] = 4;
-//                    }
-//                    if (((moviant == 3) & (movii == 1))|((moviant == 2) & (movii == 4))) {
-//                    posesc[xx][yy] = 5;
-//                    }
-//                    if (((moviant == 3) & (movii == 2))|((moviant == 1) & (movii == 4))) {
-//                    posesc[xx][yy] = 7;
-//                    }
-//                    // Caso 4: Codo Down-R / L-Up
-//                    // Caso 5: Codo Up-L / L-Down
-//                    // Caso 6: Codo Down - L / R -Up
-//                    // Caso 7: Codo Up - R / R - Down
-//
-//
-//
-//                }
+            if ( i <(juaneco.getTronquitoXY().capacity()-1)) {
+                moviant = ((ElementoJuego) juaneco.getTronquitoXY().elementAt(i + 1)).getDireccion();
+                if (moviant != movii) {
+                    if (((moviant == 4) & (movii == 1)) | ((moviant == 2) & (movii == 3))) {
+                        posesc[xx][yy] = 5;
+                    }
+                    if (((moviant == 4) & (movii == 2)) | ((moviant == 1) & (movii == 3))) {
+                        posesc[xx][yy] = 7;
+                    }
+                    if (((moviant == 3) & (movii == 1)) | ((moviant == 2) & (movii == 4))) {
+                        posesc[xx][yy] = 6;
+                    }
+                    if (((moviant == 3) & (movii == 2)) | ((moviant == 1) & (movii == 4))) {
+                        posesc[xx][yy] = 4;
+                    }
+                // Caso 4: Codo Down-R / L-Up
+                // Caso 5: Codo Up-L / L-Down
+                // Caso 6: Codo Down - L / R -Up
+                // Caso 7: Codo Up - R / R - Down
+
+                }
             }
 
 
@@ -213,6 +211,10 @@ public class Escenario {
             juaneco.getTronquitoXY().addElement(new ElementoJuego(i, j, mov));
         }
     }
+
+    private void agregaCola(int i, int j, int mov) {
+        // Se encarga de juntar el tronco con la cabeza
+        }
 
     private void bordes(int mov) {
         for (int i = 0; i < getLado() / 16; i++) {
@@ -287,6 +289,7 @@ public class Escenario {
                                 break;
                             }
                         }
+                        movant = mov;
                         cabeza = true;
                         break;
                     }
@@ -332,6 +335,7 @@ public class Escenario {
                                 break;
                             }
                         }
+                        movant = mov;
                         cabeza = true;
                         break;
                     }
@@ -377,7 +381,7 @@ public class Escenario {
                                 break;
                             }
                         }
-                        mov = 3;
+                        movant = mov;
                         cabeza = true;
                         break;
                     }
@@ -423,6 +427,7 @@ public class Escenario {
                                 break;
                             }
                         }
+                        movant = mov;
                         cabeza = true;
                         break;
                     }

@@ -149,7 +149,7 @@ public class MidletJuaneco extends MIDlet implements CommandListener {
 
     public Form getPerdiste() {
         if (perdiste == null) {
-            perdiste = new Form("Perdiste");
+            perdiste = new Form("GAME OVER!");
             try {
                 imagenPerdi = new ImageItem("Perdiste", Image.createImage("/perdiste.jpg"), ImageItem.LAYOUT_BOTTOM, "PERDISTE");
             } catch (Exception e) {
