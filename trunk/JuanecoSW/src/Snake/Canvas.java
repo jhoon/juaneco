@@ -13,7 +13,7 @@ import java.util.Random;
  */
 public class Canvas extends GameCanvas implements Runnable {
 //clase Random para la aparicion de alimento
-
+    private boolean bandera;
     Random rnd = new Random();
 // Atributos de escenario (animales, jugador, fondo, etc)
     Escenario escenario = new Escenario();
@@ -49,13 +49,13 @@ public class Canvas extends GameCanvas implements Runnable {
 
 
             obsta1.inicializar();
-            escenario.inicializa();
+            escenario.inicializa(bandera);
 
 // Se inicializa a juaneco, escenario y comida
 
-            escenario.setBorde(1);
+            
 
-            bono.setPuntaje(200);
+
 
         } catch (IOException e) {
             e.printStackTrace();
@@ -137,6 +137,21 @@ public class Canvas extends GameCanvas implements Runnable {
             movant = mov;
             mov = 4;
         }
+    }
+
+    /**
+     * @return the bandera
+     */
+    public//clase Random para la aparicion de alimento
+    boolean isBandera() {
+        return bandera;
+    }
+
+    /**
+     * @param bandera the bandera to set
+     */
+    public void setBandera(boolean bandera) {
+        this.bandera = bandera;
     }
 }
 

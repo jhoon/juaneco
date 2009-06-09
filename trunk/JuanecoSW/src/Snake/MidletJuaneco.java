@@ -76,6 +76,12 @@ public class MidletJuaneco extends MIDlet implements CommandListener {
             cambiaPantalla(null, getMenu());
         } else if (displayable == perdiste && command == okCommand) {
             cambiaPantalla(null, getMenu());
+        } else if (displayable == historia && command == okCommand) {
+            gamecanvas = new Canvas(this);
+            gamecanvas.setBandera(true);
+            gamecanvas.start();
+            
+            cambiaPantalla(null, gamecanvas);
         }
 
 
@@ -103,8 +109,9 @@ public class MidletJuaneco extends MIDlet implements CommandListener {
             if (opcionseleccionada.equals("Nuevo Juego")) {
 
                 gamecanvas = new Canvas(this);
+                gamecanvas.setBandera(false);
                 gamecanvas.start();
-
+                
                 cambiaPantalla(null, gamecanvas);
 
             } else if (opcionseleccionada.equals("Historia")) {
@@ -169,6 +176,7 @@ public class MidletJuaneco extends MIDlet implements CommandListener {
         stHitoria = new StringItem(" historia de juaneco", "");
         stHitoria.setLayout(StringItem.LAYOUT_CENTER);
         historia.append(stHitoria);
+        historia.addCommand(getOkCommand());
         historia.addCommand(getBackCommand());
         historia.setCommandListener(this);
 

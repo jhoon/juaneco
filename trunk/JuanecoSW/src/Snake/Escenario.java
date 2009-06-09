@@ -47,7 +47,10 @@ public class Escenario {
         }
     }
 
-    public void inicializa() throws IOException {
+    public void inicializa(boolean bandera) throws IOException {
+        if(bandera == true)
+        this.setFondo(Image.createImage(Canvas.class.getResourceAsStream("/costa.jpg")));
+        if (bandera == false)
         this.setFondo(Image.createImage(Canvas.class.getResourceAsStream("/fondoGame.jpg")));
         for (int i = 0; i < getLado() / 16; i++) {
             for (int j = 0; j < getLado() / 16; j++) {
@@ -144,10 +147,7 @@ public class Escenario {
             xx = ((ElementoJuego) juaneco.getTronquitoXY().elementAt(i)).getPosicionX();
             yy = ((ElementoJuego) juaneco.getTronquitoXY().elementAt(i)).getPosicionY();
             movii = ((ElementoJuego) juaneco.getTronquitoXY().elementAt(i)).getDireccion();
-
-
-
-            if (movii == 1 || movii == 2) {
+           if (movii == 1 || movii == 2) {
                 posesc[xx][yy] = 2;
             } else if (movii == 3 || movii == 4) {
                 posesc[xx][yy] = 3;
@@ -215,32 +215,6 @@ public class Escenario {
     private void agregaCola(int i, int j, int mov) {
         // Se encarga de juntar el tronco con la cabeza
         }
-
-    private void choqueborde(int i, int j, int mov, int movant) {
-        if (i == 0) {
-            if (mov == movant) {
-                this.setFin(true);
-            }
-        }
-        if (i == (lado / 16 - 1)) {
-            if (mov == movant) {
-                this.setFin(true);
-            }
-
-        }
-        if (j == 0) {
-            if (mov == movant) {
-                this.setFin(true);
-            }
-        }
-        if (j == (lado / 16 - 1)) {
-            if (mov == movant) {
-                this.setFin(true);
-            }
-        }
-
-
-    }
 
     public void movcabeza(int mov, boolean cabeza, int movant, int puntaje, Random rnd) {
         //   bordes(mov);
