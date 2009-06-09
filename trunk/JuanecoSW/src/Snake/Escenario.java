@@ -61,7 +61,7 @@ public class Escenario {
         }
 
         posesc[8][8] = 1;   /*La posicion i=8, j=8 es la cabeza*/
-        posesc[8][9] = 9;     /*La posicion i=8, j=9 es el tronco en horizontal*/
+       // posesc[8][9] = 9;     /*La posicion i=8, j=9 es el tronco en horizontal*/
         animal.apareceanimal(rnd, posesc, lado, 12);
         animal.setPuntaje(20);
         bono.setPuntaje(50);
@@ -133,7 +133,17 @@ public class Escenario {
         ((ElementoJuego) juaneco.getTronquitoXY().elementAt(0)).setPosicionY(cabezay);
 
         ((ElementoJuego) juaneco.getTronquitoXY().elementAt(0)).setDireccion(mov);
+        switch(mov){
+            case 1:{
 
+            }
+            case 2:{}
+            case 3:{}
+            case 4:{}
+
+
+
+        }
         //Volvemos a limpiar la matriz colocandole valor 0 solo si encuentra tronco
         for (int k = 0; k < (getLado() / 16); k++) {
             for (int m = 0; m < (getLado() / 16); m++) {
