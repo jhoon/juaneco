@@ -4,6 +4,7 @@
  */
 package Snake;
 
+import Snake.util.SnakeUtil;
 import java.io.IOException;
 import javax.microedition.lcdui.Graphics;
 import javax.microedition.lcdui.Image;
@@ -20,6 +21,7 @@ public class Escenario {
     Bonos bono = new Bonos();
     Animales animal = new Animales();
     private int borde;
+    private int puntaje;
     private int dimensiones;
     private Image Tipo1;
     private Image Tipo3;
@@ -36,8 +38,9 @@ public class Escenario {
     private int[] posx = new int[lado / 16];
     private int[] posy = new int[lado / 16];
 
-    public Escenario() {
+    public Escenario(int getWidth) {
         super();
+        this.setLado(getWidth);
         try {
             juaneco.cargaim();
             animal.cargaanimal();
@@ -48,12 +51,14 @@ public class Escenario {
     }
 
     public void inicializa(boolean bandera) throws IOException {
-        if(bandera == true)
-        this.setFondo(Image.createImage(Canvas.class.getResourceAsStream("/costa.jpg")));
-        if (bandera == false)
-        this.setFondo(Image.createImage(Canvas.class.getResourceAsStream("/fondoGame.jpg")));
-        for (int i = 0; i < getLado() / 16; i++) {
-            for (int j = 0; j < getLado() / 16; j++) {
+        if (bandera == true) {
+            this.setFondo(SnakeUtil.createImage("/costa.jpg"));
+        }
+        if (bandera == false) {
+            this.setFondo(SnakeUtil.createImage("/fondoGame.jpg"));
+        }
+        for (int i = 0; i < lado / 16; i++) {
+            for (int j = 0; j < lado / 16; j++) {
                 posx[i] = (8 + 16 * i);
                 posy[j] = 16 + 16 * j;
                 posesc[i][j] = 0;
@@ -61,12 +66,12 @@ public class Escenario {
         }
 
         posesc[8][8] = 1;   /*La posicion i=8, j=8 es la cabeza*/
-       // posesc[8][9] = 9;     /*La posicion i=8, j=9 es el tronco en horizontal*/
+        // posesc[8][9] = 9;     /*La posicion i=8, j=9 es el tronco en horizontal*/
         animal.apareceanimal(rnd, posesc, lado, 12);
         animal.setPuntaje(20);
         bono.setPuntaje(50);
-        bono.setTiempo(1000);
-        juaneco.setVelocidad(100);
+        bono.setTiempo(100);
+        juaneco.setVelocidad(80);
 
     }
 
@@ -133,17 +138,7 @@ public class Escenario {
         ((ElementoJuego) juaneco.getTronquitoXY().elementAt(0)).setPosicionY(cabezay);
 
         ((ElementoJuego) juaneco.getTronquitoXY().elementAt(0)).setDireccion(mov);
-        switch(mov){
-            case 1:{
 
-            }
-            case 2:{}
-            case 3:{}
-            case 4:{}
-
-
-
-        }
         //Volvemos a limpiar la matriz colocandole valor 0 solo si encuentra tronco
         for (int k = 0; k < (getLado() / 16); k++) {
             for (int m = 0; m < (getLado() / 16); m++) {
@@ -157,30 +152,29 @@ public class Escenario {
             xx = ((ElementoJuego) juaneco.getTronquitoXY().elementAt(i)).getPosicionX();
             yy = ((ElementoJuego) juaneco.getTronquitoXY().elementAt(i)).getPosicionY();
             movii = ((ElementoJuego) juaneco.getTronquitoXY().elementAt(i)).getDireccion();
-           if (movii == 1 || movii == 2) {
+
+            if (movii == 1 || movii == 2) {
                 posesc[xx][yy] = 2;
             } else if (movii == 3 || movii == 4) {
                 posesc[xx][yy] = 3;
+
             }//Caso 4: Codo Down-R / R-Up
             if (i < (juaneco.getTronquitoXY().capacity() - 1)) {
                 moviant = ((ElementoJuego) juaneco.getTronquitoXY().elementAt(i + 1)).getDireccion();
                 if (moviant != movii) {
                     if (((moviant == 4) & (movii == 1)) | ((moviant == 2) & (movii == 3))) {
-                        posesc[xx][yy] = 5;
+                        posesc[xx][yy] = 5; // Caso 5: Codo Up-L / L-Down
                     }
                     if (((moviant == 4) & (movii == 2)) | ((moviant == 1) & (movii == 3))) {
-                        posesc[xx][yy] = 7;
+                        posesc[xx][yy] = 7;// Caso 7: Codo Up - R / R - Down
                     }
                     if (((moviant == 3) & (movii == 1)) | ((moviant == 2) & (movii == 4))) {
-                        posesc[xx][yy] = 6;
+                        posesc[xx][yy] = 6;// Caso 6: Codo Down - L / R -Up
                     }
                     if (((moviant == 3) & (movii == 2)) | ((moviant == 1) & (movii == 4))) {
-                        posesc[xx][yy] = 4;
+                        posesc[xx][yy] = 4;// Caso 4: Codo Down-R / L-Up
                     }
-                // Caso 4: Codo Down-R / L-Up
-                // Caso 5: Codo Up-L / L-Down
-                // Caso 6: Codo Down - L / R -Up
-                // Caso 7: Codo Up - R / R - Down
+
 
                 }
             }
@@ -191,7 +185,7 @@ public class Escenario {
 
     }
 
-    private void agregaTronco(int i, int j, int mov) {
+    public void agregaTronco(int i, int j, int mov) {
         // Se encarga de juntar el tronco con la cabeza
         int xTronco = 0;
         int yTronco = 0;
@@ -222,187 +216,171 @@ public class Escenario {
         }
     }
 
-    private void agregaCola(int i, int j, int mov) {
-        // Se encarga de juntar el tronco con la cabeza
-        }
+    public void movcabeza(int mov, boolean cabeza, int movant, Random rnd) {
 
-    public void movcabeza(int mov, boolean cabeza, int movant, int puntaje, Random rnd) {
-        //   bordes(mov);
         bono.bontim(posesc, lado);
         cabeza = false;
-        if (mov == 1) {
-            juaneco.setCabeza(juaneco.getCabezaIzq());
-            for (int i = 1; i < getLado() / 16; i++) {
-                for (int j = 0; j < getLado() / 16; j++) {
-                    if (posesc[i][j] == 1) {
-                        switch (posesc[i - 1][j]) {
-                            case 0: {
-                                posesc[i - 1][j] = 1;
-                                posesc[i][j] = 0;
-                                break;
-                            }
-                            case 12: {
-                                puntaje = animal.getPuntaje() + puntaje;
-                                animal.apareceanimal(rnd, posesc, lado, 12);
-                                posesc[i - 1][j] = 1;
-                                agregaTronco(i, j, movant);
-                                bono.aparebono(rnd, posesc, lado);
-                                break;
-                            }
-                            case 13: {
 
-                                puntaje = bono.getPuntaje() + puntaje;
-                                posesc[i - 1][j] = 1;
-                                posesc[i][j] = 0;
-                                agregaTronco(i, j, movant);
 
-                                break;
+        for (int i = 0; i < getLado() / 16; i++) {
+            for (int j = 0; j < getLado() / 16; j++) {
+                if (posesc[i][j] == 1) {
+                    if (mov == 1) {
+                        juaneco.setCabeza(juaneco.getCabezaIzq());
+                        if (i == 0) {
+                            this.setFin(true);
+                        } else {
+                            switch (posesc[i - 1][j]) {
+                                case 0: {
+                                    posesc[i - 1][j] = 1;
+                                    posesc[i][j] = 0;
+
+                                    break;
+                                }
+                                case 12: {
+                                    setPuntaje(animal.getPuntaje() + getPuntaje());
+                                    animal.apareceanimal(rnd, posesc, lado, 12);
+                                    posesc[i - 1][j] = 1;
+                                    posesc[i][j] = 0;
+                                    agregaTronco(i, j, movant);
+                                    bono.aparebono(rnd, posesc, lado);
+                                    break;
+                                }
+                                case 13: {
+
+                                    setPuntaje(bono.getPuntaje() + getPuntaje());
+                                    posesc[i - 1][j] = 1;
+                                    posesc[i][j] = 0;
+                                    agregaTronco(i, j, movant);
+
+                                    break;
+                                }
+                                default: {
+                                    this.setFin(true);
+                                    break;
+                                }
                             }
-                            default: {
-                                this.setFin(true);
-                                break;
+                        }
+                        movant = mov;
+                        cabeza = true;
+                        break;
+                    } else if (mov == 2) {
+                        juaneco.setCabeza(juaneco.getCabezaDer());
+                        if (i == (getLado() / 16 - 1)) {
+                            this.setFin(true);
+                        } else {
+                            switch (posesc[i + 1][j]) {
+                                case 0: {
+                                    posesc[i + 1][j] = 1;
+                                    posesc[i][j] = 0;
+                                    break;
+                                }
+                                case 12: {
+                                    setPuntaje(animal.getPuntaje() + getPuntaje());
+                                    animal.apareceanimal(rnd, posesc, lado, 12);
+                                    posesc[i + 1][j] = 1;
+                                    posesc[i][j] = 0;
+                                    agregaTronco(i, j, movant);
+                                    bono.aparebono(rnd, posesc, lado);
+                                    break;
+                                }
+                                case 13: {
+                                    setPuntaje(bono.getPuntaje() + getPuntaje());
+                                    posesc[i + 1][j] = 1;
+                                    posesc[i][j] = 0;
+                                    agregaTronco(i, j, movant);
+                                    break;
+                                }
+                                default: {
+                                    this.setFin(true);
+                                    break;
+                                }
+                            }
+                        }
+                        movant = mov;
+                        cabeza = true;
+                        break;
+                    } else if (mov == 3) {
+                        juaneco.setCabeza(juaneco.getCabezaArr());
+                        if (j == 0) {
+                            this.setFin(true);
+                        } else {
+                            switch (posesc[i][j - 1]) {
+                                case 0: {
+                                    posesc[i][j - 1] = 1;
+                                    posesc[i][j] = 0;
+                                    break;
+                                }
+                                case 12: {
+                                    setPuntaje(animal.getPuntaje() + getPuntaje());
+                                    animal.apareceanimal(rnd, posesc, lado, 12);
+                                    posesc[i][j - 1] = 1;
+                                    posesc[i][j] = 0;
+                                    agregaTronco(i, j, movant);
+                                    bono.aparebono(rnd, posesc, lado);
+                                    break;
+                                }
+                                case 13: {
+                                    setPuntaje(bono.getPuntaje() + getPuntaje());
+                                    posesc[i][j - 1] = 1;
+                                    posesc[i][j] = 0;
+                                    agregaTronco(i, j, movant);
+                                    break;
+                                }
+                                default: {
+                                    this.setFin(true);
+                                    break;
+                                }
+                            }
+                        }
+                        movant = mov;
+                        cabeza = true;
+                        break;
+                    } else if (mov == 4) {
+                        juaneco.setCabeza(juaneco.getCabezaAba());
+                        if (j == (getLado() / 16 - 1)) {
+                            this.setFin(true);
+                        } else {
+                            switch (posesc[i][j + 1]) {
+                                case 0: {
+                                    posesc[i][j + 1] = 1;
+                                    posesc[i][j] = 0;
+                                    break;
+                                }
+                                case 12: {
+                                    setPuntaje(animal.getPuntaje() + getPuntaje());
+                                    animal.apareceanimal(rnd, posesc, lado, 12);
+                                    posesc[i][j + 1] = 1;
+                                    posesc[i][j] = 0;
+                                    agregaTronco(i, j, mov);
+                                    bono.aparebono(rnd, posesc, lado);
+                                    break;
+                                }
+                                case 13: {
+                                    setPuntaje(bono.getPuntaje() + getPuntaje());
+
+                                    posesc[i][j + 1] = 1;
+                                    posesc[i][j] = 0;
+                                    agregaTronco(i, j, mov);
+
+                                    break;
+                                }
+                                default: {
+                                    this.setFin(true);
+                                    break;
+                                }
                             }
                         }
                         movant = mov;
                         cabeza = true;
                         break;
                     }
-                    if (cabeza) {
-                        break;
-                    }
                 }
+
             }
-        }
-        if (mov == 2) {
-            juaneco.setCabeza(juaneco.getCabezaDer());
-            for (int i = 0; i < (getLado() / 16 - 1); i++) {
-                for (int j = 0; j < getLado() / 16; j++) {
-                    if (posesc[i][j] == 1) {
-                        switch (posesc[i + 1][j]) {
-                            case 0: {
-                                posesc[i + 1][j] = 1;
-                                posesc[i][j] = 0;
-                                break;
-                            }
-                            case 12: {
-                                puntaje = animal.getPuntaje() + puntaje;
-                                animal.apareceanimal(rnd, posesc, lado, 12);
-                                posesc[i + 1][j] = 1;
-                                posesc[i][j] = 0;
-                                agregaTronco(i, j, movant);
-                                bono.aparebono(rnd, posesc, lado);
-                                break;
-                            }
-                            case 13: {
-                                puntaje = bono.getPuntaje() + puntaje;
+            if (cabeza) {
+                break;
 
-                                posesc[i + 1][j] = 1;
-                                posesc[i][j] = 0;
-                                agregaTronco(i, j, movant);
-
-                                break;
-                            }
-                            default: {
-                                this.setFin(true);
-                                break;
-                            }
-                        }
-                        movant = mov;
-                        cabeza = true;
-                        break;
-                    }
-                }
-                if (cabeza) {
-                    break;
-                }
-            }
-        }
-        if (mov == 3) {
-            juaneco.setCabeza(juaneco.getCabezaArr());
-            for (int i = 0; i < getLado() / 16; i++) {
-                for (int j = 1; j < getLado() / 16; j++) {
-                    if (posesc[i][j] == 1) {
-                        switch (posesc[i][j - 1]) {
-                            case 0: {
-                                posesc[i][j - 1] = 1;
-                                posesc[i][j] = 0;
-                                break;
-                            }
-                            case 12: {
-                                puntaje = animal.getPuntaje() + puntaje;
-                                animal.apareceanimal(rnd, posesc, lado, 12);
-                                posesc[i][j - 1] = 1;
-                                posesc[i][j] = 0;
-                                agregaTronco(i, j, movant);
-                                bono.aparebono(rnd, posesc, lado);
-                                break;
-                            }
-                            case 13: {
-                                puntaje = bono.getPuntaje() + puntaje;
-
-                                posesc[i][j - 1] = 1;
-                                posesc[i][j] = 0;
-                                agregaTronco(i, j, movant);
-
-                                break;
-                            }
-                            default: {
-                                this.setFin(true);
-                                break;
-                            }
-                        }
-                        movant = mov;
-                        cabeza = true;
-                        break;
-                    }
-                }
-                if (cabeza) {
-                    break;
-                }
-            }
-        }
-        if (mov == 4) {
-            juaneco.setCabeza(juaneco.getCabezaAba());
-            for (int i = 0; i < getLado() / 16; i++) {
-                for (int j = 0; j < (getLado() / 16 - 1); j++) {
-                    if (posesc[i][j] == 1) {
-                        switch (posesc[i][j + 1]) {
-                            case 0: {
-                                posesc[i][j + 1] = 1;
-                                posesc[i][j] = 0;
-                                break;
-                            }
-                            case 12: {
-                                puntaje = animal.getPuntaje() + puntaje;
-                                animal.apareceanimal(rnd, posesc, lado, 12);
-                                posesc[i][j + 1] = 1;
-                                posesc[i][j] = 0;
-                                agregaTronco(i, j, mov);
-                                bono.aparebono(rnd, posesc, lado);
-                                break;
-                            }
-                            case 13: {
-                                puntaje = bono.getPuntaje() + puntaje;
-
-                                posesc[i][j + 1] = 1;
-                                posesc[i][j] = 0;
-                                agregaTronco(i, j, mov);
-
-                                break;
-                            }
-                            default: {
-                                this.setFin(true);
-                                break;
-                            }
-                        }
-                        movant = mov;
-                        cabeza = true;
-                        break;
-                    }
-                    if (cabeza) {
-                        break;
-                    }
-                }
             }
         }
     }
@@ -482,130 +460,84 @@ public class Escenario {
         }
     }
 
-    /**
-     * @return the borde
-     */
     public int getBorde() {
         return borde;
     }
 
-    /**
-     * @param borde the borde to set
-     */
     public void setBorde(int borde) {
         this.borde = borde;
     }
 
-    /**
-     * @return the dimensiones
-     */
     public int getDimensiones() {
         return dimensiones;
     }
 
-    /**
-     * @param dimensiones the dimensiones to set
-     */
     public void setDimensiones(int dimensiones) {
         this.dimensiones = dimensiones;
     }
 
-    /**
-     * @return the fondo
-     */
     public Image getFondo() {
 
         return fondo;
     }
 
-    /**
-     * @param fondo the fondo to set
-     */
     public void setFondo(Image fondo) {
         this.fondo = fondo;
     }
 
-    /**
-     * @return the nuevoJuego
-     */
     public Image getNuevoJuego() {
         return nuevoJuego;
     }
 
-    /**
-     * @param nuevoJuego the nuevoJuego to set
-     */
     public void setNuevoJuego(Image nuevoJuego) {
         this.nuevoJuego = nuevoJuego;
     }
 
-    /**
-     * @return the ayuda
-     */
     public Image getAyuda() {
         return ayuda;
     }
 
-    /**
-     * @param ayuda the ayuda to set
-     */
     public void setAyuda(Image ayuda) {
         this.ayuda = ayuda;
     }
 
-    /**
-     * @return the opciones
-     */
     public Image getOpciones() {
         return opciones;
     }
 
-    /**
-     * @param opciones the opciones to set
-     */
     public void setOpciones(Image opciones) {
         this.opciones = opciones;
     }
 
-    /**
-     * @return the Tipo2
-     */
     public Image getTipo2() {
         return Tipo2;
     }
 
-    /**
-     * @param Tipo2 the Tipo2 to set
-     */
     public void setTipo2(Image Tipo2) {
         this.Tipo2 = Tipo2;
     }
 
-    /**
-     * @return the lado
-     */
     public int getLado() {
         return lado;
     }
 
-    /**
-     * @param lado the lado to set
-     */
     public void setLado(int lado) {
         this.lado = lado;
     }
 
-    /**
-     * @return the fin
-     */
     public boolean isFin() {
         return fin;
     }
 
-    /**
-     * @param fin the fin to set
-     */
     public void setFin(boolean fin) {
         this.fin = fin;
+    }
+
+    public int getPuntaje() {
+        return puntaje;
+    }
+
+    public void setPuntaje(int puntaje) {
+        this.puntaje = puntaje;
     }
 }

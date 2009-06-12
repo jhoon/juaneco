@@ -46,7 +46,7 @@ public class MidletJuaneco extends MIDlet implements CommandListener {
     private ImageItem imagenPerdi;
 
     public MidletJuaneco() {
-        // gamecanvas = new Canvas();
+        //\ gamecanvas = new Canvas();
     }
 
     public void startApp() {
@@ -308,7 +308,5 @@ public class MidletJuaneco extends MIDlet implements CommandListener {
         this.gamecanvas = gamecanvas;
     }
 
-    private Displayable getForm1() {
-        throw new UnsupportedOperationException("Not yet implemented");
-    }
+    
 }
