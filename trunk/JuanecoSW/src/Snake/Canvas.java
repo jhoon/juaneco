@@ -24,8 +24,8 @@ public class Canvas extends GameCanvas implements Runnable {
     private MidletJuaneco midletPadre;
     // Constantes del juego
     // Variables del juego
-    private int mov;
-    private int movant;
+    private int mov=3;
+    private int movant=3;
     private int lado = getWidth();
     private boolean cabeza = false;
 
@@ -76,7 +76,6 @@ public class Canvas extends GameCanvas implements Runnable {
         cambio_coor(estado_boton);
     }
 
-    /**************************************************************/
     private void updateGameScreen(Graphics g) {
         escenario.movcabeza(mov, cabeza, movant, rnd);
         if (escenario.juaneco.getTronquitoXY().capacity() > 0) {
