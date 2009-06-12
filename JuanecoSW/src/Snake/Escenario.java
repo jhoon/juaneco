@@ -152,8 +152,29 @@ public class Escenario {
             xx = ((ElementoJuego) juaneco.getTronquitoXY().elementAt(i)).getPosicionX();
             yy = ((ElementoJuego) juaneco.getTronquitoXY().elementAt(i)).getPosicionY();
             movii = ((ElementoJuego) juaneco.getTronquitoXY().elementAt(i)).getDireccion();
+            if (i == (juaneco.getTronquitoXY().capacity()-1)) {
+                switch(movii){
+                    case 1:{
+                    posesc[xx][yy] =10;
+                        break;
+                    }
+                    case 2:{
+                    posesc[xx][yy] = 11;
+                        break;
+                    }
+                    case 3:{
+                    posesc[xx][yy] = 9;
+                        break;
+                    }
+                    case 4:{
+                    posesc[xx][yy] = 8;
+                        break;
+                    }
 
-            if (movii == 1 || movii == 2) {
+                }
+
+
+            }else  if (movii == 1 || movii == 2) {
                 posesc[xx][yy] = 2;
             } else if (movii == 3 || movii == 4) {
                 posesc[xx][yy] = 3;
