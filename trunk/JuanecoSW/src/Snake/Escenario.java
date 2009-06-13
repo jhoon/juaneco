@@ -78,8 +78,8 @@ public class Escenario {
         animal.apareceanimal(rnd, posesc, lado, 12);
         animal.setPuntaje(20);
         bono.setPuntaje(50);
-        bono.setTiempo(60);
-        juaneco.setVelocidad(80);
+        bono.setTiempo(50);
+        juaneco.setVelocidad(100);
 
     }
 
