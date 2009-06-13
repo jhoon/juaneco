@@ -46,14 +46,11 @@ public class MidletJuaneco extends MIDlet implements CommandListener {
     private ChoiceGroup lista;
     private ImageItem imagenMenu;
     private ImageItem imagenPerdi;
-
     private ImageItem imagenHistoria;
-
     private ImageItem winner;
     private ImageItem selvaysierra;
     private ImageItem sierraycosta;
     private ImageItem bossito;
-
 
     public MidletJuaneco() {
         //\ gamecanvas = new Canvas();
@@ -90,16 +87,15 @@ public class MidletJuaneco extends MIDlet implements CommandListener {
             gamecanvas = new Canvas(this);
             gamecanvas.getEscenario().setNivel(1);
             gamecanvas.start();
-            
+
             cambiaPantalla(null, gamecanvas);
-        }else if (displayable == selvaSierra && command == okCommand) {
+        } else if (displayable == selvaSierra && command == okCommand) {
             gamecanvas = new Canvas(this);
             gamecanvas.getEscenario().setNivel(2);
             gamecanvas.start();
 
             cambiaPantalla(null, gamecanvas);
-        }
-        else if (displayable == sierraCosta && command == okCommand) {
+        } else if (displayable == sierraCosta && command == okCommand) {
             gamecanvas = new Canvas(this);
             gamecanvas.getEscenario().setNivel(3);
             gamecanvas.start();
@@ -132,9 +128,9 @@ public class MidletJuaneco extends MIDlet implements CommandListener {
             if (opcionseleccionada.equals("Nuevo Juego")) {
 
                 gamecanvas = new Canvas(this);
-            gamecanvas.getEscenario().setNivel(0);
+                gamecanvas.getEscenario().setNivel(0);
                 gamecanvas.start();
-                
+
                 cambiaPantalla(null, gamecanvas);
 
             } else if (opcionseleccionada.equals("Historia")) {
@@ -192,7 +188,8 @@ public class MidletJuaneco extends MIDlet implements CommandListener {
 
         return perdiste;
     }
-      public Form getGanaste() {
+
+    public Form getGanaste() {
         if (ganaste == null) {
             ganaste = new Form("GAME OVER!");
             try {
@@ -222,11 +219,13 @@ public class MidletJuaneco extends MIDlet implements CommandListener {
         }
 
         return selvaSierra;
-    } public Form getBoss() {
+    }
+
+    public Form getBoss() {
         if (boss == null) {
             boss = new Form("Enfrentamiento final");
             try {
-               bossito = new ImageItem("Perdiste", Image.createImage("/perdiste.jpg"), ImageItem.LAYOUT_BOTTOM, "PERDISTE");
+                bossito = new ImageItem("Perdiste", Image.createImage("/perdiste.jpg"), ImageItem.LAYOUT_BOTTOM, "PERDISTE");
             } catch (Exception e) {
             }
             boss.append(bossito);
@@ -396,6 +395,4 @@ public class MidletJuaneco extends MIDlet implements CommandListener {
     public void setGamecanvas(Canvas gamecanvas) {
         this.gamecanvas = gamecanvas;
     }
-
-    
 }

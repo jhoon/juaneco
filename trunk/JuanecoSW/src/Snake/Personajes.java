@@ -2,25 +2,21 @@
  * To change this template, choose Tools | Templates
  * and open the template in the editor.
  */
-
 package Snake;
 
 /**
  *
  * @author Manuel Sotelo A
  */
-public class  Personajes extends ElementoJuego{
+public class Personajes extends ElementoJuego {
 
-private int Estado;
-private int Tamano;
+    private int Estado;
+    private int Tamano;
 
-public Personajes (){
-super();
-}
+    public Personajes() {
+        super();
+    }
 
-
-
- 
     /**
      * @return the Tamano
      */
@@ -48,6 +44,4 @@ super();
     public void setEstado(int Estado) {
         this.Estado = Estado;
     }
-
-
 }

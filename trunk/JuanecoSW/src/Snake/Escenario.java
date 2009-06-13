@@ -50,7 +50,9 @@ public class Escenario {
                 posesc[i][j] = 0;
             }
         }
-
+        juaneco.cargaim();
+        animal.cargaanimal(nivel);
+        bono.cargabono(nivel);
         if (nivel == 0) {
             this.setFondo(SnakeUtil.createImage("/fondoGame.jpg"));
 
@@ -70,12 +72,16 @@ public class Escenario {
         } else if (nivel == 4) {
             this.setFondo(SnakeUtil.createImage("/selva.jpg"));
         }
-        this.juaneco.cargaim();
-        this.bono.cargabono(nivel);
-        this.animal.cargaanimal(nivel);
-        this.bono.setTiempo(60);
-    }
+        posesc[8][8] = 1;   /*La posicion i=8, j=8 es la cabeza*/
+        agregaTronco(8, 9, 3); // Aumenta la cola
+        // posesc[8][9] = 9;     /*La posicion i=8, j=9 es el tronco en horizontal*/
+        animal.apareceanimal(rnd, posesc, lado, 12);
+        animal.setPuntaje(20);
+        bono.setPuntaje(50);
+        bono.setTiempo(60);
+        juaneco.setVelocidad(80);
 
+    }
 
     public int[][] costa() {
         int a[][] = {{0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0},
@@ -301,12 +307,8 @@ public class Escenario {
     }
 
     public void movcabeza(int mov, boolean cabeza, int movant, Random rnd) {
-
         bono.bontim(posesc, lado);
-
         cabeza = false;
-
-
         for (int i = 0; i < getLado() / 16; i++) {
             for (int j = 0; j < getLado() / 16; j++) {
                 if (posesc[i][j] == 1) {
