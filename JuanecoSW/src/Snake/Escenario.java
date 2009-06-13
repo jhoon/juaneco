@@ -43,65 +43,102 @@ public class Escenario {
     }
 
     public void inicializa() {
+        for (int i = 0; i < lado / 16; i++) {
+            for (int j = 0; j < lado / 16; j++) {
+                posx[i] = (8 + 16 * i);
+                posy[j] = 16 + 16 * j;
+                posesc[i][j] = 0;
+            }
+        }
+
         if (nivel == 0) {
             this.setFondo(SnakeUtil.createImage("/fondoGame.jpg"));
 
         } else if (nivel == 1) {
             this.setFondo(SnakeUtil.createImage("/f1.jpg"));
-            this.obsta1.inicializar(1, posesc);
+            this.obsta1.inicializar(1);
+
+            posesc = selva();
         } else if (nivel == 2) {
             this.setFondo(SnakeUtil.createImage("/f2.jpg"));
-            this.obsta1.inicializar(2, posesc);
+            this.obsta1.inicializar(2);
+            posesc = sierra();
         } else if (nivel == 3) {
             this.setFondo(SnakeUtil.createImage("/f3.jpg"));
-            this.obsta1.inicializar(3, posesc);
+            this.obsta1.inicializar(3);
+            posesc = costa();
         } else if (nivel == 4) {
             this.setFondo(SnakeUtil.createImage("/selva.jpg"));
         }
         this.juaneco.cargaim();
         this.bono.cargabono(nivel);
         this.animal.cargaanimal(nivel);
-        for (int i = 0; i < lado / 16; i++) {
-            for (int j = 0; j < lado / 16; j++) {
-                posx[i] = (8 + 16 * i);
-                posy[j] = 16 + 16 * j;
-                posesc[i][j] = 0;
-
-            }
-        }
+        this.bono.setTiempo(60);
     }
 
-    public void inicializa() {
 
-        try {
-            if (nivel == 0) {
-                this.setFondo(SnakeUtil.createImage("/fondoGame.jpg"));
-            } else if (nivel == 1) {
-                this.setFondo(SnakeUtil.createImage("/costa.jpg"));
-                this.obsta1.inicializar(1, posesc);
-            } else if (nivel == 2) {
-                this.setFondo(SnakeUtil.createImage("/sierra.jpg"));
-                this.obsta1.inicializar(2, posesc);
-            } else if (nivel == 3) {
-                this.setFondo(SnakeUtil.createImage("/selva.jpg"));
-                this.obsta1.inicializar(3, posesc);
-            } else if (nivel == 4) {
-                this.setFondo(SnakeUtil.createImage("/selva.jpg"));
+    public int[][] costa() {
+        int a[][] = {{0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0},
+            {0, 14, 14, 14, 14, 14, 14, 0, 0, 0, 0, 0, 0, 14, 0},
+            {0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 14, 0},
+            {0, 0, 0, 0, 14, 0, 0, 0, 0, 14, 0, 0, 0, 14, 0},
+            {0, 0, 0, 0, 14, 14, 14, 14, 14, 14, 0, 0, 0, 14, 0},
+            {0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 14, 0},
+            {0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0},
+            {0, 14, 14, 14, 14, 14, 14, 14, 14, 0, 0, 0, 0, 0, 0},
+            {0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0},
+            {0, 0, 14, 14, 14, 14, 14, 14, 14, 14, 0, 0, 0, 0, 0},
+            {0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 14, 0, 0},
+            {0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 14, 0, 0},
+            {0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 14, 0, 0},
+            {0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 14, 0, 14, 0, 0},
+            {0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0}};
 
-            }
-        } catch(Exception e){}
+        return a;
 
-        posesc[8][8] = 1;   /*La posicion i=8, j=8 es la cabeza*/
-        agregaTronco(8, 9, 3); // Aumenta la cola
-        // posesc[8][9] = 9;     /*La posicion i=8, j=9 es el tronco en horizontal*/
-        animal.apareceanimal(rnd, posesc, lado, 12);
-        animal.setPuntaje(20);
-        bono.setPuntaje(50);
-        bono.setTiempo(100);
-        juaneco.setVelocidad(80);
 
     }
 
+    public int[][] sierra() {
+        int a[][] = {{0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0},
+            {0, 14, 14, 14, 14, 14, 14, 0, 0, 0, 0, 0, 0, 14, 0},
+            {0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 14, 0},
+            {0, 0, 0, 0, 14, 0, 0, 0, 0, 14, 0, 0, 0, 14, 0},
+            {0, 0, 0, 0, 14, 14, 14, 14, 14, 14, 0, 0, 0, 14, 0},
+            {0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 14, 0},
+            {0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0},
+            {0, 14, 14, 14, 14, 14, 14, 14, 14, 0, 0, 0, 0, 0, 0},
+            {0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0},
+            {0, 0, 14, 14, 14, 14, 14, 14, 14, 14, 0, 0, 0, 0, 0},
+            {0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 14, 0, 0},
+            {0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 14, 0, 0},
+            {0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 14, 0, 0},
+            {0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 14, 0, 14, 0, 0},
+            {0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0}};
+
+        return a;
+
+
+    }
+
+    public int[][] selva() {
+        int a[][] = {{0, 0, 0, 0, 0, 0, 0, 0, 14, 0, 0, 0, 0, 0, 0},
+            {0, 0, 15, 15, 15, 0, 0, 0, 14, 0, 0, 0, 15, 0, 0},
+            {0, 0, 15, 15, 15, 0, 0, 0, 14, 0, 0, 0, 15, 0, 0},
+            {0, 0, 15, 0, 0, 0, 0, 0, 14, 0, 0, 0, 15, 0, 0},
+            {0, 0, 15, 0, 0, 0, 0, 0, 14, 0, 0, 0, 15, 0, 0},
+            {0, 0, 0, 0, 0, 0, 0, 0, 14, 0, 0, 0, 15, 0, 0},
+            {0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0},
+            {0, 0, 0, 0, 0, 0, 0, 0, 14, 0, 0, 0, 0, 0, 0},
+            {0, 0, 0, 0, 0, 0, 0, 0, 14, 0, 0, 0, 0, 0, 0},
+            {0, 0, 0, 0, 0, 0, 0, 0, 14, 0, 0, 0, 0, 15, 0},
+            {0, 0, 15, 0, 0, 0, 0, 0, 14, 0, 0, 0, 0, 15, 0},
+            {0, 0, 15, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 15, 0},
+            {0, 0, 15, 0, 0, 0, 0, 0, 14, 0, 0, 0, 0, 15, 0},
+            {0, 0, 15, 15, 15, 0, 0, 0, 14, 0, 0, 0, 0, 15, 0},
+            {0, 0, 0, 0, 0, 0, 0, 0, 14, 0, 0, 0, 0, 0, 0},};
+        return a;
+    }
 
     public void movotronco(int mov) {
         boolean Condicion = false;
@@ -266,7 +303,7 @@ public class Escenario {
     public void movcabeza(int mov, boolean cabeza, int movant, Random rnd) {
 
         bono.bontim(posesc, lado);
-        
+
         cabeza = false;
 
 
@@ -496,9 +533,9 @@ public class Escenario {
                     case 14: {
                         g.drawImage(obsta1.getObstaculo(), posx[i], posy[j], Graphics.HCENTER | Graphics.BOTTOM);
                         break;
-                    }// Caso 15: Obstaculo 1
+                    }// Caso 14: Obstaculo 1
                     case 15: {
-                        g.drawImage(obsta1.getObstaculo(), posx[i], posy[j], Graphics.HCENTER | Graphics.BOTTOM);
+                        g.drawImage(obsta1.getObstaculo2(), posx[i], posy[j], Graphics.HCENTER | Graphics.BOTTOM);
                         break;
                     }// Caso 15: Obstaculo 2
                     default: {

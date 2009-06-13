@@ -4,7 +4,7 @@
  */
 package Snake;
 
-import java.io.IOException;
+import Snake.util.SnakeUtil;
 import javax.microedition.lcdui.Image;
 
 /**
@@ -14,48 +14,33 @@ import javax.microedition.lcdui.Image;
 public class Obstaculos extends ElementoJuego {
 
     private Image Obstaculo;
-    private Image tipo1;
-    private Image tipo2;
-    private Image tipo3;
+    private Image Obstaculo2;
     private int tamano;
 
     public Obstaculos() {
         super();
     }
 
-    public void inicializar(int tipo, int pos[][]) {
-        try {
+    public void inicializar(int tipo) {
+      
             if (tipo == 1) {
-                this.setTipo1(Image.createImage(Canvas.class.getResourceAsStream("/rat.jpg")));
-
-                this.setTipo2(Image.createImage(Canvas.class.getResourceAsStream("/rat.jpg")));
-           
-                this.setTipo3(Image.createImage(Canvas.class.getResourceAsStream("/rat.jpg")));
+                this.setObstaculo(SnakeUtil.createImage("/rio.gif"));
+                this.setObstaculo2(SnakeUtil.createImage("/selva_obs.gif"));
 
                 // falta la matriz
             }else if (tipo == 2) {
-                this.setTipo1(Image.createImage(Canvas.class.getResourceAsStream("/rat.jpg")));
-           
-                this.setTipo2(Image.createImage(Canvas.class.getResourceAsStream("/rat.jpg")));
-           
-                this.setTipo3(Image.createImage(Canvas.class.getResourceAsStream("/rat.jpg")));
+                this.setObstaculo(SnakeUtil.createImage("/sierra_obs.gif"));
+
                 
                 // falta la matriz
             } if (tipo == 3) {
-                this.setTipo1(Image.createImage(Canvas.class.getResourceAsStream("/rat.jpg")));
+               this.setObstaculo(SnakeUtil.createImage("/costa_obs.gif"));
            
-                this.setTipo2(Image.createImage(Canvas.class.getResourceAsStream("/rat.jpg")));
-           
-                this.setTipo3(Image.createImage(Canvas.class.getResourceAsStream("/rat.jpg")));
                 
                 // falta la matriz
             }
 
-            this.setObstaculo(this.getTipo1());
-        } catch (IOException e) {
-            e.printStackTrace();
-        }
-
+     
     }
 
     /**
@@ -90,44 +75,18 @@ public class Obstaculos extends ElementoJuego {
     }
 
     /**
-     * @return the tipo1
+     * @return the Obstaculo2
      */
-    public Image getTipo1() {
-        return tipo1;
+    public Image getObstaculo2() {
+        return Obstaculo2;
     }
 
     /**
-     * @param tipo1 the tipo1 to set
+     * @param Obstaculo2 the Obstaculo2 to set
      */
-    public void setTipo1(Image tipo1) {
-        this.tipo1 = tipo1;
+    public void setObstaculo2(Image Obstaculo2) {
+        this.Obstaculo2 = Obstaculo2;
     }
 
-    /**
-     * @return the tipo2
-     */
-    public Image getTipo2() {
-        return tipo2;
-    }
-
-    /**
-     * @param tipo2 the tipo2 to set
-     */
-    public void setTipo2(Image tipo2) {
-        this.tipo2 = tipo2;
-    }
-
-    /**
-     * @return the tipo3
-     */
-    public Image getTipo3() {
-        return tipo3;
-    }
-
-    /**
-     * @param tipo3 the tipo3 to set
-     */
-    public void setTipo3(Image tipo3) {
-        this.tipo3 = tipo3;
-    }
+    
 }
