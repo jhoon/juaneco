@@ -59,6 +59,7 @@ public class Bonos extends Animales {
         if (this.getAparece() == 6) {
             this.apareceanimal(rnd, posesc, lado, 13);
             this.setAparece(0);
+            this.setTiempo(62);
         }
 
     }
