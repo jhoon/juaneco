@@ -30,6 +30,7 @@ public class Escenario {
     private Image Boss;
     private Image fondo;
     private boolean fin;
+
     Random rnd = new Random();
 //private Image fondoPant;
     private Image nuevoJuego;
@@ -64,7 +65,10 @@ public class Escenario {
             for (int j = 0; j < lado / 16; j++) {
                 posx[i] = (8 + 16 * i);
                 posy[j] = 16 + 16 * j;
-                posesc[i][j] = 0;
+                posesc[i][j] = 0;}
+        }
+    }
+            
 
     public void inicializa() {
         try {
@@ -268,6 +272,7 @@ public class Escenario {
     public void movcabeza(int mov, boolean cabeza, int movant, Random rnd) {
 
         bono.bontim(posesc, lado);
+        puntaje = 0;
         cabeza = false;
 
 
@@ -432,6 +437,7 @@ public class Escenario {
 
             }
         }
+        
     }
 
     public void dibuja(Graphics g) {
@@ -589,6 +595,9 @@ public class Escenario {
     public void setPuntaje(int puntaje) {
         this.puntaje = puntaje;
     }
+//<<<<<<< .mine
+
+//=======
 
     /**
      * @return the nivel
@@ -645,4 +654,5 @@ public class Escenario {
     public void setBoss(Image Boss) {
         this.Boss = Boss;
     }
+//>>>>>>> .r54
 }

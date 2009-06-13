@@ -27,6 +27,7 @@ public class Canvas extends GameCanvas implements Runnable {
     private int movant=3;
     private int lado = getWidth();
     private boolean cabeza = false;
+    private int puntaje;
 
     public Canvas() {
         super(true);
@@ -75,6 +76,23 @@ public class Canvas extends GameCanvas implements Runnable {
     }
 
     private void updateGameScreen(Graphics g) {
+//<<<<<<< .mine
+//<<<<<<< .mine
+        escenario.dibuja(g);
+        escenario.movcabeza(mov, cabeza, movant, rnd);
+//=======
+        escenario.movcabeza(mov, cabeza, movant, rnd);
+//>>>>>>> .r52
+        if (escenario.juaneco.getTronquitoXY().capacity() > 0) {
+            escenario.movotronco(mov);
+        }
+        
+        g.drawString("Puntuacion:", 7 * lado / 9 + 9, 14 * getHeight() / 16 + 15, Graphics.HCENTER | Graphics.BOTTOM);
+//<<<<<<< .mine
+        g.drawString("" +getPuntaje(), 7 * lado / 9 + 9, 15 * getHeight() / 16 + 10, Graphics.HCENTER | Graphics.BOTTOM);
+//=======
+        g.drawString("" + escenario.getPuntaje(), 7 * lado / 9 + 9, 15 * getHeight() / 16 + 10, Graphics.HCENTER | Graphics.BOTTOM);
+//=======
         getEscenario().movcabeza(getMov(), isCabeza(), getMovant(), getRnd());
    
             getEscenario().movotronco(getMov());
@@ -82,6 +100,8 @@ public class Canvas extends GameCanvas implements Runnable {
         getEscenario().dibuja(g);
         g.drawString("Puntuacion:", 7 * getLado() / 9 + 9, 14 * getHeight() / 16 + 15, Graphics.HCENTER | Graphics.BOTTOM);
         g.drawString("" + getEscenario().getPuntaje(), 7 * getLado() / 9 + 9, 15 * getHeight() / 16 + 10, Graphics.HCENTER | Graphics.BOTTOM);
+//>>>>>>> .r54
+//>>>>>>> .r52
         flushGraphics();
     }
 
@@ -118,6 +138,22 @@ public class Canvas extends GameCanvas implements Runnable {
     public void setRnd(Random rnd) {
         this.rnd = rnd;
     }
+//<<<<<<< .mine
+
+    /**
+     * @return the puntaje
+     */
+    public int getPuntaje() {
+        return puntaje;
+    }
+
+    /**
+     * @param puntaje the puntaje to set
+     */
+    public void setPuntaje(int puntaje) {
+        this.puntaje = puntaje;
+    }
+//=======
 
     /**
      * @return the escenario
@@ -231,5 +267,6 @@ public class Canvas extends GameCanvas implements Runnable {
         this.cabeza = cabeza;
     }
 
+//>>>>>>> .r54
 }
 
