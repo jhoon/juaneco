@@ -66,8 +66,30 @@ public class Escenario {
                 posx[i] = (8 + 16 * i);
                 posy[j] = 16 + 16 * j;
                 posesc[i][j] = 0;
+
             }
         }
+    }
+
+    public void inicializa() {
+
+        try {
+            if (nivel == 0) {
+                this.setFondo(SnakeUtil.createImage("/fondoGame.jpg"));
+            } else if (nivel == 1) {
+                this.setFondo(SnakeUtil.createImage("/costa.jpg"));
+                this.obsta1.inicializar(1, posesc);
+            } else if (nivel == 2) {
+                this.setFondo(SnakeUtil.createImage("/sierra.jpg"));
+                this.obsta1.inicializar(2, posesc);
+            } else if (nivel == 3) {
+                this.setFondo(SnakeUtil.createImage("/selva.jpg"));
+                this.obsta1.inicializar(3, posesc);
+            } else if (nivel == 4) {
+                this.setFondo(SnakeUtil.createImage("/selva.jpg"));
+
+            }
+        } catch(Exception e){}
 
         posesc[8][8] = 1;   /*La posicion i=8, j=8 es la cabeza*/
         agregaTronco(8, 9, 3); // Aumenta la cola
