@@ -14,7 +14,6 @@ import java.util.Random;
 public class Canvas extends GameCanvas implements Runnable {
 //clase Random para la aparicion de alimento
 
-    private boolean bandera;
     private Random rnd = new Random();
 // Atributos de escenario (animales, jugador, fondo, etc)
     private Escenario escenario = new Escenario(getWidth());
@@ -39,14 +38,12 @@ public class Canvas extends GameCanvas implements Runnable {
     }
 
     public void start() {
-        try {
-//Se cargan las imagenes de la cabeza de Juaneco por cada punto cardinal
-            obsta1.inicializar();
-            escenario.inicializa(bandera);
-// Se inicializa a juaneco, escenario y comida
-        } catch (IOException e) {
-            e.printStackTrace();
-        }
+       
+        //Se cargan las imagenes de la cabeza de Juaneco por cada punto cardinal
+            
+            this.getEscenario().inicializa();
+        // Se inicializa a juaneco, escenario y comida
+      
         Thread hilo = new Thread(this);
 
         hilo.start();
@@ -56,15 +53,16 @@ public class Canvas extends GameCanvas implements Runnable {
         try {
             Graphics g = getGraphics();
             while (true) {
-                if (escenario.isFin() == true) {
-                    midletPadre.cambiaPantalla(null, this.midletPadre.getPerdiste());
+                
+                checkUserInput();
+                updateGameScreen(getGraphics());
+                if (getEscenario().isFin() == true) {
+                    getMidletPadre().cambiaPantalla(null, this.getMidletPadre().getPerdiste());
                     break;
 // La funcion anterior se encarga de volver al menu, en el cambio de pantalla debe ir a la pantalla Perdiste y de ahi
                 //a la pantalla Menu
                 }
-                checkUserInput();
-                updateGameScreen(getGraphics());
-                Thread.sleep(escenario.juaneco.getVelocidad());
+                Thread.sleep(getEscenario().juaneco.getVelocidad());
             }
         } catch (Exception e) {
             e.printStackTrace();
@@ -77,42 +75,161 @@ public class Canvas extends GameCanvas implements Runnable {
     }
 
     private void updateGameScreen(Graphics g) {
-        escenario.movcabeza(mov, cabeza, movant, rnd);
-        if (escenario.juaneco.getTronquitoXY().capacity() > 0) {
-            escenario.movotronco(mov);
-        }
-        escenario.dibuja(g);
-        g.drawString("Puntuacion:", 7 * lado / 9 + 9, 14 * getHeight() / 16 + 15, Graphics.HCENTER | Graphics.BOTTOM);
-        g.drawString("" + escenario.getPuntaje(), 7 * lado / 9 + 9, 15 * getHeight() / 16 + 10, Graphics.HCENTER | Graphics.BOTTOM);
+        getEscenario().movcabeza(getMov(), isCabeza(), getMovant(), getRnd());
+   
+            getEscenario().movotronco(getMov());
+        
+        getEscenario().dibuja(g);
+        g.drawString("Puntuacion:", 7 * getLado() / 9 + 9, 14 * getHeight() / 16 + 15, Graphics.HCENTER | Graphics.BOTTOM);
+        g.drawString("" + getEscenario().getPuntaje(), 7 * getLado() / 9 + 9, 15 * getHeight() / 16 + 10, Graphics.HCENTER | Graphics.BOTTOM);
         flushGraphics();
     }
 
     private void cambio_coor(int estado_boton) {
-        cabeza = false;
-        if (((estado_boton & LEFT_PRESSED) != 0) & (mov != 1) & (mov != 2)) {
-            movant = mov;
-            mov = 1;
-        } else if (((estado_boton & RIGHT_PRESSED) != 0) & (mov != 1) & (mov != 2)) {
-            movant = mov;
-            mov = 2;
-        } else if (((estado_boton & UP_PRESSED) != 0) & (mov != 3) & (mov != 4)) {
-            movant = mov;
-            mov = 3;
-        } else if (((estado_boton & DOWN_PRESSED) != 0) & (mov != 3) & (mov != 4)) {
-            movant = mov;
-            mov = 4;
-        }else if (((estado_boton & DOWN_PRESSED) != 0) & (mov != 3) & (mov != 4)) {
-            movant = mov;
-            mov = 4;
+        setCabeza(false);
+        if (((estado_boton & LEFT_PRESSED) != 0) & (getMov() != 1) & (getMov() != 2)) {
+            setMovant(getMov());
+            setMov(1);
+        } else if (((estado_boton & RIGHT_PRESSED) != 0) & (getMov() != 1) & (getMov() != 2)) {
+            setMovant(getMov());
+            setMov(2);
+        } else if (((estado_boton & UP_PRESSED) != 0) & (getMov() != 3) & (getMov() != 4)) {
+            setMovant(getMov());
+            setMov(3);
+        } else if (((estado_boton & DOWN_PRESSED) != 0) & (getMov() != 3) & (getMov() != 4)) {
+            setMovant(getMov());
+            setMov(4);
+        }else if (((estado_boton & DOWN_PRESSED) != 0) & (getMov() != 3) & (getMov() != 4)) {
+            setMovant(getMov());
+            setMov(4);
         }
     }
 
-    public boolean isBandera() {
-        return bandera;
+    /**
+     * @return the rnd
+     */
+    public Random getRnd() {
+        return rnd;
     }
 
-    public void setBandera(boolean bandera) {
-        this.bandera = bandera;
+    /**
+     * @param rnd the rnd to set
+     */
+    public void setRnd(Random rnd) {
+        this.rnd = rnd;
     }
+
+    /**
+     * @return the escenario
+     */
+    public Escenario getEscenario() {
+        return escenario;
+    }
+
+    /**
+     * @param escenario the escenario to set
+     */
+    public void setEscenario(Escenario escenario) {
+        this.escenario = escenario;
+    }
+
+    /**
+     * @return the bono
+     */
+    public Bonos getBono() {
+        return bono;
+    }
+
+    /**
+     * @param bono the bono to set
+     */
+    public void setBono(Bonos bono) {
+        this.bono = bono;
+    }
+
+    /**
+     * @return the obsta1
+     */
+    public Obstaculos getObsta1() {
+        return obsta1;
+    }
+
+    /**
+     * @param obsta1 the obsta1 to set
+     */
+    public void setObsta1(Obstaculos obsta1) {
+        this.obsta1 = obsta1;
+    }
+
+    /**
+     * @return the midletPadre
+     */
+    public MidletJuaneco getMidletPadre() {
+        return midletPadre;
+    }
+
+    /**
+     * @param midletPadre the midletPadre to set
+     */
+    public void setMidletPadre(MidletJuaneco midletPadre) {
+        this.midletPadre = midletPadre;
+    }
+
+    /**
+     * @return the mov
+     */
+    public int getMov() {
+        return mov;
+    }
+
+    /**
+     * @param mov the mov to set
+     */
+    public void setMov(int mov) {
+        this.mov = mov;
+    }
+
+    /**
+     * @return the movant
+     */
+    public int getMovant() {
+        return movant;
+    }
+
+    /**
+     * @param movant the movant to set
+     */
+    public void setMovant(int movant) {
+        this.movant = movant;
+    }
+
+    /**
+     * @return the lado
+     */
+    public int getLado() {
+        return lado;
+    }
+
+    /**
+     * @param lado the lado to set
+     */
+    public void setLado(int lado) {
+        this.lado = lado;
+    }
+
+    /**
+     * @return the cabeza
+     */
+    public boolean isCabeza() {
+        return cabeza;
+    }
+
+    /**
+     * @param cabeza the cabeza to set
+     */
+    public void setCabeza(boolean cabeza) {
+        this.cabeza = cabeza;
+    }
+
 }
 

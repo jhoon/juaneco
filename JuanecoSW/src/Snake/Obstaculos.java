@@ -2,8 +2,8 @@
  * To change this template, choose Tools | Templates
  * and open the template in the editor.
  */
-
 package Snake;
+
 import java.io.IOException;
 import javax.microedition.lcdui.Image;
 
@@ -12,28 +12,56 @@ import javax.microedition.lcdui.Image;
  * @author Manuel Sotelo A
  */
 public class Obstaculos extends ElementoJuego {
-private Image Obstaculo;
-private Image tipo1;
-private Image tipo2;
-private Image tipo3;
-private int tamano;
 
-public Obstaculos(){
-super();
-}
-public void inicializar()  throws IOException {
+    private Image Obstaculo;
+    private Image tipo1;
+    private Image tipo2;
+    private Image tipo3;
+    private int tamano;
 
-            this.setTipo1(Image.createImage(Canvas.class.getResourceAsStream("/rat.jpg")));
-            this.setTipo2(Image.createImage(Canvas.class.getResourceAsStream("/rat.jpg")));
-            this.setTipo3(Image.createImage(Canvas.class.getResourceAsStream("/rat.jpg")));
+    public Obstaculos() {
+        super();
+    }
+
+    public void inicializar(int tipo, int pos[][]) {
+        try {
+            if (tipo == 1) {
+                this.setTipo1(Image.createImage(Canvas.class.getResourceAsStream("/rat.jpg")));
+
+                this.setTipo2(Image.createImage(Canvas.class.getResourceAsStream("/rat.jpg")));
+           
+                this.setTipo3(Image.createImage(Canvas.class.getResourceAsStream("/rat.jpg")));
+
+                // falta la matriz
+            }else if (tipo == 2) {
+                this.setTipo1(Image.createImage(Canvas.class.getResourceAsStream("/rat.jpg")));
+           
+                this.setTipo2(Image.createImage(Canvas.class.getResourceAsStream("/rat.jpg")));
+           
+                this.setTipo3(Image.createImage(Canvas.class.getResourceAsStream("/rat.jpg")));
+                
+                // falta la matriz
+            } if (tipo == 3) {
+                this.setTipo1(Image.createImage(Canvas.class.getResourceAsStream("/rat.jpg")));
+           
+                this.setTipo2(Image.createImage(Canvas.class.getResourceAsStream("/rat.jpg")));
+           
+                this.setTipo3(Image.createImage(Canvas.class.getResourceAsStream("/rat.jpg")));
+                
+                // falta la matriz
+            }
+
             this.setObstaculo(this.getTipo1());
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
 
+    }
 
-}
     /**
      * @return the tipo
      */
-       /**
+    /**
      * @return the tamano
      */
     public int getTamano() {
@@ -102,5 +130,4 @@ public void inicializar()  throws IOException {
     public void setTipo3(Image tipo3) {
         this.tipo3 = tipo3;
     }
-
 }

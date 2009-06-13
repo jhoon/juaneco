@@ -23,9 +23,11 @@ public class Escenario {
     private int borde;
     private int puntaje;
     private int dimensiones;
+    private int nivel;
     private Image Tipo1;
     private Image Tipo3;
     private Image Tipo2;
+    private Image Boss;
     private Image fondo;
     private boolean fin;
     Random rnd = new Random();
@@ -50,29 +52,42 @@ public class Escenario {
         }
     }
 
-    public void inicializa(boolean bandera) throws IOException {
-        if (bandera == true) {
-            this.setFondo(SnakeUtil.createImage("/costa.jpg"));
-        }
-        if (bandera == false) {
-            this.setFondo(SnakeUtil.createImage("/fondoGame.jpg"));
-        }
-        for (int i = 0; i < lado / 16; i++) {
-            for (int j = 0; j < lado / 16; j++) {
-                posx[i] = (8 + 16 * i);
-                posy[j] = 16 + 16 * j;
-                posesc[i][j] = 0;
+    public void inicializa() {
+        try {
+            if (nivel == 0) {
+                this.setFondo(SnakeUtil.createImage("/fondoGame.jpg"));
+            } else if (nivel == 1) {
+                this.setFondo(SnakeUtil.createImage("/costa.jpg"));
+                this.obsta1.inicializar(1, posesc);
+            } else if (nivel == 2) {
+                this.setFondo(SnakeUtil.createImage("/sierra.jpg"));
+                this.obsta1.inicializar(2, posesc);
+            } else if (nivel == 3) {
+                this.setFondo(SnakeUtil.createImage("/selva.jpg"));
+                this.obsta1.inicializar(3, posesc);
+            } else if (nivel == 4) {
+                this.setFondo(SnakeUtil.createImage("/selva.jpg"));
             }
+            for (int i = 0; i < lado / 16; i++) {
+                for (int j = 0; j < lado / 16; j++) {
+                    posx[i] = (8 + 16 * i);
+                    posy[j] = 16 + 16 * j;
+                    posesc[i][j] = 0;
+                }
+            }
+
+            posesc[8][8] = 1;   /*La posicion i=8, j=8 es la cabeza*/
+            agregaTronco(8, 9, 3); // Aumenta la cola
+            // posesc[8][9] = 9;     /*La posicion i=8, j=9 es el tronco en horizontal*/
+            animal.apareceanimal(rnd, posesc, lado, 12);
+            animal.setPuntaje(20);
+            bono.setPuntaje(50);
+            bono.setTiempo(100);
+            juaneco.setVelocidad(80);
+
+        } catch (Exception e) {
+            e.printStackTrace();
         }
-
-        posesc[8][8] = 1;   /*La posicion i=8, j=8 es la cabeza*/
-        // posesc[8][9] = 9;     /*La posicion i=8, j=9 es el tronco en horizontal*/
-        animal.apareceanimal(rnd, posesc, lado, 12);
-        animal.setPuntaje(20);
-        bono.setPuntaje(50);
-        bono.setTiempo(100);
-        juaneco.setVelocidad(80);
-
     }
 
     public void movotronco(int mov) {
@@ -152,29 +167,27 @@ public class Escenario {
             xx = ((ElementoJuego) juaneco.getTronquitoXY().elementAt(i)).getPosicionX();
             yy = ((ElementoJuego) juaneco.getTronquitoXY().elementAt(i)).getPosicionY();
             movii = ((ElementoJuego) juaneco.getTronquitoXY().elementAt(i)).getDireccion();
-            if (i == (juaneco.getTronquitoXY().capacity()-1)) {
-                switch(movii){
-                    case 1:{
-                    posesc[xx][yy] =10;
+            if (i == (juaneco.getTronquitoXY().capacity() - 1)) {
+                switch (movii) {
+                    case 1: {
+                        posesc[xx][yy] = 10;
                         break;
                     }
-                    case 2:{
-                    posesc[xx][yy] = 11;
+                    case 2: {
+                        posesc[xx][yy] = 11;
                         break;
                     }
-                    case 3:{
-                    posesc[xx][yy] = 9;
+                    case 3: {
+                        posesc[xx][yy] = 9;
                         break;
                     }
-                    case 4:{
-                    posesc[xx][yy] = 8;
+                    case 4: {
+                        posesc[xx][yy] = 8;
                         break;
                     }
 
                 }
-
-
-            }else  if (movii == 1 || movii == 2) {
+            } else if (movii == 1 || movii == 2) {
                 posesc[xx][yy] = 2;
             } else if (movii == 3 || movii == 4) {
                 posesc[xx][yy] = 3;
@@ -560,5 +573,61 @@ public class Escenario {
 
     public void setPuntaje(int puntaje) {
         this.puntaje = puntaje;
+    }
+
+    /**
+     * @return the nivel
+     */
+    public int getNivel() {
+        return nivel;
+    }
+
+    /**
+     * @param nivel the nivel to set
+     */
+    public void setNivel(int nivel) {
+        this.nivel = nivel;
+    }
+
+    /**
+     * @return the Tipo1
+     */
+    public Image getTipo1() {
+        return Tipo1;
+    }
+
+    /**
+     * @param Tipo1 the Tipo1 to set
+     */
+    public void setTipo1(Image Tipo1) {
+        this.Tipo1 = Tipo1;
+    }
+
+    /**
+     * @return the Tipo3
+     */
+    public Image getTipo3() {
+        return Tipo3;
+    }
+
+    /**
+     * @param Tipo3 the Tipo3 to set
+     */
+    public void setTipo3(Image Tipo3) {
+        this.Tipo3 = Tipo3;
+    }
+
+    /**
+     * @return the Boss
+     */
+    public Image getBoss() {
+        return Boss;
+    }
+
+    /**
+     * @param Boss the Boss to set
+     */
+    public void setBoss(Image Boss) {
+        this.Boss = Boss;
     }
 }
