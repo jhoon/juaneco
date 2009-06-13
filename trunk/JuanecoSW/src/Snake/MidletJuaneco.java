@@ -47,10 +47,14 @@ public class MidletJuaneco extends MIDlet implements CommandListener {
     private ChoiceGroup lista;
     private ImageItem imagenMenu;
     private ImageItem imagenPerdi;
+
+    private ImageItem imagenHistoria;
+
     private ImageItem ganaste;
     private ImageItem selvaysierra;
     private ImageItem sierraycosta;
     private ImageItem bossito;
+
 
     public MidletJuaneco() {
         //\ gamecanvas = new Canvas();
@@ -215,7 +219,12 @@ public class MidletJuaneco extends MIDlet implements CommandListener {
         historia = new Form("Historia");
         stHitoria = new StringItem(" historia de juaneco", "");
         stHitoria.setLayout(StringItem.LAYOUT_CENTER);
+        try {
+            imagenHistoria = new ImageItem("HISTORIA", Image.createImage("/historia.jpg"), ImageItem.LAYOUT_BOTTOM, "HISTORIA");
+        } catch (Exception e) {
+        }
         historia.append(stHitoria);
+        historia.append(imagenHistoria);
         historia.addCommand(getOkCommand());
         historia.addCommand(getBackCommand());
         historia.setCommandListener(this);

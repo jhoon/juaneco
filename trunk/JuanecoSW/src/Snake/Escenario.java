@@ -52,6 +52,20 @@ public class Escenario {
         }
     }
 
+
+    public void inicializa(boolean bandera) throws IOException {
+        if (bandera == true) {
+            this.setFondo(SnakeUtil.createImage("/costaFondo.jpg"));
+        }
+        if (bandera == false) {
+            this.setFondo(SnakeUtil.createImage("/fondoGame.jpg"));
+        }
+        for (int i = 0; i < lado / 16; i++) {
+            for (int j = 0; j < lado / 16; j++) {
+                posx[i] = (8 + 16 * i);
+                posy[j] = 16 + 16 * j;
+                posesc[i][j] = 0;
+
     public void inicializa() {
         try {
             if (nivel == 0) {
@@ -67,6 +81,7 @@ public class Escenario {
                 this.obsta1.inicializar(3, posesc);
             } else if (nivel == 4) {
                 this.setFondo(SnakeUtil.createImage("/selva.jpg"));
+
             }
             for (int i = 0; i < lado / 16; i++) {
                 for (int j = 0; j < lado / 16; j++) {
