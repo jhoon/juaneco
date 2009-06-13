@@ -31,6 +31,9 @@ public class MidletJuaneco extends MIDlet implements CommandListener {
     private Form ayuda;
     private Form menu;
     private Form perdiste;
+    private Form selvaSierra;
+    private Form sierraCosta;
+    private Form Boss;
     private StringItem stringItem;
     private StringItem alu1;
     private StringItem alu2;
@@ -44,6 +47,10 @@ public class MidletJuaneco extends MIDlet implements CommandListener {
     private ChoiceGroup lista;
     private ImageItem imagenMenu;
     private ImageItem imagenPerdi;
+    private ImageItem ganaste;
+    private ImageItem selvaysierra;
+    private ImageItem sierraycosta;
+    private ImageItem bossito;
 
     public MidletJuaneco() {
         //\ gamecanvas = new Canvas();
@@ -78,7 +85,8 @@ public class MidletJuaneco extends MIDlet implements CommandListener {
             cambiaPantalla(null, getMenu());
         } else if (displayable == historia && command == okCommand) {
             gamecanvas = new Canvas(this);
-            gamecanvas.setBandera(true);
+
+            gamecanvas.getEscenario().setNivel(1);
             gamecanvas.start();
             
             cambiaPantalla(null, gamecanvas);
@@ -109,7 +117,7 @@ public class MidletJuaneco extends MIDlet implements CommandListener {
             if (opcionseleccionada.equals("Nuevo Juego")) {
 
                 gamecanvas = new Canvas(this);
-                gamecanvas.setBandera(false);
+            gamecanvas.getEscenario().setNivel(0);
                 gamecanvas.start();
                 
                 cambiaPantalla(null, gamecanvas);
@@ -168,6 +176,38 @@ public class MidletJuaneco extends MIDlet implements CommandListener {
         }
 
         return perdiste;
+    }
+
+    public Form getSelvaSierra() {
+        if (perdiste == null) {
+            perdiste = new Form("GAME OVER!");
+            try {
+                imagenPerdi = new ImageItem("Perdiste", Image.createImage("/perdiste.jpg"), ImageItem.LAYOUT_BOTTOM, "PERDISTE");
+            } catch (Exception e) {
+            }
+            perdiste.append(imagenPerdi);
+            perdiste.addCommand(getOkCommand());
+            perdiste.setCommandListener(this);
+
+        }
+
+        return perdiste;
+    }
+
+    public Form getSierraCosta() {
+        if (sierraCosta == null) {
+            sierraCosta = new Form("GAME OVER!");
+            try {
+                imagenPerdi = new ImageItem("Perdiste", Image.createImage("/perdiste.jpg"), ImageItem.LAYOUT_BOTTOM, "PERDISTE");
+            } catch (Exception e) {
+            }
+            sierraCosta.append(imagenPerdi);
+            sierraCosta.addCommand(getOkCommand());
+            sierraCosta.setCommandListener(this);
+
+        }
+
+        return sierraCosta;
     }
 
     public Form getHistoria() {
