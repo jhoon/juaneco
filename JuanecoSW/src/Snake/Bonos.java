@@ -5,7 +5,6 @@
 package Snake;
 
 import Snake.util.SnakeUtil;
-import java.io.IOException;
 import java.util.Random;
 import javax.microedition.lcdui.Image;
 
@@ -35,10 +34,6 @@ public class Bonos extends Animales {
         } else if (tipo == 3) {
             this.setBono(SnakeUtil.createImage("/gato.gif"));
         }
-
-
-
-
     }
 
     public void bontim(int posesc[][], int lado) {
@@ -61,7 +56,6 @@ public class Bonos extends Animales {
             this.setAparece(0);
             this.setTiempo(62);
         }
-
     }
 
     /**
