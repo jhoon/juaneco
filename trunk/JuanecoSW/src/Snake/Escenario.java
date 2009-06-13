@@ -24,13 +24,9 @@ public class Escenario {
     private int puntaje;
     private int dimensiones;
     private int nivel;
-    private Image Tipo1;
-    private Image Tipo3;
-    private Image Tipo2;
     private Image Boss;
     private Image fondo;
     private boolean fin;
-
     Random rnd = new Random();
 //private Image fondoPant;
     private Image nuevoJuego;
@@ -43,71 +39,47 @@ public class Escenario {
 
     public Escenario(int getWidth) {
         super();
-        this.setLado(getWidth);
-        try {
-            juaneco.cargaim();
-            animal.cargaanimal();
-            bono.cargabono();
-        } catch (IOException ex) {
-            ex.printStackTrace();
-        }
+
     }
 
-
-    public void inicializa(boolean bandera) throws IOException {
-        if (bandera == true) {
-            this.setFondo(SnakeUtil.createImage("/costaFondo.jpg"));
-        }
-        if (bandera == false) {
+    public void inicializa() {
+        if (nivel == 0) {
             this.setFondo(SnakeUtil.createImage("/fondoGame.jpg"));
+
+        } else if (nivel == 1) {
+            this.setFondo(SnakeUtil.createImage("/f1.jpg"));
+            this.obsta1.inicializar(1, posesc);
+        } else if (nivel == 2) {
+            this.setFondo(SnakeUtil.createImage("/f2.jpg"));
+            this.obsta1.inicializar(2, posesc);
+        } else if (nivel == 3) {
+            this.setFondo(SnakeUtil.createImage("/f3.jpg"));
+            this.obsta1.inicializar(3, posesc);
+        } else if (nivel == 4) {
+            this.setFondo(SnakeUtil.createImage("/selva.jpg"));
         }
+        this.juaneco.cargaim();
+        this.bono.cargabono(nivel);
+        this.animal.cargaanimal(nivel);
         for (int i = 0; i < lado / 16; i++) {
             for (int j = 0; j < lado / 16; j++) {
                 posx[i] = (8 + 16 * i);
                 posy[j] = 16 + 16 * j;
-                posesc[i][j] = 0;}
-        }
-    }
-            
-
-    public void inicializa() {
-        try {
-            if (nivel == 0) {
-                this.setFondo(SnakeUtil.createImage("/fondoGame.jpg"));
-            } else if (nivel == 1) {
-                this.setFondo(SnakeUtil.createImage("/costa.jpg"));
-                this.obsta1.inicializar(1, posesc);
-            } else if (nivel == 2) {
-                this.setFondo(SnakeUtil.createImage("/sierra.jpg"));
-                this.obsta1.inicializar(2, posesc);
-            } else if (nivel == 3) {
-                this.setFondo(SnakeUtil.createImage("/selva.jpg"));
-                this.obsta1.inicializar(3, posesc);
-            } else if (nivel == 4) {
-                this.setFondo(SnakeUtil.createImage("/selva.jpg"));
-
+                posesc[i][j] = 0;
             }
-            for (int i = 0; i < lado / 16; i++) {
-                for (int j = 0; j < lado / 16; j++) {
-                    posx[i] = (8 + 16 * i);
-                    posy[j] = 16 + 16 * j;
-                    posesc[i][j] = 0;
-                }
-            }
-
-            posesc[8][8] = 1;   /*La posicion i=8, j=8 es la cabeza*/
-            agregaTronco(8, 9, 3); // Aumenta la cola
-            // posesc[8][9] = 9;     /*La posicion i=8, j=9 es el tronco en horizontal*/
-            animal.apareceanimal(rnd, posesc, lado, 12);
-            animal.setPuntaje(20);
-            bono.setPuntaje(50);
-            bono.setTiempo(100);
-            juaneco.setVelocidad(80);
-
-        } catch (Exception e) {
-            e.printStackTrace();
         }
+
+        posesc[8][8] = 1;   /*La posicion i=8, j=8 es la cabeza*/
+        agregaTronco(8, 9, 3); // Aumenta la cola
+        // posesc[8][9] = 9;     /*La posicion i=8, j=9 es el tronco en horizontal*/
+        animal.apareceanimal(rnd, posesc, lado, 12);
+        animal.setPuntaje(20);
+        bono.setPuntaje(50);
+        bono.setTiempo(100);
+        juaneco.setVelocidad(80);
+
     }
+
 
     public void movotronco(int mov) {
         boolean Condicion = false;
@@ -272,7 +244,7 @@ public class Escenario {
     public void movcabeza(int mov, boolean cabeza, int movant, Random rnd) {
 
         bono.bontim(posesc, lado);
-        puntaje = 0;
+        
         cabeza = false;
 
 
@@ -437,7 +409,7 @@ public class Escenario {
 
             }
         }
-        
+
     }
 
     public void dibuja(Graphics g) {
@@ -564,14 +536,6 @@ public class Escenario {
         this.opciones = opciones;
     }
 
-    public Image getTipo2() {
-        return Tipo2;
-    }
-
-    public void setTipo2(Image Tipo2) {
-        this.Tipo2 = Tipo2;
-    }
-
     public int getLado() {
         return lado;
     }
@@ -595,9 +559,6 @@ public class Escenario {
     public void setPuntaje(int puntaje) {
         this.puntaje = puntaje;
     }
-//<<<<<<< .mine
-
-//=======
 
     /**
      * @return the nivel
@@ -614,34 +575,6 @@ public class Escenario {
     }
 
     /**
-     * @return the Tipo1
-     */
-    public Image getTipo1() {
-        return Tipo1;
-    }
-
-    /**
-     * @param Tipo1 the Tipo1 to set
-     */
-    public void setTipo1(Image Tipo1) {
-        this.Tipo1 = Tipo1;
-    }
-
-    /**
-     * @return the Tipo3
-     */
-    public Image getTipo3() {
-        return Tipo3;
-    }
-
-    /**
-     * @param Tipo3 the Tipo3 to set
-     */
-    public void setTipo3(Image Tipo3) {
-        this.Tipo3 = Tipo3;
-    }
-
-    /**
      * @return the Boss
      */
     public Image getBoss() {
@@ -654,5 +587,4 @@ public class Escenario {
     public void setBoss(Image Boss) {
         this.Boss = Boss;
     }
-//>>>>>>> .r54
 }

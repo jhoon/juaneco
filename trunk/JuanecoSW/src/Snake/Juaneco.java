@@ -38,7 +38,7 @@ public class Juaneco extends Personajes {
         super();
     }
 
-    public void cargaim() throws IOException {
+    public void cargaim() {
         this.setCabezaIzq(SnakeUtil.createImage("/cabeza1.gif"));
         this.setCabezaAba(SnakeUtil.createImage("/cabeza4.gif"));
         this.setCabezaDer(SnakeUtil.createImage("/cabeza3.gif"));
