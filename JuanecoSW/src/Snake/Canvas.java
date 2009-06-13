@@ -16,8 +16,6 @@ public class Canvas extends GameCanvas implements Runnable {
     private Random rnd = new Random();
 // Atributos de escenario (animales, jugador, fondo, etc)
     private Escenario escenario = new Escenario(getWidth());
-    private Bonos bono = new Bonos();
-    private Obstaculos obsta1 = new Obstaculos();
 // Llmando al midlet
     private MidletJuaneco midletPadre;
     // Constantes del juego
@@ -61,7 +59,7 @@ public class Canvas extends GameCanvas implements Runnable {
                     break;
 // La funcion anterior se encarga de volver al menu, en el cambio de pantalla debe ir a la pantalla Perdiste y de ahi
                 //a la pantalla Menu
-                } else if ((this.escenario.getPuntaje() >= 60) && escenario.getNivel() != 0) {
+                } else if ((this.getEscenario().getPuntaje() >= 1000) && getEscenario().getNivel() != 0) {
                     this.cambioescenario();
                     break;
                 }
@@ -81,9 +79,9 @@ public class Canvas extends GameCanvas implements Runnable {
     private void updateGameScreen(Graphics g) {
 
 
-        escenario.movcabeza(mov, cabeza, movant, rnd);
+        getEscenario().movcabeza(mov, cabeza, movant, rnd);
 
-        if (this.escenario.isFin() == false) {
+        if (this.getEscenario().isFin() == false) {
             getEscenario().movotronco(getMov());
         }
 
@@ -116,11 +114,11 @@ public class Canvas extends GameCanvas implements Runnable {
 
     public void cambioescenario() {
 
-        if (escenario.getNivel() == 1) {
+        if (getEscenario().getNivel() == 1) {
             getMidletPadre().cambiaPantalla(null, this.getMidletPadre().getSelvaSierra());
-        } else if (escenario.getNivel() == 2) {
+        } else if (getEscenario().getNivel() == 2) {
             getMidletPadre().cambiaPantalla(null, this.getMidletPadre().getSierraCosta());
-        } else if (escenario.getNivel() == 3) {
+        } else if (getEscenario().getNivel() == 3) {
             getMidletPadre().cambiaPantalla(null, this.getMidletPadre().getBoss());
         }
 
@@ -156,49 +154,6 @@ public class Canvas extends GameCanvas implements Runnable {
      */
     public void setPuntaje(int puntaje) {
         this.puntaje = puntaje;
-    }
-//=======
-
-    /**
-     * @return the escenario
-     */
-    public Escenario getEscenario() {
-        return escenario;
-    }
-
-    /**
-     * @param escenario the escenario to set
-     */
-    public void setEscenario(Escenario escenario) {
-        this.escenario = escenario;
-    }
-
-    /**
-     * @return the bono
-     */
-    public Bonos getBono() {
-        return bono;
-    }
-
-    /**
-     * @param bono the bono to set
-     */
-    public void setBono(Bonos bono) {
-        this.bono = bono;
-    }
-
-    /**
-     * @return the obsta1
-     */
-    public Obstaculos getObsta1() {
-        return obsta1;
-    }
-
-    /**
-     * @param obsta1 the obsta1 to set
-     */
-    public void setObsta1(Obstaculos obsta1) {
-        this.obsta1 = obsta1;
     }
 
     /**
@@ -269,6 +224,20 @@ public class Canvas extends GameCanvas implements Runnable {
      */
     public void setCabeza(boolean cabeza) {
         this.cabeza = cabeza;
+    }
+
+    /**
+     * @return the escenario
+     */
+    public Escenario getEscenario() {
+        return escenario;
+    }
+
+    /**
+     * @param escenario the escenario to set
+     */
+    public void setEscenario(Escenario escenario) {
+        this.escenario = escenario;
     }
 }
 
