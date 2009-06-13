@@ -18,19 +18,23 @@ public class Animales extends Personajes {
     private int animal;
     private int visibilidad;
     private Image figura;
-    private Image animal1;
-    private Image animal2;
-    private Image animal3;
 
     public Animales() {
         super();
     }
 
-    public void cargaanimal() {
-        this.setAnimal1(SnakeUtil.createImage("/vizcacha.gif"));
-        this.setAnimal2(SnakeUtil.createImage("/cuy.gif"));
-        this.setAnimal3(SnakeUtil.createImage("/raton.gif"));
-        this.setFigura(this.getAnimal2());
+    public void cargaanimal(int tipo) {
+        Random a = new Random();
+        if (tipo == 0) {
+            tipo = (a.nextInt(2) + 1);
+        }
+        if (tipo == 1) {
+            this.setFigura(SnakeUtil.createImage("/vizcacha.gif"));
+        } else if (tipo == 2) {
+            this.setFigura(SnakeUtil.createImage("/cuy.gif"));
+        } else if (tipo == 3) {
+            this.setFigura(SnakeUtil.createImage("/raton.gif"));
+        }
     }
 
     public void apareceanimal(Random rnd, int posesc[][], int lado, int tipo) {
@@ -77,29 +81,5 @@ public class Animales extends Personajes {
 
     public void setFigura(Image figura) {
         this.figura = figura;
-    }
-
-    public Image getAnimal1() {
-        return animal1;
-    }
-
-    public void setAnimal1(Image animal1) {
-        this.animal1 = animal1;
-    }
-
-    public Image getAnimal2() {
-        return animal2;
-    }
-
-    public void setAnimal2(Image animal2) {
-        this.animal2 = animal2;
-    }
-
-    public Image getAnimal3() {
-        return animal3;
-    }
-
-    public void setAnimal3(Image animal3) {
-        this.animal3 = animal3;
     }
 }

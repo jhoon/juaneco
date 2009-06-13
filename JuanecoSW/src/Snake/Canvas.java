@@ -2,7 +2,6 @@ package Snake;
 
 import javax.microedition.lcdui.Graphics;
 import javax.microedition.lcdui.game.GameCanvas;
-import java.io.IOException;
 import java.util.Random;
 
 /**a
@@ -23,8 +22,8 @@ public class Canvas extends GameCanvas implements Runnable {
     private MidletJuaneco midletPadre;
     // Constantes del juego
     // Variables del juego
-    private int mov=3;
-    private int movant=3;
+    private int mov = 3;
+    private int movant = 3;
     private int lado = getWidth();
     private boolean cabeza = false;
     private int puntaje;
@@ -39,12 +38,12 @@ public class Canvas extends GameCanvas implements Runnable {
     }
 
     public void start() {
-       
+
         //Se cargan las imagenes de la cabeza de Juaneco por cada punto cardinal
-            
-            this.getEscenario().inicializa();
+
+        this.getEscenario().inicializa();
         // Se inicializa a juaneco, escenario y comida
-      
+
         Thread hilo = new Thread(this);
 
         hilo.start();
@@ -54,7 +53,7 @@ public class Canvas extends GameCanvas implements Runnable {
         try {
             Graphics g = getGraphics();
             while (true) {
-                
+
                 checkUserInput();
                 updateGameScreen(getGraphics());
                 if (getEscenario().isFin() == true) {
@@ -62,7 +61,11 @@ public class Canvas extends GameCanvas implements Runnable {
                     break;
 // La funcion anterior se encarga de volver al menu, en el cambio de pantalla debe ir a la pantalla Perdiste y de ahi
                 //a la pantalla Menu
+                } else if (this.escenario.getPuntaje() >= 250) {
+                    this.cambioescenario();
+                    break;
                 }
+
                 Thread.sleep(getEscenario().juaneco.getVelocidad());
             }
         } catch (Exception e) {
@@ -76,32 +79,18 @@ public class Canvas extends GameCanvas implements Runnable {
     }
 
     private void updateGameScreen(Graphics g) {
-//<<<<<<< .mine
-//<<<<<<< .mine
-        escenario.dibuja(g);
+
+
         escenario.movcabeza(mov, cabeza, movant, rnd);
-//=======
-        escenario.movcabeza(mov, cabeza, movant, rnd);
-//>>>>>>> .r52
-        if (escenario.juaneco.getTronquitoXY().capacity() > 0) {
-            escenario.movotronco(mov);
-        }
-        
-        g.drawString("Puntuacion:", 7 * lado / 9 + 9, 14 * getHeight() / 16 + 15, Graphics.HCENTER | Graphics.BOTTOM);
-//<<<<<<< .mine
-        g.drawString("" +getPuntaje(), 7 * lado / 9 + 9, 15 * getHeight() / 16 + 10, Graphics.HCENTER | Graphics.BOTTOM);
-//=======
-        g.drawString("" + escenario.getPuntaje(), 7 * lado / 9 + 9, 15 * getHeight() / 16 + 10, Graphics.HCENTER | Graphics.BOTTOM);
-//=======
-        getEscenario().movcabeza(getMov(), isCabeza(), getMovant(), getRnd());
-   
+
+        if (this.escenario.isFin() == false) {
             getEscenario().movotronco(getMov());
-        
-        getEscenario().dibuja(g);
+        }
+
+        this.getEscenario().dibuja(g);
+
         g.drawString("Puntuacion:", 7 * getLado() / 9 + 9, 14 * getHeight() / 16 + 15, Graphics.HCENTER | Graphics.BOTTOM);
         g.drawString("" + getEscenario().getPuntaje(), 7 * getLado() / 9 + 9, 15 * getHeight() / 16 + 10, Graphics.HCENTER | Graphics.BOTTOM);
-//>>>>>>> .r54
-//>>>>>>> .r52
         flushGraphics();
     }
 
@@ -119,10 +108,26 @@ public class Canvas extends GameCanvas implements Runnable {
         } else if (((estado_boton & DOWN_PRESSED) != 0) & (getMov() != 3) & (getMov() != 4)) {
             setMovant(getMov());
             setMov(4);
-        }else if (((estado_boton & DOWN_PRESSED) != 0) & (getMov() != 3) & (getMov() != 4)) {
+        } else if (((estado_boton & DOWN_PRESSED) != 0) & (getMov() != 3) & (getMov() != 4)) {
             setMovant(getMov());
             setMov(4);
         }
+    }
+
+    public void cambioescenario() {
+
+        if (escenario.getNivel() == 1) {
+            getMidletPadre().cambiaPantalla(null, this.getMidletPadre().getSelvaSierra());
+        } else if (escenario.getNivel() == 2) {
+            getMidletPadre().cambiaPantalla(null, this.getMidletPadre().getSierraCosta());
+        } else if (escenario.getNivel() == 3) {
+            getMidletPadre().cambiaPantalla(null, this.getMidletPadre().getBoss());
+        }
+
+
+
+
+
     }
 
     /**
@@ -138,7 +143,6 @@ public class Canvas extends GameCanvas implements Runnable {
     public void setRnd(Random rnd) {
         this.rnd = rnd;
     }
-//<<<<<<< .mine
 
     /**
      * @return the puntaje
