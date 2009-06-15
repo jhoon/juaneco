@@ -59,7 +59,7 @@ public class Canvas extends GameCanvas implements Runnable {
                     break;
                 // La funcion anterior se encarga de volver al menu, en el cambio de pantalla debe ir a la pantalla Perdiste y de ahi
                 //a la pantalla Menu
-                } else if ((this.getEscenario().getPuntaje() >= 20) && getEscenario().getNivel() != 0) {
+                } else if ((this.getEscenario().getPuntaje() >= 500) && getEscenario().getNivel() != 0) {
                     this.cambioescenario();
                     break;
                 }
@@ -78,8 +78,9 @@ public class Canvas extends GameCanvas implements Runnable {
     }
 
     private void updateGameScreen(Graphics g) {
-
-
+        if (getEscenario().isConta()) {
+            getEscenario().aleatorionivel();
+        }
         getEscenario().movcabeza(mov, cabeza, movant, rnd);
 
         if (this.getEscenario().isFin() == false) {
@@ -90,9 +91,16 @@ public class Canvas extends GameCanvas implements Runnable {
         }
 
         this.getEscenario().dibuja(g);
+        g.setColor(120, 120, 120);
         if (this.escenario.getNivel() != 4) {
             g.drawString("Puntuacion:", 7 * getLado() / 9 + 9, 14 * getHeight() / 16 + 15, Graphics.HCENTER | Graphics.BOTTOM);
             g.drawString("" + getEscenario().getPuntaje(), 7 * getLado() / 9 + 9, 15 * getHeight() / 16 + 10, Graphics.HCENTER | Graphics.BOTTOM);
+        } else {
+            g.drawString("Vidas de Juaneco:", 7 * getLado() / 9 + 9, 14 * getHeight() / 16 + 15, Graphics.HCENTER | Graphics.BOTTOM);
+            g.drawString("" + getEscenario().juaneco.getVidas(), 7 * getLado() / 9 + 9, 15 * getHeight() / 16 + 10, Graphics.HCENTER | Graphics.BOTTOM);
+            g.drawString("Vidas del Cazador:", 3 * getLado() / 9 + 9, 14 * getHeight() / 16 + 15, Graphics.HCENTER | Graphics.BOTTOM);
+            g.drawString("" + getEscenario().caza.getVidas(), 3 * getLado() / 9 + 9, 15 * getHeight() / 16 + 10, Graphics.HCENTER | Graphics.BOTTOM);
+
         }
         flushGraphics();
 
@@ -113,12 +121,14 @@ public class Canvas extends GameCanvas implements Runnable {
         } else if (((estado_boton & DOWN_PRESSED) != 0) & (getMov() != 3) & (getMov() != 4)) {
             setMovant(getMov());
             setMov(4);
-        } else if (((estado_boton & DOWN_PRESSED) != 0) & (getMov() != 3) & (getMov() != 4)) {
-            setMovant(getMov());
-            setMov(4);
-        } else if (((estado_boton & KEY_NUM5) != 0) ) {
-            if(this.escenario.getNivel()==4)
-            this.escenario.juaneco.setDisparo(true);
+        } else if (((estado_boton & KEY_NUM5) != 0)) {
+            if (this.escenario.getNivel() == 4) {
+                if (!this.escenario.juaneco.isDisparo()) {
+                    this.escenario.juaneco.setDisparo(true);
+                }
+            }
+        } else {
+            this.escenario.juaneco.setDisparo(false);
         }
     }
 
@@ -133,10 +143,6 @@ public class Canvas extends GameCanvas implements Runnable {
         } else if (getEscenario().getNivel() == 4) {
             getMidletPadre().cambiaPantalla(null, this.midletPadre.getMenu());
         }
-
-
-
-
 
     }
 

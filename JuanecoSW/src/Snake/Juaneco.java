@@ -32,12 +32,14 @@ public class Juaneco extends Personajes {
     private Image codo4;
     private Image barril;
     private int Velocidad;
+    private int vidas;
     private int balas;
     private boolean disparo;
 
     public Juaneco() {
         super();
         this.setDisparo(false);
+        this.setVidas(3);
     }
 
     public void cargaim() {
@@ -236,5 +238,19 @@ public class Juaneco extends Personajes {
      */
     public void setBarril(Image barril) {
         this.barril = barril;
+    }
+
+    /**
+     * @return the vidas
+     */
+    public int getVidas() {
+        return vidas;
+    }
+
+    /**
+     * @param vidas the vidas to set
+     */
+    public void setVidas(int vidas) {
+        this.vidas = vidas;
     }
 }
