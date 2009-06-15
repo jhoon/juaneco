@@ -34,15 +34,19 @@ public class Animales extends Personajes {
             this.setFigura(SnakeUtil.createImage("/cuy.gif"));
         } else if (tipo == 3) {
             this.setFigura(SnakeUtil.createImage("/raton.gif"));
+        } else if (tipo == 4) {
+            this.setFigura(SnakeUtil.createImage("/barril.gif"));
         }
+
+
     }
 
     public void apareceanimal(Random rnd, int posesc[][], int lado, int tipo) {
         int a;
         int b;
         while (true) {
-            a = rnd.nextInt(lado / 16 - 1);
-            b = rnd.nextInt(lado / 16 - 1);
+            a = rnd.nextInt(lado / 16);
+            b = rnd.nextInt(lado / 16);
             if (posesc[a][b] == 0) {
                 posesc[a][b] = tipo;
                 break;

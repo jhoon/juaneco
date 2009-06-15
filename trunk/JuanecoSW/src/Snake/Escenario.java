@@ -6,7 +6,6 @@
 package Snake;
 
 import Snake.util.SnakeUtil;
-import java.io.IOException;
 import javax.microedition.lcdui.Graphics;
 import javax.microedition.lcdui.Image;
 import java.util.Random;
@@ -21,6 +20,7 @@ public class Escenario {
     Obstaculos obsta1 = new Obstaculos();
     Bonos bono = new Bonos();
     Animales animal = new Animales();
+    Cazador caza = new Cazador();
     private int borde;
     private int puntaje;
     private int dimensiones;
@@ -71,14 +71,20 @@ public class Escenario {
             posesc = costa();
         } else if (nivel == 4) {
             this.setFondo(SnakeUtil.createImage("/selva.jpg"));
+            this.caza.cargaimagen();
+
+            posesc = boss();
+            posesc[14][14] = 18;
         }
         posesc[8][8] = 1;   /*La posicion i=8, j=8 es la cabeza*/
         agregaTronco(8, 9, 3); // Aumenta la cola
         // posesc[8][9] = 9;     /*La posicion i=8, j=9 es el tronco en horizontal*/
-        animal.apareceanimal(rnd, posesc, lado, 12);
-        animal.setPuntaje(20);
-        bono.setPuntaje(50);
-        bono.setTiempo(50);
+        if (this.getNivel() != 4) {
+            animal.apareceanimal(rnd, posesc, lado, 12);
+            animal.setPuntaje(20);
+            bono.setPuntaje(50);
+            bono.setTiempo(50);
+        }
         juaneco.setVelocidad(100);
 
 
@@ -100,6 +106,29 @@ public class Escenario {
             {0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 14, 0, 0},
             {0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 14, 0, 14, 0, 0},
             {0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0}};
+
+        return a;
+
+
+    }
+
+    public int[][] boss() {
+        int a[][] = {{0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0},
+            {0, 12, 12, 12, 0, 0, 0, 0, 0, 0, 0, 12, 12, 12, 0},
+            {0, 12, 0, 12, 0, 0, 0, 0, 0, 0, 0, 12, 0, 12, 0},
+            {0, 12, 12, 12, 0, 0, 0, 0, 0, 0, 0, 12, 12, 12, 0},
+            {0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0},
+            {0, 0, 0, 0, 0, 12, 12, 12, 12, 12, 0, 0, 0, 0, 0},
+            {0, 0, 0, 0, 0, 12, 0, 0, 0, 12, 0, 0, 0, 0, 0},
+            {0, 0, 0, 0, 0, 12, 0, 0, 0, 12, 0, 0, 0, 0, 0},
+            {0, 0, 0, 0, 0, 12, 0, 0, 0, 12, 0, 0, 0, 0, 0},
+            {0, 0, 0, 0, 0, 12, 12, 12, 12, 12, 0, 0, 0, 0, 0},
+            {0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0},
+            {0, 12, 12, 12, 0, 0, 0, 0, 0, 0, 0, 12, 12, 12, 0},
+            {0, 12, 0, 12, 0, 0, 0, 0, 0, 0, 0, 12, 0, 12, 0},
+            {0, 12, 12, 12, 0, 0, 0, 0, 0, 0, 0, 12, 12, 12, 0},
+            {0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0},};
+
 
         return a;
 
@@ -327,12 +356,15 @@ public class Escenario {
                                     break;
                                 }
                                 case 12: {
-                                    setPuntaje(animal.getPuntaje() + getPuntaje());
-                                    animal.apareceanimal(rnd, posesc, lado, 12);
+
                                     posesc[i - 1][j] = 1;
                                     posesc[i][j] = 0;
-                                    agregaTronco(i, j, movant);
-                                    bono.aparebono(rnd, posesc, lado);
+                                    if (nivel != 4) {
+                                        setPuntaje(animal.getPuntaje() + getPuntaje());
+                                        animal.apareceanimal(rnd, posesc, lado, 12);
+                                        agregaTronco(i, j, movant);
+                                        bono.aparebono(rnd, posesc, lado);
+                                    }
                                     break;
                                 }
                                 case 13: {
@@ -365,12 +397,15 @@ public class Escenario {
                                     break;
                                 }
                                 case 12: {
-                                    setPuntaje(animal.getPuntaje() + getPuntaje());
-                                    animal.apareceanimal(rnd, posesc, lado, 12);
+
                                     posesc[i + 1][j] = 1;
                                     posesc[i][j] = 0;
-                                    agregaTronco(i, j, movant);
-                                    bono.aparebono(rnd, posesc, lado);
+                                    if (nivel != 4) {
+                                        setPuntaje(animal.getPuntaje() + getPuntaje());
+                                        animal.apareceanimal(rnd, posesc, lado, 12);
+                                        agregaTronco(i, j, movant);
+                                        bono.aparebono(rnd, posesc, lado);
+                                    }
                                     break;
                                 }
                                 case 13: {
@@ -401,12 +436,15 @@ public class Escenario {
                                     break;
                                 }
                                 case 12: {
-                                    setPuntaje(animal.getPuntaje() + getPuntaje());
-                                    animal.apareceanimal(rnd, posesc, lado, 12);
+
                                     posesc[i][j - 1] = 1;
                                     posesc[i][j] = 0;
-                                    agregaTronco(i, j, movant);
-                                    bono.aparebono(rnd, posesc, lado);
+                                    if (nivel != 4) {
+                                        setPuntaje(animal.getPuntaje() + getPuntaje());
+                                        animal.apareceanimal(rnd, posesc, lado, 12);
+                                        agregaTronco(i, j, movant);
+                                        bono.aparebono(rnd, posesc, lado);
+                                    }
                                     break;
                                 }
                                 case 13: {
@@ -437,12 +475,15 @@ public class Escenario {
                                     break;
                                 }
                                 case 12: {
-                                    setPuntaje(animal.getPuntaje() + getPuntaje());
-                                    animal.apareceanimal(rnd, posesc, lado, 12);
+
                                     posesc[i][j + 1] = 1;
                                     posesc[i][j] = 0;
-                                    agregaTronco(i, j, mov);
-                                    bono.aparebono(rnd, posesc, lado);
+                                    if (nivel != 4) {
+                                        setPuntaje(animal.getPuntaje() + getPuntaje());
+                                        animal.apareceanimal(rnd, posesc, lado, 12);
+                                        agregaTronco(i, j, mov);
+                                        bono.aparebono(rnd, posesc, lado);
+                                    }
                                     break;
                                 }
                                 case 13: {
@@ -542,11 +583,46 @@ public class Escenario {
                         g.drawImage(obsta1.getObstaculo2(), posx[i], posy[j], Graphics.HCENTER | Graphics.BOTTOM);
                         break;
                     }// Caso 15: Obstaculo 2
+                    case 16: {
+                        g.drawImage(juaneco.getBarril(), posx[i], posy[j], Graphics.HCENTER | Graphics.BOTTOM);
+                        break;
+                    }
+                    case 17: {
+                        g.drawImage(caza.getBala(), posx[i], posy[j], Graphics.HCENTER | Graphics.BOTTOM);
+                        break;
+                    }
+                    case 18: {
+                        g.drawImage(caza.getCazador(), posx[i], posy[j], Graphics.HCENTER | Graphics.BOTTOM);
+                        break;
+                    }
                     default: {
                         break;
                     }
                 }
             }
+        }
+    }
+
+    public void muevecaza() {
+        Random g = new Random();
+        int a, d;
+        d = g.nextInt(14);
+
+        for (int j = 0; j < getLado() / 16; j++) {
+            if (posesc[14][j] == 18) {
+                if ((j + d) < getLado() / 16) {
+                    posesc[14][j] = 0;
+                    posesc[14][j + d] = 18;
+                } else if ((j - d) > 0) {
+                    posesc[14][j] = 0;
+                    posesc[14][j - d] = 18;
+                } else {
+                    posesc[14][j] = 0;
+                    posesc[14][d] = 18;
+                }
+
+            }
+
         }
     }
 
