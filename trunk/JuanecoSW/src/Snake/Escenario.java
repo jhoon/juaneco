@@ -37,6 +37,8 @@ public class Escenario {
     private int[][] posesc = new int[lado / 16][lado / 16]; // posicion escenario
     private int[] posx = new int[lado / 16];
     private int[] posy = new int[lado / 16];
+    private int contador = 100;
+    private boolean conta = true;
 
     public Escenario(int getWidth) {
         super();
@@ -92,19 +94,19 @@ public class Escenario {
 
     public int[][] costa() {
         int a[][] = {{0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0},
-            {0, 14, 14, 14, 14, 14, 14, 0, 0, 0, 0, 0, 0, 14, 0},
-            {0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 14, 0},
-            {0, 0, 0, 0, 14, 0, 0, 0, 0, 14, 0, 0, 0, 14, 0},
-            {0, 0, 0, 0, 14, 14, 14, 14, 14, 14, 0, 0, 0, 14, 0},
-            {0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 14, 0},
+            {0, 14, 14, 14, 14, 14, 0, 0, 0, 0, 0, 0, 0, 0, 0},
+            {0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 14, 14, 14, 14, 0},
             {0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0},
-            {0, 14, 14, 14, 14, 14, 14, 14, 14, 0, 0, 0, 0, 0, 0},
-            {0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0},
-            {0, 0, 14, 14, 14, 14, 14, 14, 14, 14, 0, 0, 0, 0, 0},
-            {0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 14, 0, 0},
-            {0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 14, 0, 0},
-            {0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 14, 0, 0},
-            {0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 14, 0, 14, 0, 0},
+            {0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 14, 0},
+            {0, 14, 0, 14, 14, 0, 0, 0, 0, 14, 0, 14, 0, 14, 0},
+            {0, 14, 0, 0, 14, 0, 0, 14, 0, 14, 0, 14, 0, 14, 0},
+            {0, 14, 0, 0, 14, 0, 0, 14, 0, 14, 0, 14, 0, 14, 0},
+            {0, 14, 0, 0, 14, 0, 0, 14, 0, 14, 0, 14, 0, 14, 0},
+            {0, 14, 0, 0, 14, 0, 0, 14, 0, 14, 0, 14, 0, 14, 0},
+            {0, 14, 0, 14, 14, 0, 0, 14, 0, 14, 0, 14, 0, 14, 0},
+            {0, 14, 0, 0, 0, 0, 0, 14, 0, 14, 0, 14, 0, 0, 0},
+            {0, 14, 0, 0, 0, 0, 0, 14, 0, 14, 0, 0, 0, 0, 0},
+            {0, 14, 0, 0, 0, 0, 0, 14, 0, 0, 0, 0, 0, 0, 0},
             {0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0}};
 
         return a;
@@ -137,19 +139,19 @@ public class Escenario {
 
     public int[][] sierra() {
         int a[][] = {{0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0},
-            {0, 14, 14, 14, 14, 14, 14, 0, 0, 0, 0, 0, 0, 14, 0},
+            {0, 14, 14, 14, 14, 14, 0, 0, 0, 0, 14, 14, 0, 0, 0},
+            {0, 14, 14, 14, 14, 14, 0, 0, 0, 0, 14, 14, 0, 0, 0},
+            {0, 0, 14, 14, 0, 0, 0, 0, 0, 0, 14, 14, 14, 0, 0},
+            {0, 0, 0, 14, 0, 0, 0, 0, 0, 0, 0, 14, 14, 14, 0},
+            {0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 14, 14, 0},
             {0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 14, 0},
-            {0, 0, 0, 0, 14, 0, 0, 0, 0, 14, 0, 0, 0, 14, 0},
-            {0, 0, 0, 0, 14, 14, 14, 14, 14, 14, 0, 0, 0, 14, 0},
-            {0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 14, 0},
-            {0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0},
-            {0, 14, 14, 14, 14, 14, 14, 14, 14, 0, 0, 0, 0, 0, 0},
-            {0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0},
-            {0, 0, 14, 14, 14, 14, 14, 14, 14, 14, 0, 0, 0, 0, 0},
-            {0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 14, 0, 0},
-            {0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 14, 0, 0},
-            {0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 14, 0, 0},
-            {0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 14, 0, 14, 0, 0},
+            {0, 0, 0, 0, 14, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0},
+            {0, 14, 0, 0, 14, 14, 0, 0, 0, 0, 0, 0, 0, 0, 0},
+            {0, 14, 14, 0, 0, 14, 0, 0, 0, 0, 0, 0, 0, 0, 0},
+            {0, 14, 14, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0},
+            {0, 14, 14, 14, 0, 0, 0, 0, 0, 0, 14, 0, 0, 0, 0},
+            {0, 14, 14, 14, 14, 0, 0, 0, 0, 0, 14, 14, 14, 0, 0},
+            {0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 14, 14, 14, 14, 0},
             {0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0}};
 
         return a;
@@ -338,7 +340,11 @@ public class Escenario {
 
     public void movcabeza(int mov, boolean cabeza, int movant, Random rnd) {
         bono.bontim(posesc, lado);
+        if (nivel == 4) {
+            this.ataca();
+            this.muevebala();
 
+        }
         cabeza = false;
         for (int i = 0; i < getLado() / 16; i++) {
             for (int j = 0; j < getLado() / 16; j++) {
@@ -359,10 +365,11 @@ public class Escenario {
 
                                     posesc[i - 1][j] = 1;
                                     posesc[i][j] = 0;
+                                    agregaTronco(i, j, movant);
+
                                     if (nivel != 4) {
                                         setPuntaje(animal.getPuntaje() + getPuntaje());
                                         animal.apareceanimal(rnd, posesc, lado, 12);
-                                        agregaTronco(i, j, movant);
                                         bono.aparebono(rnd, posesc, lado);
                                     }
                                     break;
@@ -374,6 +381,12 @@ public class Escenario {
                                     posesc[i][j] = 0;
                                     agregaTronco(i, j, movant);
 
+                                    break;
+                                }
+                                case 18: {
+                                    posesc[i][j + 1] = 1;
+                                    posesc[i][j] = 0;
+                                    setPuntaje(50000);
                                     break;
                                 }
                                 default: {
@@ -390,6 +403,9 @@ public class Escenario {
                         if (i == (getLado() / 16 - 1)) {
                             this.setFin(true);
                         } else {
+
+
+
                             switch (posesc[i + 1][j]) {
                                 case 0: {
                                     posesc[i + 1][j] = 1;
@@ -397,13 +413,13 @@ public class Escenario {
                                     break;
                                 }
                                 case 12: {
+                                    agregaTronco(i, j, movant);
 
                                     posesc[i + 1][j] = 1;
                                     posesc[i][j] = 0;
                                     if (nivel != 4) {
                                         setPuntaje(animal.getPuntaje() + getPuntaje());
                                         animal.apareceanimal(rnd, posesc, lado, 12);
-                                        agregaTronco(i, j, movant);
                                         bono.aparebono(rnd, posesc, lado);
                                     }
                                     break;
@@ -413,6 +429,12 @@ public class Escenario {
                                     posesc[i + 1][j] = 1;
                                     posesc[i][j] = 0;
                                     agregaTronco(i, j, movant);
+                                    break;
+                                }
+                                case 18: {
+                                    posesc[i][j + 1] = 1;
+                                    posesc[i][j] = 0;
+                                    setPuntaje(50000);
                                     break;
                                 }
                                 default: {
@@ -439,10 +461,11 @@ public class Escenario {
 
                                     posesc[i][j - 1] = 1;
                                     posesc[i][j] = 0;
+                                    agregaTronco(i, j, movant);
+
                                     if (nivel != 4) {
                                         setPuntaje(animal.getPuntaje() + getPuntaje());
                                         animal.apareceanimal(rnd, posesc, lado, 12);
-                                        agregaTronco(i, j, movant);
                                         bono.aparebono(rnd, posesc, lado);
                                     }
                                     break;
@@ -452,6 +475,12 @@ public class Escenario {
                                     posesc[i][j - 1] = 1;
                                     posesc[i][j] = 0;
                                     agregaTronco(i, j, movant);
+                                    break;
+                                }
+                                case 18: {
+                                    posesc[i][j + 1] = 1;
+                                    posesc[i][j] = 0;
+                                    setPuntaje(50000);
                                     break;
                                 }
                                 default: {
@@ -478,10 +507,12 @@ public class Escenario {
 
                                     posesc[i][j + 1] = 1;
                                     posesc[i][j] = 0;
+                                    agregaTronco(i, j, mov);
+
                                     if (nivel != 4) {
                                         setPuntaje(animal.getPuntaje() + getPuntaje());
                                         animal.apareceanimal(rnd, posesc, lado, 12);
-                                        agregaTronco(i, j, mov);
+
                                         bono.aparebono(rnd, posesc, lado);
                                     }
                                     break;
@@ -493,6 +524,12 @@ public class Escenario {
                                     posesc[i][j] = 0;
                                     agregaTronco(i, j, mov);
 
+                                    break;
+                                }
+                                case 18: {
+                                    posesc[i][j + 1] = 1;
+                                    posesc[i][j] = 0;
+                                    setPuntaje(50000);
                                     break;
                                 }
                                 default: {
@@ -512,6 +549,45 @@ public class Escenario {
                 break;
 
             }
+        }
+    }
+
+    public void buscacabeza() {
+        for (int i = 0; i < getLado() / 16; i++) {
+            for (int j = 0; j < lado / 16; j++) {
+                if (posesc[i][j] == 1) {
+                    this.setFin(false);
+
+                } else {
+                    this.setFin(true);
+                }
+            }
+        }
+    }
+
+    public void aleatorionivel() {
+        if (nivel == 1) {
+            if (this.getPuntaje() >= 250) {
+
+                for (int i = 0; i < getLado() / 16; i++) {
+                    posesc[6][i] = 14;
+                    posesc[7][i] = 14;
+                    posesc[8][i] = 14;
+                }
+                setContador(getContador() - 1);
+                if (getContador() == 0) {
+                    for (int i = 0; i < getLado() / 16; i++) {
+                        posesc[6][i] = 0;
+                        posesc[7][i] = 14;
+                        posesc[8][i] = 0;
+                    }
+                    posesc[7][6] = 0;
+                    posesc[7][11] = 0;
+                    conta = false;
+                }
+            }
+        } else if (nivel == 2) {
+        } else if (nivel == 3) {
         }
 
     }
@@ -610,18 +686,78 @@ public class Escenario {
 
         for (int j = 0; j < getLado() / 16; j++) {
             if (posesc[14][j] == 18) {
-                if ((j + d) < getLado() / 16) {
-                    posesc[14][j] = 0;
-                    posesc[14][j + d] = 18;
-                } else if ((j - d) > 0) {
-                    posesc[14][j] = 0;
-                    posesc[14][j - d] = 18;
-                } else {
-                    posesc[14][j] = 0;
-                    posesc[14][d] = 18;
+                while (true) {
+                    if (posesc[14][j] != 1) {
+                        if ((j + d) < getLado() / 16) {
+                            posesc[14][j] = 0;
+                            posesc[14][j + d] = 18;
+                        } else if ((j - d) > 0) {
+                            posesc[14][j] = 0;
+                            posesc[14][j - d] = 18;
+                        } else {
+                            posesc[14][j] = 0;
+                            posesc[14][d] = 18;
+                        }
+                        break;
+                    }
                 }
 
+
             }
+
+        }
+    }
+
+    public void ataca() {
+        int a = 0, d = 0;
+
+        for (int j = 0; j < getLado() / 16; j++) {
+            if (posesc[14][j] == 18) {
+                d = j;
+            }
+
+        }
+        for (int i = 0; i < getLado() / 16; i++) {
+            for (int j = 0; j < getLado() / 16; j++) {
+                if (posesc[i][j] == 1) {
+                    a = j;
+                }
+            }
+        }
+
+        if (a == d) {
+            posesc[13][d] = 17;
+        }
+
+    }
+
+    public void muevebala() {
+        for (int i = 0; i < getLado() / 16; i++) {
+            for (int j = 0; j < getLado() / 16; j++) {
+                if (posesc[i][j] == 17) {
+                    posesc[i][j] = 0;
+                    if (i > 0) {
+                        if (posesc[i - 1][j] == 0) {
+                            posesc[i - 1][j] = 17;
+                        } else if ((posesc[i - 1][j] >= 1) && (posesc[i - 1][j] <= 11)) {
+                            if (this.juaneco.getVidas() > 0) {
+                                this.juaneco.setVidas(this.juaneco.getVidas() - 1);
+
+                            } else {
+                                this.setFin(true);
+                            }
+                        }
+
+                    }
+                }
+            }
+
+        }
+    }
+
+    public void gane() {
+        if (this.caza.getVidas() == 0) {
+            this.setPuntaje(20000);
 
         }
     }
@@ -725,5 +861,33 @@ public class Escenario {
      */
     public void setBoss(Image Boss) {
         this.Boss = Boss;
+    }
+
+    /**
+     * @return the conta
+     */
+    public boolean isConta() {
+        return conta;
+    }
+
+    /**
+     * @param conta the conta to set
+     */
+    public void setConta(boolean conta) {
+        this.conta = conta;
+    }
+
+    /**
+     * @return the contador
+     */
+    public int getContador() {
+        return contador;
+    }
+
+    /**
+     * @param contador the contador to set
+     */
+    public void setContador(int contador) {
+        this.contador = contador;
     }
 }
