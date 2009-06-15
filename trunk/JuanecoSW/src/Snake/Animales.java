@@ -45,9 +45,9 @@ public class Animales extends Personajes {
         int a;
         int b;
         while (true) {
-            a = rnd.nextInt(lado / 16);
-            b = rnd.nextInt(lado / 16);
-            if (posesc[a][b] == 0) {
+            a = rnd.nextInt(lado / 16 - 2) + 1;
+            b = rnd.nextInt(lado / 16 - 2) + 1;
+            if ((posesc[a][b] == 0) && (posesc[a + 1][b] == 0) && (posesc[a - 1][b] == 0) && (posesc[a][b + 1] == 0) && (posesc[a][b - 1] == 0)) {
                 posesc[a][b] = tipo;
                 break;
             }

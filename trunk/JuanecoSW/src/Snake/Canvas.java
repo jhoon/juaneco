@@ -59,7 +59,7 @@ public class Canvas extends GameCanvas implements Runnable {
                     break;
                 // La funcion anterior se encarga de volver al menu, en el cambio de pantalla debe ir a la pantalla Perdiste y de ahi
                 //a la pantalla Menu
-                } else if ((this.getEscenario().getPuntaje() >= 100) && getEscenario().getNivel() != 0) {
+                } else if ((this.getEscenario().getPuntaje() >= 200) && getEscenario().getNivel() != 0) {
                     this.cambioescenario();
                     break;
                 }
@@ -141,7 +141,7 @@ public class Canvas extends GameCanvas implements Runnable {
         } else if (getEscenario().getNivel() == 3) {
             getMidletPadre().cambiaPantalla(null, this.getMidletPadre().getBoss());
         } else if (getEscenario().getNivel() == 4) {
-            getMidletPadre().cambiaPantalla(null, this.midletPadre.getMenu());
+            getMidletPadre().cambiaPantalla(null, this.midletPadre.getGanaste());
         }
 
     }

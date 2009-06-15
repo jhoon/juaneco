@@ -121,6 +121,19 @@ public class MidletJuaneco extends MIDlet implements CommandListener {
             playWap(bandera);
 
             cambiaPantalla(null, gamecanvas);
+        }else if (displayable == boss && command == okCommand) {
+            bandera = 4;
+            gamecanvas = new Canvas(this);
+            gamecanvas.getEscenario().setNivel(4);
+            gamecanvas.start();
+            playWap(bandera);
+            //p=Manager.createPlayer(stream, type)
+
+            cambiaPantalla(null, gamecanvas);
+        }else if (displayable == ganaste && command == okCommand) {
+
+
+            cambiaPantalla(null, getMenu());
         }
 
         //bandera = 0;
@@ -230,9 +243,9 @@ public class MidletJuaneco extends MIDlet implements CommandListener {
 
         else if (bandera == 5){
             try {
-                InputStream in = getClass().getResourceAsStream("/mujerhi.wav");
-                Player p = Manager.createPlayer(in, "audio/x-wav");
-                p.stop();
+                InputStream in = getClass().getResourceAsStream("/GanondorfBattle.midi");
+                Player p = Manager.createPlayer(in, null);
+                p.start();
             } catch (Exception e) {
                 Alert alr = new Alert("Error", "No se pudo reproducir el sonido.", null, AlertType.ERROR);
                 alr.setTimeout(Alert.FOREVER);
@@ -287,11 +300,12 @@ public class MidletJuaneco extends MIDlet implements CommandListener {
 
     public Form getGanaste() {
         if (ganaste == null) {
-            ganaste = new Form("GAME OVER!");
+            ganaste = new Form("Felicitaciones!!");
             try {
-                winner = new ImageItem("Perdiste", Image.createImage("/perdiste.jpg"), ImageItem.LAYOUT_BOTTOM, "PERDISTE");
+                winner = new ImageItem("Perdiste", Image.createImage("/fondofinal.jpg"), ImageItem.LAYOUT_BOTTOM, "PERDISTE");
             } catch (Exception e) {
             }
+            stringItem = new StringItem("Juaneco emprende su travesia denuevo a la selva\n donde espera tener una vida feliz \n junto a sus hijos esperando que el cazador nunca\n mas moleste", "");
             ganaste.append(winner);
             ganaste.addCommand(getOkCommand());
             ganaste.setCommandListener(this);
@@ -303,9 +317,9 @@ public class MidletJuaneco extends MIDlet implements CommandListener {
 
     public Form getSelvaSierra() {
         if (selvaSierra == null) {
-            selvaSierra = new Form("Camino Selva-Sierra");
+            selvaSierra = new Form("Camino a la Sierra");
             try {
-                selvaysierra = new ImageItem("Perdiste", Image.createImage("/perdiste.jpg"), ImageItem.LAYOUT_BOTTOM, "PERDISTE");
+                selvaysierra = new ImageItem("Sierra", Image.createImage("/mapa2.gif"), ImageItem.LAYOUT_BOTTOM, "Camino de Juaneco");
             } catch (Exception e) {
             }
             selvaSierra.append(selvaysierra);
@@ -321,7 +335,7 @@ public class MidletJuaneco extends MIDlet implements CommandListener {
         if (boss == null) {
             boss = new Form("Enfrentamiento final");
             try {
-                bossito = new ImageItem("Perdiste", Image.createImage("/perdiste.jpg"), ImageItem.LAYOUT_BOTTOM, "PERDISTE");
+                bossito = new ImageItem("Cazador", Image.createImage("/imagencaz.gif"), ImageItem.LAYOUT_BOTTOM, "PERDISTE");
             } catch (Exception e) {
             }
             boss.append(bossito);
@@ -337,7 +351,7 @@ public class MidletJuaneco extends MIDlet implements CommandListener {
         if (sierraCosta == null) {
             sierraCosta = new Form("Camino Sierra Costa");
             try {
-                sierraycosta = new ImageItem("Perdiste", Image.createImage("/perdiste.jpg"), ImageItem.LAYOUT_BOTTOM, "PERDISTE");
+                sierraycosta = new ImageItem("Costa", Image.createImage("/mapa3.gif"), ImageItem.LAYOUT_BOTTOM, "PERDISTE");
             } catch (Exception e) {
             }
             sierraCosta.append(sierraycosta);

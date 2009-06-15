@@ -22,25 +22,26 @@ public class Obstaculos extends ElementoJuego {
     }
 
     public void inicializar(int tipo) {
-      
-            if (tipo == 1) {
-                this.setObstaculo(SnakeUtil.createImage("/rio.gif"));
-                this.setObstaculo2(SnakeUtil.createImage("/selva_obs.gif"));
 
-                // falta la matriz
-            }else if (tipo == 2) {
-                this.setObstaculo(SnakeUtil.createImage("/sierra_obs.gif"));
+        if (tipo == 1) {
+            this.setObstaculo(SnakeUtil.createImage("/rio.gif"));
+            this.setObstaculo2(SnakeUtil.createImage("/selva_obs.gif"));
 
-                
-                // falta la matriz
-            } if (tipo == 3) {
-               this.setObstaculo(SnakeUtil.createImage("/costa_obs.gif"));
-           
-                
-                // falta la matriz
-            }
+        // falta la matriz
+        } else if (tipo == 2) {
+            this.setObstaculo(SnakeUtil.createImage("/sierra_obs.gif"));
+            this.setObstaculo2(SnakeUtil.createImage("/huayco.gif"));
 
-     
+        // falta la matriz
+        }
+        if (tipo == 3) {
+            this.setObstaculo(SnakeUtil.createImage("/costa_obs.gif"));
+            this.setObstaculo2(SnakeUtil.createImage("/terremoto.gif"));
+
+        // falta la matriz
+        }
+
+
     }
 
     /**
@@ -87,6 +88,4 @@ public class Obstaculos extends ElementoJuego {
     public void setObstaculo2(Image Obstaculo2) {
         this.Obstaculo2 = Obstaculo2;
     }
-
-    
 }
