@@ -4,10 +4,13 @@
  */
 package Snake;
 
+import java.io.InputStream;
+import javax.microedition.media.MediaException;
 import javax.microedition.midlet.MIDlet;
 import javax.microedition.lcdui.Display;
 import javax.microedition.lcdui.CommandListener;
 import javax.microedition.lcdui.Alert;
+import javax.microedition.lcdui.AlertType;
 import javax.microedition.lcdui.Choice;
 import javax.microedition.lcdui.Command;
 import javax.microedition.lcdui.Displayable;
@@ -16,6 +19,9 @@ import javax.microedition.lcdui.StringItem;
 import javax.microedition.lcdui.Image;
 import javax.microedition.lcdui.ImageItem;
 import javax.microedition.lcdui.ChoiceGroup;
+import javax.microedition.media.Manager;
+import javax.microedition.media.Player;
+import javax.microedition.media.control.*;
 
 public class MidletJuaneco extends MIDlet implements CommandListener {
 
@@ -46,20 +52,28 @@ public class MidletJuaneco extends MIDlet implements CommandListener {
     private ChoiceGroup lista;
     private ImageItem imagenMenu;
     private ImageItem imagenPerdi;
+    private Player p;
+    private Player p1;
+    private Player p2;
     private ImageItem imagenHistoria;
     private ImageItem winner;
     private ImageItem selvaysierra;
     private ImageItem sierraycosta;
     private ImageItem bossito;
+    private Command wap,  nota,  secuencia;
+    private int bandera;
 
     public MidletJuaneco() {
         //\ gamecanvas = new Canvas();
+
+        
     }
 
     public void startApp() {
 
 
         cambiaPantalla(null, getMenu());
+
 
     //Display display = Display.getDisplay(this);
     //gamecanvas.start();
@@ -84,26 +98,33 @@ public class MidletJuaneco extends MIDlet implements CommandListener {
         } else if (displayable == perdiste && command == okCommand) {
             cambiaPantalla(null, getMenu());
         } else if (displayable == historia && command == okCommand) {
+            bandera = 2;
             gamecanvas = new Canvas(this);
             gamecanvas.getEscenario().setNivel(1);
             gamecanvas.start();
+            playWap();
+
 
             cambiaPantalla(null, gamecanvas);
         } else if (displayable == selvaSierra && command == okCommand) {
+            bandera = 3;
             gamecanvas = new Canvas(this);
             gamecanvas.getEscenario().setNivel(2);
             gamecanvas.start();
+            playWap();
 
             cambiaPantalla(null, gamecanvas);
         } else if (displayable == sierraCosta && command == okCommand) {
+            bandera = 4;
             gamecanvas = new Canvas(this);
             gamecanvas.getEscenario().setNivel(3);
             gamecanvas.start();
+            playWap();
 
             cambiaPantalla(null, gamecanvas);
         }
 
-
+        bandera = 0;
     }
 
     public void cambiaPantalla(Alert alert, Displayable objetoMostrar) {
@@ -127,10 +148,11 @@ public class MidletJuaneco extends MIDlet implements CommandListener {
 
             if (opcionseleccionada.equals("Nuevo Juego")) {
 
+                bandera = 1;
                 gamecanvas = new Canvas(this);
                 gamecanvas.getEscenario().setNivel(0);
                 gamecanvas.start();
-
+                playWap();
                 cambiaPantalla(null, gamecanvas);
 
             } else if (opcionseleccionada.equals("Historia")) {
@@ -145,7 +167,68 @@ public class MidletJuaneco extends MIDlet implements CommandListener {
 
                 cambiaPantalla(null, getAyuda());
             }
+
+            bandera = 0;
         }
+
+    }
+
+    public void playWap() {
+
+        if (bandera == 1) {
+            try {
+                InputStream in = getClass().getResourceAsStream("/cartoon1.wav");
+                Player p = Manager.createPlayer(in, "audio/x-wav");
+                p.start();
+            } catch (Exception e) {
+                Alert alr = new Alert("Error", "No se pudo reproducir el sonido.", null, AlertType.ERROR);
+                alr.setTimeout(Alert.FOREVER);
+
+            }
+
+
+
+        }
+
+        else if (bandera == 2) {
+            try {
+                InputStream in = getClass().getResourceAsStream("/mujerhi.wav");
+                Player p = Manager.createPlayer(in, "audio/x-wav");
+                p.start();
+            } catch (Exception e) {
+                Alert alr = new Alert("Error", "No se pudo reproducir el sonido.", null, AlertType.ERROR);
+                alr.setTimeout(Alert.FOREVER);
+
+            }
+
+        }
+
+        else  if (bandera == 3) {
+            try {
+                InputStream in = getClass().getResourceAsStream("/condor.wav");
+                Player p = Manager.createPlayer(in, "audio/x-wav");
+                p.start();
+            } catch (Exception e) {
+                Alert alr = new Alert("Error", "No se pudo reproducir el sonido.", null, AlertType.ERROR);
+                alr.setTimeout(Alert.FOREVER);
+
+            }
+
+        }
+
+        else  if (bandera == 4) {
+            try {
+                InputStream in = getClass().getResourceAsStream("/cartoon1.wav");
+                Player p = Manager.createPlayer(in, "audio/x-wav");
+                p.start();
+            } catch (Exception e) {
+                Alert alr = new Alert("Error", "No se pudo reproducir el sonido.", null, AlertType.ERROR);
+                alr.setTimeout(Alert.FOREVER);
+
+            }
+
+        }
+
 
     }
 
@@ -173,7 +256,7 @@ public class MidletJuaneco extends MIDlet implements CommandListener {
         return menu;
     }
 
-    public Form getPerdiste() {
+    public Form getPerdiste() throws MediaException {
         if (perdiste == null) {
             perdiste = new Form("GAME OVER!");
             try {
@@ -183,6 +266,7 @@ public class MidletJuaneco extends MIDlet implements CommandListener {
             perdiste.append(imagenPerdi);
             perdiste.addCommand(getOkCommand());
             perdiste.setCommandListener(this);
+
 
         }
 

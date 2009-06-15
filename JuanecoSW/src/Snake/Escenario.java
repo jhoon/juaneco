@@ -1,3 +1,4 @@
+
 /*
  * To change this template, choose Tools | Templates
  * and open the template in the editor.
@@ -55,18 +56,17 @@ public class Escenario {
         bono.cargabono(nivel);
         if (nivel == 0) {
             this.setFondo(SnakeUtil.createImage("/fondoGame.jpg"));
-
         } else if (nivel == 1) {
             this.setFondo(SnakeUtil.createImage("/f1.jpg"));
             this.obsta1.inicializar(1);
 
             posesc = selva();
         } else if (nivel == 2) {
-            this.setFondo(SnakeUtil.createImage("/f2.jpg"));
+            this.setFondo(SnakeUtil.createImage("/sierra.jpg"));
             this.obsta1.inicializar(2);
             posesc = sierra();
         } else if (nivel == 3) {
-            this.setFondo(SnakeUtil.createImage("/f3.jpg"));
+            this.setFondo(SnakeUtil.createImage("/selva.jpg"));
             this.obsta1.inicializar(3);
             posesc = costa();
         } else if (nivel == 4) {
@@ -80,6 +80,7 @@ public class Escenario {
         bono.setPuntaje(50);
         bono.setTiempo(50);
         juaneco.setVelocidad(100);
+
 
     }
 
@@ -107,19 +108,19 @@ public class Escenario {
 
     public int[][] sierra() {
         int a[][] = {{0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0},
-            {0, 0, 14, 14, 14, 14, 14, 0, 0, 0, 0, 0, 14, 14, 0},
-            {0, 0, 14, 14, 14, 14, 0, 0, 0, 0, 0, 14, 14, 14, 0},
-            {0, 0, 14, 14, 0, 0, 0, 0, 0, 0, 14, 14, 14, 14, 0},
-            {0, 0, 14, 0, 0, 0, 14, 14, 0, 0, 0, 0, 14, 14, 0},
-            {0, 0, 0, 0, 0, 14, 14, 0, 0, 0, 0, 0, 14, 14, 0},
+            {0, 14, 14, 14, 14, 14, 14, 0, 0, 0, 0, 0, 0, 14, 0},
+            {0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 14, 0},
+            {0, 0, 0, 0, 14, 0, 0, 0, 0, 14, 0, 0, 0, 14, 0},
+            {0, 0, 0, 0, 14, 14, 14, 14, 14, 14, 0, 0, 0, 14, 0},
+            {0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 14, 0},
             {0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0},
+            {0, 14, 14, 14, 14, 14, 14, 14, 14, 0, 0, 0, 0, 0, 0},
             {0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0},
-            {0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0},
-            {0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0},
-            {0, 14, 14, 14, 0, 0, 0, 0, 0, 0, 0, 14, 14, 14, 0},
-            {0, 14, 14, 0, 0, 0, 0, 0, 0, 14, 14, 14, 14, 14, 0},
-            {0, 14, 14, 0, 0, 0, 0, 0, 14, 14, 14, 14, 0, 0, 0},
-            {0, 14, 0, 0, 0, 0, 0, 14, 14, 14, 14, 0, 0, 0, 0},
+            {0, 0, 14, 14, 14, 14, 14, 14, 14, 14, 0, 0, 0, 0, 0},
+            {0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 14, 0, 0},
+            {0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 14, 0, 0},
+            {0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 14, 0, 0},
+            {0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 14, 0, 14, 0, 0},
             {0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0}};
 
         return a;
@@ -308,6 +309,7 @@ public class Escenario {
 
     public void movcabeza(int mov, boolean cabeza, int movant, Random rnd) {
         bono.bontim(posesc, lado);
+
         cabeza = false;
         for (int i = 0; i < getLado() / 16; i++) {
             for (int j = 0; j < getLado() / 16; j++) {
