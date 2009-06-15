@@ -16,6 +16,7 @@ import java.util.Random;
  */
 public class Escenario {
 
+    private int balas = 0;
     Juaneco juaneco = new Juaneco();
     Obstaculos obsta1 = new Obstaculos();
     Bonos bono = new Bonos();
@@ -61,15 +62,17 @@ public class Escenario {
         } else if (nivel == 1) {
             this.setFondo(SnakeUtil.createImage("/f1.jpg"));
             this.obsta1.inicializar(1);
-
+            this.setContador(100);
             posesc = selva();
         } else if (nivel == 2) {
             this.setFondo(SnakeUtil.createImage("/f2.jpg"));
             this.obsta1.inicializar(2);
+            this.setContador(100);
             posesc = sierra();
         } else if (nivel == 3) {
             this.setFondo(SnakeUtil.createImage("/f3.jpg"));
             this.obsta1.inicializar(3);
+            this.setContador(7);
             posesc = costa();
         } else if (nivel == 4) {
             this.setFondo(SnakeUtil.createImage("/selva.jpg"));
@@ -96,7 +99,7 @@ public class Escenario {
         int a[][] = {{0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0},
             {0, 14, 14, 14, 14, 14, 0, 0, 0, 0, 0, 0, 0, 0, 0},
             {0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 14, 14, 14, 14, 0},
-            {0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0},
+            {0, 0, 0, 14, 0, 14, 0, 14, 0, 14, 0, 0, 0, 0, 0},
             {0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 14, 0},
             {0, 14, 0, 14, 0, 0, 0, 0, 0, 0, 0, 14, 0, 14, 0},
             {0, 14, 0, 0, 0, 0, 0, 0, 0, 0, 0, 14, 0, 14, 0},
@@ -105,7 +108,7 @@ public class Escenario {
             {0, 14, 0, 0, 0, 0, 0, 0, 0, 0, 0, 14, 0, 14, 0},
             {0, 14, 0, 14, 0, 0, 0, 0, 0, 0, 0, 14, 0, 14, 0},
             {0, 14, 0, 0, 0, 0, 0, 14, 0, 14, 0, 14, 0, 0, 0},
-            {0, 14, 0, 0, 0, 0, 0, 14, 0, 14, 0, 0, 0, 0, 0},
+            {0, 14, 0, 14, 0, 0, 0, 14, 0, 14, 0, 0, 0, 0, 0},
             {0, 14, 0, 0, 0, 0, 0, 14, 0, 0, 0, 0, 0, 0, 0},
             {0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0}};
 
@@ -367,7 +370,7 @@ public class Escenario {
                                     posesc[i - 1][j] = 1;
                                     posesc[i][j] = 0;
                                     agregaTronco(i, j, movant);
-
+                                    this.juaneco.setVidas(this.juaneco.getVidas() + 1);
                                     if (nivel != 4) {
                                         setPuntaje(animal.getPuntaje() + getPuntaje());
                                         animal.apareceanimal(rnd, posesc, lado, 12);
@@ -418,6 +421,7 @@ public class Escenario {
 
                                     posesc[i + 1][j] = 1;
                                     posesc[i][j] = 0;
+                                    this.juaneco.setVidas(this.juaneco.getVidas() + 1);
                                     if (nivel != 4) {
                                         setPuntaje(animal.getPuntaje() + getPuntaje());
                                         animal.apareceanimal(rnd, posesc, lado, 12);
@@ -463,7 +467,7 @@ public class Escenario {
                                     posesc[i][j - 1] = 1;
                                     posesc[i][j] = 0;
                                     agregaTronco(i, j, movant);
-
+                                    this.juaneco.setVidas(this.juaneco.getVidas() + 1);
                                     if (nivel != 4) {
                                         setPuntaje(animal.getPuntaje() + getPuntaje());
                                         animal.apareceanimal(rnd, posesc, lado, 12);
@@ -509,7 +513,7 @@ public class Escenario {
                                     posesc[i][j + 1] = 1;
                                     posesc[i][j] = 0;
                                     agregaTronco(i, j, mov);
-
+                                    this.juaneco.setVidas(this.juaneco.getVidas() + 1);
                                     if (nivel != 4) {
                                         setPuntaje(animal.getPuntaje() + getPuntaje());
                                         animal.apareceanimal(rnd, posesc, lado, 12);
@@ -567,13 +571,27 @@ public class Escenario {
     }
 
     public void aleatorionivel() {
+        Random a = new Random();
+        int b;
+        int c;
+
+
         if (nivel == 1) {
-            if (this.getPuntaje() >= 250) {
+            if (this.getPuntaje() >= 100) {
 
                 for (int i = 0; i < getLado() / 16; i++) {
-                    posesc[6][i] = 14;
-                    posesc[7][i] = 14;
-                    posesc[8][i] = 14;
+                    for (int j = 6; j < 9; j++) {
+                        if ((posesc[j][i] != 1) && (posesc[j][i] != 12)) {
+                            posesc[j][i] = 14;
+
+                        } else if ((posesc[j][i] == 1)) {
+                            this.setFin(true);
+                        } else if ((posesc[j][i] == 12)) {
+                            posesc[j][i] = 14;
+                            this.animal.apareceanimal(rnd, posesc, lado, 12);
+                        }
+
+                    }
                 }
                 setContador(getContador() - 1);
                 if (getContador() == 0) {
@@ -588,7 +606,63 @@ public class Escenario {
                 }
             }
         } else if (nivel == 2) {
+            if (this.getPuntaje() >= 100) {
+                for (int i = 6; i < 10; i++) {
+                    for (int j = 6; j < 10; j++) {
+                        if ((posesc[j][i] != 1) && (posesc[j][i] != 12)) {
+                            posesc[j][i] = 15;
+
+                        } else if ((posesc[j][i] == 1)) {
+                            this.setFin(true);
+                        } else if ((posesc[j][i] == 12)) {
+                            posesc[j][i] = 15;
+                            this.animal.apareceanimal(rnd, posesc, lado, 12);
+                        }
+
+                    }
+                }
+            }
+            setContador(getContador() - 1);
+            if (getContador() == 0) {
+                for (int i = 6; i < 10; i++) {
+                    for (int j = 6; j < 10; j++) {
+                        posesc[j][i] = 0;
+
+                    }
+                }
+
+                conta = false;
+            }
+
+
+
         } else if (nivel == 3) {
+            if (this.getPuntaje() >= 100) {
+                b = 1 + a.nextInt(lado / 16 - 2);
+                c = 1 + a.nextInt(lado / 16 - 2);
+                if (posesc[b][c] == 0) {
+                    posesc[b][c] = 15;
+                }
+            }
+            setContador(getContador() - 1);
+            if (getContador() == 0) {
+                for (int i = 0; i < getLado() / 16; i++) {
+                    for (int j = 0; j < getLado() / 16; j++) {
+                        if (posesc[i][j] == 15) {
+                            posesc[i][j] = 0;
+                        }
+
+                    }
+                }
+
+                conta = false;
+            }
+
+
+
+
+
+
         }
 
     }
@@ -684,28 +758,37 @@ public class Escenario {
         Random g = new Random();
         int a, d;
         d = g.nextInt(14);
-
-        for (int j = 0; j < getLado() / 16; j++) {
-            if (posesc[14][j] == 18) {
-                while (true) {
-                    if (posesc[14][j] != 1) {
-                        if ((j + d) < getLado() / 16) {
-                            posesc[14][j] = 0;
-                            posesc[14][j + d] = 18;
-                        } else if ((j - d) > 0) {
-                            posesc[14][j] = 0;
-                            posesc[14][j - d] = 18;
-                        } else {
-                            posesc[14][j] = 0;
-                            posesc[14][d] = 18;
+        if (balas <= 100) {
+            for (int j = 0; j < getLado() / 16; j++) {
+                if (posesc[14][j] == 18) {
+                    while (true) {
+                        if (posesc[14][j] != 1) {
+                            if ((j + d) < getLado() / 16) {
+                                posesc[14][j] = 0;
+                                posesc[14][j + d] = 18;
+                            } else if ((j - d) > 0) {
+                                posesc[14][j] = 0;
+                                posesc[14][j - d] = 18;
+                            } else {
+                                posesc[14][j] = 0;
+                                posesc[14][d] = 18;
+                            }
+                            break;
                         }
-                        break;
                     }
+
+
                 }
 
+            }
+        } else {
+            for (int j = 0; j < getLado() / 16; j++) {
+                if (posesc[14][j] == 18) {
+                    posesc[14][j] = 0;
+                    posesc[d][d] = 18;
+                }
 
             }
-
         }
     }
 
@@ -729,7 +812,7 @@ public class Escenario {
         if (a == d) {
             posesc[13][d] = 17;
         }
-
+        balas++;
     }
 
     public void muevebala() {
