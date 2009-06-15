@@ -5,7 +5,6 @@
 package Snake;
 
 import Snake.util.SnakeUtil;
-import java.io.IOException;
 import java.util.Vector;
 import javax.microedition.lcdui.Image;
 
@@ -31,11 +30,14 @@ public class Juaneco extends Personajes {
     private Image codo2;
     private Image codo3;
     private Image codo4;
+    private Image barril;
     private int Velocidad;
-    private int Incremento;
+    private int balas;
+    private boolean disparo;
 
     public Juaneco() {
         super();
+        this.setDisparo(false);
     }
 
     public void cargaim() {
@@ -53,6 +55,7 @@ public class Juaneco extends Personajes {
         this.setColaAba(SnakeUtil.createImage("/col2.gif"));
         this.setColaIzq(SnakeUtil.createImage("/col3.gif"));
         this.setColaArr(SnakeUtil.createImage("/col4.gif"));
+        this.setBarril(SnakeUtil.createImage("/disparo.gif"));
         this.setCabeza(this.getCabezaArr());
 
     }
@@ -65,15 +68,7 @@ public class Juaneco extends Personajes {
         this.Velocidad = Velocidad;
     }
 
-    public int getIncremento() {
-        return Incremento;
-    }
-
-    public void setIncremento(int Incremento) {
-        this.Incremento = Incremento;
-    }
-
-    public Image getCabeza() {
+      public Image getCabeza() {
         return cabeza;
     }
 
@@ -199,5 +194,47 @@ public class Juaneco extends Personajes {
 
     public void setTronquitoXY(Vector tronquitoXY) {
         this.tronquitoXY = tronquitoXY;
+    }
+
+    /**
+     * @return the balas
+     */
+    public int getBalas() {
+        return balas;
+    }
+
+    /**
+     * @param balas the balas to set
+     */
+    public void setBalas(int balas) {
+        this.balas = balas;
+    }
+
+    /**
+     * @return the disparo
+     */
+    public boolean isDisparo() {
+        return disparo;
+    }
+
+    /**
+     * @param disparo the disparo to set
+     */
+    public void setDisparo(boolean disparo) {
+        this.disparo = disparo;
+    }
+
+    /**
+     * @return the barril
+     */
+    public Image getBarril() {
+        return barril;
+    }
+
+    /**
+     * @param barril the barril to set
+     */
+    public void setBarril(Image barril) {
+        this.barril = barril;
     }
 }
