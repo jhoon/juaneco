@@ -101,39 +101,29 @@ public class MidletJuaneco extends MIDlet implements CommandListener {
             bandera = 2;
             gamecanvas = new Canvas(this);
             gamecanvas.getEscenario().setNivel(1);
-            gamecanvas.getEscenario().setBorde(1);
             gamecanvas.start();
-            playWap();
-
-
+            playWap(bandera);
             cambiaPantalla(null, gamecanvas);
+
         } else if (displayable == selvaSierra && command == okCommand) {
             bandera = 3;
             gamecanvas = new Canvas(this);
             gamecanvas.getEscenario().setNivel(2);
-            gamecanvas.getEscenario().setBorde(1);
             gamecanvas.start();
-            playWap();
+            playWap(bandera);
 
             cambiaPantalla(null, gamecanvas);
         } else if (displayable == sierraCosta && command == okCommand) {
             bandera = 4;
             gamecanvas = new Canvas(this);
             gamecanvas.getEscenario().setNivel(3);
-            gamecanvas.getEscenario().setBorde(1);
             gamecanvas.start();
-            playWap();
+            playWap(bandera);
 
-            cambiaPantalla(null, gamecanvas);
-        }  else if (displayable == boss && command == okCommand) {
-            gamecanvas = new Canvas(this);
-            gamecanvas.getEscenario().setNivel(4);
-            gamecanvas.getEscenario().setBorde(1);
-            gamecanvas.start();
             cambiaPantalla(null, gamecanvas);
         }
 
-        bandera = 0;
+        //bandera = 0;
     }
 
     public void cambiaPantalla(Alert alert, Displayable objetoMostrar) {
@@ -160,9 +150,8 @@ public class MidletJuaneco extends MIDlet implements CommandListener {
                 bandera = 1;
                 gamecanvas = new Canvas(this);
                 gamecanvas.getEscenario().setNivel(0);
-                gamecanvas.getEscenario().setBorde(0);
                 gamecanvas.start();
-                playWap();
+                playWap(bandera);
                 cambiaPantalla(null, gamecanvas);
 
             } else if (opcionseleccionada.equals("Historia")) {
@@ -178,14 +167,16 @@ public class MidletJuaneco extends MIDlet implements CommandListener {
                 cambiaPantalla(null, getAyuda());
             }
 
-            bandera = 0;
+           // bandera = 0;
         }
 
     }
 
-    public void playWap() {
+    public void playWap(int bandera ) {
 
         if (bandera == 1) {
+            
+
             try {
                 InputStream in = getClass().getResourceAsStream("/cartoon1.wav");
                 Player p = Manager.createPlayer(in, "audio/x-wav");
@@ -193,11 +184,8 @@ public class MidletJuaneco extends MIDlet implements CommandListener {
             } catch (Exception e) {
                 Alert alr = new Alert("Error", "No se pudo reproducir el sonido.", null, AlertType.ERROR);
                 alr.setTimeout(Alert.FOREVER);
-
-            }
-
-
-
+                }
+            
         }
 
         else if (bandera == 2) {
@@ -205,6 +193,7 @@ public class MidletJuaneco extends MIDlet implements CommandListener {
                 InputStream in = getClass().getResourceAsStream("/mujerhi.wav");
                 Player p = Manager.createPlayer(in, "audio/x-wav");
                 p.start();
+                
             } catch (Exception e) {
                 Alert alr = new Alert("Error", "No se pudo reproducir el sonido.", null, AlertType.ERROR);
                 alr.setTimeout(Alert.FOREVER);
@@ -215,7 +204,7 @@ public class MidletJuaneco extends MIDlet implements CommandListener {
 
         else  if (bandera == 3) {
             try {
-                InputStream in = getClass().getResourceAsStream("/condor.wav");
+                InputStream in = getClass().getResourceAsStream("/condorito.wav");
                 Player p = Manager.createPlayer(in, "audio/x-wav");
                 p.start();
             } catch (Exception e) {
@@ -239,6 +228,16 @@ public class MidletJuaneco extends MIDlet implements CommandListener {
 
         }
 
+        else if (bandera == 5){
+            try {
+                InputStream in = getClass().getResourceAsStream("/mujerhi.wav");
+                Player p = Manager.createPlayer(in, "audio/x-wav");
+                p.stop();
+            } catch (Exception e) {
+                Alert alr = new Alert("Error", "No se pudo reproducir el sonido.", null, AlertType.ERROR);
+                alr.setTimeout(Alert.FOREVER);
+            }
+        }
 
     }
 
@@ -274,10 +273,13 @@ public class MidletJuaneco extends MIDlet implements CommandListener {
             } catch (Exception e) {
             }
             perdiste.append(imagenPerdi);
+            bandera=5;
+           playWap(bandera);
+            // p.stop();
             perdiste.addCommand(getOkCommand());
             perdiste.setCommandListener(this);
 
-
+           
         }
 
         return perdiste;
@@ -285,9 +287,9 @@ public class MidletJuaneco extends MIDlet implements CommandListener {
 
     public Form getGanaste() {
         if (ganaste == null) {
-            ganaste = new Form("Felicitaciones");
+            ganaste = new Form("GAME OVER!");
             try {
-                winner = new ImageItem("Ganaste", Image.createImage("/perdiste.jpg"), ImageItem.LAYOUT_BOTTOM, "PERDISTE");
+                winner = new ImageItem("Perdiste", Image.createImage("/perdiste.jpg"), ImageItem.LAYOUT_BOTTOM, "PERDISTE");
             } catch (Exception e) {
             }
             ganaste.append(winner);
@@ -303,7 +305,7 @@ public class MidletJuaneco extends MIDlet implements CommandListener {
         if (selvaSierra == null) {
             selvaSierra = new Form("Camino Selva-Sierra");
             try {
-                selvaysierra = new ImageItem("Travesia", Image.createImage("/mapa2.gif"), ImageItem.LAYOUT_BOTTOM, "PERDISTE");
+                selvaysierra = new ImageItem("Perdiste", Image.createImage("/perdiste.jpg"), ImageItem.LAYOUT_BOTTOM, "PERDISTE");
             } catch (Exception e) {
             }
             selvaSierra.append(selvaysierra);
@@ -331,15 +333,11 @@ public class MidletJuaneco extends MIDlet implements CommandListener {
         return boss;
     }
 
-
-
-
-
     public Form getSierraCosta() {
         if (sierraCosta == null) {
             sierraCosta = new Form("Camino Sierra Costa");
             try {
-                sierraycosta = new ImageItem("", Image.createImage("/mapa3.gif"), ImageItem.LAYOUT_BOTTOM, "PERDISTE");
+                sierraycosta = new ImageItem("Perdiste", Image.createImage("/perdiste.jpg"), ImageItem.LAYOUT_BOTTOM, "PERDISTE");
             } catch (Exception e) {
             }
             sierraCosta.append(sierraycosta);
@@ -396,7 +394,6 @@ public class MidletJuaneco extends MIDlet implements CommandListener {
         ayuda.append(stayuda);
         ayuda.append(imagenAyuda);
         ayuda.addCommand(getBackCommand());
-        ayuda.addCommand(getOkCommand());
         ayuda.setCommandListener(this);
 
         return ayuda;
