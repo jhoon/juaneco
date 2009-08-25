@@ -54,15 +54,7 @@ public class Canvas extends GameCanvas implements Runnable {
 
                 checkUserInput();
                 updateGameScreen(getGraphics());
-                if (getEscenario().isFin() == true) {
-                    getMidletPadre().cambiaPantalla(null, this.getMidletPadre().getPerdiste());
-                    break;
-                // La funcion anterior se encarga de volver al menu, en el cambio de pantalla debe ir a la pantalla Perdiste y de ahi
-                //a la pantalla Menu
-                } else if ((this.getEscenario().getPuntaje() >= 200) && getEscenario().getNivel() != 0) {
-                    this.cambioescenario();
-                    break;
-                }
+
 
                 Thread.sleep(getEscenario().juaneco.getVelocidad());
             }
@@ -78,32 +70,37 @@ public class Canvas extends GameCanvas implements Runnable {
     }
 
     private void updateGameScreen(Graphics g) {
-        if (getEscenario().isConta()) {
-            getEscenario().aleatorionivel();
-        }
-        getEscenario().movcabeza(mov, cabeza, movant, rnd);
+        if (getEscenario().getPantalla() == 1) {
+        } else if (getEscenario().getPantalla() == 2) {
+        } else if (getEscenario().getPantalla() == 3) {
+        } else if (getEscenario().getPantalla() == 4) {
+            if (getEscenario().isConta()) {
+                getEscenario().aleatorionivel();
+            }
+            getEscenario().movcabeza(mov, cabeza, movant, rnd);
 
-        if (this.getEscenario().isFin() == false) {
-            getEscenario().movotronco(getMov());
-        }
-        if (this.escenario.getNivel() == 4) {
-            this.escenario.muevecaza();
-        }
+            if (this.getEscenario().isFin() == false) {
+                getEscenario().movotronco(getMov());
+            }
+            if (this.escenario.getNivel() == 4) {
+                this.escenario.muevecaza();
+            }
 
-        this.getEscenario().dibuja(g);
-        g.setColor(120, 120, 120);
-        if (this.escenario.getNivel() != 4) {
-            g.drawString("Puntuacion:", 7 * getLado() / 9 + 9, 14 * getHeight() / 16 + 15, Graphics.HCENTER | Graphics.BOTTOM);
-            g.drawString("" + getEscenario().getPuntaje(), 7 * getLado() / 9 + 9, 15 * getHeight() / 16 + 10, Graphics.HCENTER | Graphics.BOTTOM);
-        } else {
-            g.drawString("Vidas de Juaneco:", 7 * getLado() / 9 + 9, 14 * getHeight() / 16 + 15, Graphics.HCENTER | Graphics.BOTTOM);
-            g.drawString("" + getEscenario().juaneco.getVidas(), 7 * getLado() / 9 + 9, 15 * getHeight() / 16 + 10, Graphics.HCENTER | Graphics.BOTTOM);
-            g.drawString("Vidas del Cazador:", 3 * getLado() / 9 + 9, 14 * getHeight() / 16 + 15, Graphics.HCENTER | Graphics.BOTTOM);
-            g.drawString("" + getEscenario().caza.getVidas(), 3 * getLado() / 9 + 9, 15 * getHeight() / 16 + 10, Graphics.HCENTER | Graphics.BOTTOM);
+            this.getEscenario().dibuja(g);
+            g.setColor(120, 120, 120);
+            if (this.escenario.getNivel() != 4) {
+                g.drawString("Puntuacion:", 7 * getLado() / 9 + 9, 14 * getHeight() / 16 + 15, Graphics.HCENTER | Graphics.BOTTOM);
+                g.drawString("" + getEscenario().getPuntaje(), 7 * getLado() / 9 + 9, 15 * getHeight() / 16 + 10, Graphics.HCENTER | Graphics.BOTTOM);
+            } else {
+                g.drawString("Vidas de Juaneco:", 7 * getLado() / 9 + 9, 14 * getHeight() / 16 + 15, Graphics.HCENTER | Graphics.BOTTOM);
+                g.drawString("" + getEscenario().juaneco.getVidas(), 7 * getLado() / 9 + 9, 15 * getHeight() / 16 + 10, Graphics.HCENTER | Graphics.BOTTOM);
+                g.drawString("Vidas del Cazador:", 3 * getLado() / 9 + 9, 14 * getHeight() / 16 + 15, Graphics.HCENTER | Graphics.BOTTOM);
+                g.drawString("" + getEscenario().caza.getVidas(), 3 * getLado() / 9 + 9, 15 * getHeight() / 16 + 10, Graphics.HCENTER | Graphics.BOTTOM);
 
+            }
+            flushGraphics();
+        } else if (getEscenario().getPantalla() == 5) {
         }
-        flushGraphics();
-
     }
 
     private void cambio_coor(int estado_boton) {
@@ -133,17 +130,6 @@ public class Canvas extends GameCanvas implements Runnable {
     }
 
     public void cambioescenario() {
-
-        if (getEscenario().getNivel() == 1) {
-            getMidletPadre().cambiaPantalla(null, this.getMidletPadre().getSelvaSierra());
-        } else if (getEscenario().getNivel() == 2) {
-            getMidletPadre().cambiaPantalla(null, this.getMidletPadre().getSierraCosta());
-        } else if (getEscenario().getNivel() == 3) {
-            getMidletPadre().cambiaPantalla(null, this.getMidletPadre().getBoss());
-        } else if (getEscenario().getNivel() == 4) {
-            getMidletPadre().cambiaPantalla(null, this.midletPadre.getGanaste());
-        }
-
     }
 
     /**
