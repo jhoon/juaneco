@@ -29,5 +29,6 @@ public class MidletJuaneco extends MIDlet {
     }
 
     public void destroyApp(boolean unconditional) {
+    notifyDestroyed();
     }
 }
