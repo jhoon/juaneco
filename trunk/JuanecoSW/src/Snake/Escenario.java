@@ -34,14 +34,14 @@ public class Escenario {
     Random rnd = new Random();
 //private Image fondoPant;
     private Image nuevoJuego;
-    private Image ayuda;
-    private Image opciones;
+ 
     private int lado = 240;
     private int[][] posesc = new int[lado / 16][lado / 16]; // posicion escenario
     private int[] posx = new int[lado / 16];
     private int[] posy = new int[lado / 16];
     private int contador = 100;
     private boolean conta = true;
+    private Image opc;
 
     public Escenario(int getWidth) {
         super();
@@ -49,6 +49,8 @@ public class Escenario {
     }
 
     public void inicializa() {
+        this.setPantalla(1);
+        this.setSeleccion(4);
         for (int i = 0; i < lado / 16; i++) {
             for (int j = 0; j < lado / 16; j++) {
                 posx[i] = (8 + 16 * i);
@@ -56,9 +58,14 @@ public class Escenario {
                 posesc[i][j] = 0;
             }
         }
-        juaneco.cargaim();
+       this.juaneco_in();
+
+    }
+    public void juaneco_in(){
+     juaneco.cargaim();
         animal.cargaanimal(nivel);
         bono.cargabono(nivel);
+
         if (nivel == 0) {
             this.setFondo(SnakeUtil.createImage("/fondoGame.jpg"));
         } else if (nivel == 1) {
@@ -93,7 +100,6 @@ public class Escenario {
             bono.setTiempo(50);
         }
         juaneco.setVelocidad(100);
-
 
     }
 
@@ -881,21 +887,7 @@ public class Escenario {
         this.nuevoJuego = nuevoJuego;
     }
 
-    public Image getAyuda() {
-        return ayuda;
-    }
-
-    public void setAyuda(Image ayuda) {
-        this.ayuda = ayuda;
-    }
-
-    public Image getOpciones() {
-        return opciones;
-    }
-
-    public void setOpciones(Image opciones) {
-        this.opciones = opciones;
-    }
+  
 
     public int getLado() {
         return lado;
@@ -991,5 +983,19 @@ public class Escenario {
 
     public void setSeleccion(int seleccion) {
         this.seleccion = seleccion;
+    }
+
+    /**
+     * @return the opc
+     */
+    public Image getOpc() {
+        return opc;
+    }
+
+    /**
+     * @param opc the opc to set
+     */
+    public void setOpc(Image opc) {
+        this.opc = opc;
     }
 }

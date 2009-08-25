@@ -1,15 +1,10 @@
 package Snake;
 
+import Snake.util.SnakeUtil;
 import javax.microedition.lcdui.Graphics;
 import javax.microedition.lcdui.game.GameCanvas;
 import java.util.Random;
 
-/**a
- *
-
- *
- * @author Manuel Sotelo A
- */
 public class Canvas extends GameCanvas implements Runnable {
 //clase Random para la aparicion de alimento
 
@@ -70,10 +65,74 @@ public class Canvas extends GameCanvas implements Runnable {
     }
 
     private void updateGameScreen(Graphics g) {
+        int state = getKeyStates();
         if (getEscenario().getPantalla() == 1) {
+            getEscenario().setFondo(SnakeUtil.createImage("/pantalla1.jpg"));
+            getEscenario().setOpc(SnakeUtil.createImage("/cazador.gif"));
+            g.drawImage(getEscenario().getFondo(), lado / 2, 290, Graphics.HCENTER | Graphics.BOTTOM);
+            if ((state & DOWN_PRESSED) != 0) {
+                if (getEscenario().getSeleccion() <= 5) {
+                    getEscenario().setSeleccion(getEscenario().getSeleccion() + 1);
+                } else {
+                    getEscenario().setSeleccion(1);
+                }
+            } else if ((state & UP_PRESSED) != 0) {
+                if (getEscenario().getSeleccion() >= 1) {
+                    getEscenario().setSeleccion(getEscenario().getSeleccion() - 1);
+                } else {
+                    getEscenario().setSeleccion(5);
+                }
+            }
+
+            switch (getEscenario().getSeleccion()) {
+                case 1: {
+                    g.drawImage(getEscenario().getOpc(), 20, 252, Graphics.VCENTER | Graphics.RIGHT);
+                    if ((state & FIRE_PRESSED) != 0) {
+                        getEscenario().setPantalla(1);
+                    }
+                    break;
+                }
+                case 2: {
+                    g.drawImage(getEscenario().getOpc(), 20, 274, Graphics.VCENTER | Graphics.RIGHT);
+                    if ((state & FIRE_PRESSED) != 0) {
+                        getEscenario().setPantalla(2);
+                    }
+                    break;
+                }
+                case 3: {
+                    g.drawImage(getEscenario().getOpc(), 124, 237, Graphics.VCENTER | Graphics.RIGHT);
+                    if ((state & FIRE_PRESSED) != 0) {
+                        getEscenario().setPantalla(3);
+                    }
+                    break;
+                }
+                case 4: {
+                    g.drawImage(getEscenario().getOpc(), 20, 200, Graphics.VCENTER | Graphics.RIGHT);
+                    if ((state & FIRE_PRESSED) != 0) {
+                        getEscenario().setPantalla(4);
+                    }
+                    break;
+                }
+                case 5: {
+                    g.drawImage(getEscenario().getOpc(), 20, 227, Graphics.VCENTER | Graphics.RIGHT);
+                    if ((state & FIRE_PRESSED) != 0) {
+                        getEscenario().setPantalla(5);
+                    }
+                    break;
+                }
+                default:
+                    break;
+
+            }
+
+
+
+            flushGraphics();
+
         } else if (getEscenario().getPantalla() == 2) {
         } else if (getEscenario().getPantalla() == 3) {
         } else if (getEscenario().getPantalla() == 4) {
+            
             if (getEscenario().isConta()) {
                 getEscenario().aleatorionivel();
             }
