@@ -9,10 +9,10 @@ public class MidletJuaneco extends MIDlet {
 
     private Canvas gamecanvas;
 
-    private int bandera;
+   
 
     public MidletJuaneco() {
-         gamecanvas = new Canvas();
+         gamecanvas = new Canvas(this);
 
 
     }
