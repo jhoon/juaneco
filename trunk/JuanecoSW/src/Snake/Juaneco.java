@@ -14,7 +14,7 @@ import javax.microedition.lcdui.Image;
  */
 public class Juaneco extends Personajes {
 
-    private Vector tronquitoXY = new Vector(0, 1);
+    private Vector tronquitoXY;
     private Image cabeza;
     private Image cabezaIzq;
     private Image cabezaDer;
