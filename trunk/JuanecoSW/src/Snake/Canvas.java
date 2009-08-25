@@ -144,6 +144,7 @@ public class Canvas extends GameCanvas implements Runnable {
                         getEscenario().inicializa();
                         getEscenario().setFin(false);
                         getEscenario().setNivel(0);
+                        getEscenario().setPuntaje(0);
                     }
                     break;
                 }
@@ -154,6 +155,7 @@ public class Canvas extends GameCanvas implements Runnable {
                         getEscenario().setNivel(1);
                         getEscenario().setPantalla(4);
                         getEscenario().inicializa();
+                        getEscenario().setPuntaje(0);
                     }
                     break;
                 }
@@ -182,6 +184,16 @@ public class Canvas extends GameCanvas implements Runnable {
             if (this.escenario.getNivel() == 4) {
                 this.escenario.muevecaza();
             }
+            if (getEscenario().getNivel() != 0) {
+                if (getEscenario().getPuntaje() == 350) {
+                    getEscenario().setPuntaje(0);
+                    if (getEscenario().getNivel() < 3) {
+                        getEscenario().setNivel(getEscenario().getNivel() + 1);
+                    }
+                    getEscenario().inicializa();
+                }
+            }
+
             if (getEscenario().isFin()) {
 
                 getEscenario().setPantalla(1);
