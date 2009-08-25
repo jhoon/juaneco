@@ -4,6 +4,7 @@ import Snake.util.SnakeUtil;
 import javax.microedition.lcdui.Graphics;
 import javax.microedition.lcdui.game.GameCanvas;
 import java.util.Random;
+import javax.microedition.midlet.MIDlet;
 
 public class Canvas extends GameCanvas implements Runnable {
 //clase Random para la aparicion de alimento
@@ -20,14 +21,16 @@ public class Canvas extends GameCanvas implements Runnable {
     private int lado = getWidth();
     private boolean cabeza = false;
     private int puntaje;
+    private MIDlet midlet;
+
+    public Canvas(MIDlet midlet) {
+        super(true);
+        this.midlet = midlet;
+    }
 
     public Canvas() {
         super(true);
-    }
 
-    public Canvas(MidletJuaneco midlet) {
-        super(true);
-        this.midletPadre = midlet;
     }
 
     public void start() {
@@ -36,7 +39,8 @@ public class Canvas extends GameCanvas implements Runnable {
 
         this.getEscenario().inicializa();
         // Se inicializa a juaneco, escenario y comida
-
+        getEscenario().setPantalla(1);
+        getEscenario().setSeleccion(4);
         Thread hilo = new Thread(this);
 
         hilo.start();
@@ -102,7 +106,8 @@ public class Canvas extends GameCanvas implements Runnable {
                 case 3: {
                     g.drawImage(getEscenario().getOpc(), 124, 237, Graphics.VCENTER | Graphics.RIGHT);
                     if ((state & FIRE_PRESSED) != 0) {
-                        getEscenario().setPantalla(3);
+                        midlet.notifyDestroyed();
+
                     }
                     break;
                 }
@@ -110,6 +115,8 @@ public class Canvas extends GameCanvas implements Runnable {
                     g.drawImage(getEscenario().getOpc(), 20, 200, Graphics.VCENTER | Graphics.RIGHT);
                     if ((state & FIRE_PRESSED) != 0) {
                         getEscenario().setPantalla(4);
+                        getEscenario().inicializa();
+                        getEscenario().setFin(false);
                     }
                     break;
                 }
@@ -132,10 +139,11 @@ public class Canvas extends GameCanvas implements Runnable {
         } else if (getEscenario().getPantalla() == 2) {
         } else if (getEscenario().getPantalla() == 3) {
         } else if (getEscenario().getPantalla() == 4) {
-            
+
             if (getEscenario().isConta()) {
                 getEscenario().aleatorionivel();
             }
+
             getEscenario().movcabeza(mov, cabeza, movant, rnd);
 
             if (this.getEscenario().isFin() == false) {
@@ -144,7 +152,12 @@ public class Canvas extends GameCanvas implements Runnable {
             if (this.escenario.getNivel() == 4) {
                 this.escenario.muevecaza();
             }
+            if (getEscenario().isFin()) {
 
+                getEscenario().setPantalla(1);
+
+
+            }
             this.getEscenario().dibuja(g);
             g.setColor(120, 120, 120);
             if (this.escenario.getNivel() != 4) {
@@ -157,6 +170,7 @@ public class Canvas extends GameCanvas implements Runnable {
                 g.drawString("" + getEscenario().caza.getVidas(), 3 * getLado() / 9 + 9, 15 * getHeight() / 16 + 10, Graphics.HCENTER | Graphics.BOTTOM);
 
             }
+
             flushGraphics();
         } else if (getEscenario().getPantalla() == 5) {
         }

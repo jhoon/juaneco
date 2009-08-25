@@ -9,6 +9,7 @@ import Snake.util.SnakeUtil;
 import javax.microedition.lcdui.Graphics;
 import javax.microedition.lcdui.Image;
 import java.util.Random;
+import java.util.Vector;
 
 /**
  *
@@ -34,7 +35,6 @@ public class Escenario {
     Random rnd = new Random();
 //private Image fondoPant;
     private Image nuevoJuego;
- 
     private int lado = 240;
     private int[][] posesc = new int[lado / 16][lado / 16]; // posicion escenario
     private int[] posx = new int[lado / 16];
@@ -49,8 +49,7 @@ public class Escenario {
     }
 
     public void inicializa() {
-        this.setPantalla(1);
-        this.setSeleccion(4);
+
         for (int i = 0; i < lado / 16; i++) {
             for (int j = 0; j < lado / 16; j++) {
                 posx[i] = (8 + 16 * i);
@@ -58,14 +57,12 @@ public class Escenario {
                 posesc[i][j] = 0;
             }
         }
-       this.juaneco_in();
+        this.juaneco.setTronquitoXY(new Vector(0, 1));
+        this.juaneco_in();
 
     }
-    public void juaneco_in(){
-     juaneco.cargaim();
-        animal.cargaanimal(nivel);
-        bono.cargabono(nivel);
 
+    public void juaneco_niv() {
         if (nivel == 0) {
             this.setFondo(SnakeUtil.createImage("/fondoGame.jpg"));
         } else if (nivel == 1) {
@@ -90,6 +87,14 @@ public class Escenario {
             posesc = boss();
             posesc[14][14] = 18;
         }
+    }
+
+    public void juaneco_in() {
+        juaneco.cargaim();
+        animal.cargaanimal(nivel);
+        bono.cargabono(nivel);
+        this.juaneco_niv();
+
         posesc[8][8] = 1;   /*La posicion i=8, j=8 es la cabeza*/
         agregaTronco(8, 9, 3); // Aumenta la cola
         // posesc[8][9] = 9;     /*La posicion i=8, j=9 es el tronco en horizontal*/
@@ -886,8 +891,6 @@ public class Escenario {
     public void setNuevoJuego(Image nuevoJuego) {
         this.nuevoJuego = nuevoJuego;
     }
-
-  
 
     public int getLado() {
         return lado;
