@@ -104,7 +104,12 @@ public class Escenario {
             bono.setPuntaje(50);
             bono.setTiempo(50);
         }
-        juaneco.setVelocidad(100);
+        if (this.getPantalla() == 1) {
+            juaneco.setVelocidad(10);
+        } else {
+            juaneco.setVelocidad(80);
+        }
+
 
     }
 
