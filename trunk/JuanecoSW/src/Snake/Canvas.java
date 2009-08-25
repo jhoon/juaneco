@@ -21,9 +21,10 @@ public class Canvas extends GameCanvas implements Runnable {
     private int lado = getWidth();
     private boolean cabeza = false;
     private int puntaje;
-    private MIDlet midlet;
+    private boolean fifin;
+    private MidletJuaneco midlet;
 
-    public Canvas(MIDlet midlet) {
+    public Canvas(MidletJuaneco midlet) {
         super(true);
         this.midlet = midlet;
     }
@@ -74,20 +75,45 @@ public class Canvas extends GameCanvas implements Runnable {
             getEscenario().setFondo(SnakeUtil.createImage("/pantalla1.jpg"));
             getEscenario().setOpc(SnakeUtil.createImage("/cazador.gif"));
             g.drawImage(getEscenario().getFondo(), lado / 2, 290, Graphics.HCENTER | Graphics.BOTTOM);
+
             if ((state & DOWN_PRESSED) != 0) {
-                if (getEscenario().getSeleccion() <= 5) {
-                    getEscenario().setSeleccion(getEscenario().getSeleccion() + 1);
-                } else {
-                    getEscenario().setSeleccion(1);
+                switch (getEscenario().getSeleccion()) {
+                    case 1:
+                        getEscenario().setSeleccion(2);
+                        break;
+                    case 2:
+                        getEscenario().setSeleccion(3);
+                        break;
+                    case 3:
+                        getEscenario().setSeleccion(4);
+                        break;
+                    case 4:
+                        getEscenario().setSeleccion(5);
+                        break;
+                    case 5:
+                        getEscenario().setSeleccion(1);
+                        break;
+
                 }
             } else if ((state & UP_PRESSED) != 0) {
-                if (getEscenario().getSeleccion() >= 1) {
-                    getEscenario().setSeleccion(getEscenario().getSeleccion() - 1);
-                } else {
-                    getEscenario().setSeleccion(5);
+                switch (getEscenario().getSeleccion()) {
+                    case 1:
+                        getEscenario().setSeleccion(5);
+                        break;
+                    case 2:
+                        getEscenario().setSeleccion(1);
+                        break;
+                    case 3:
+                        getEscenario().setSeleccion(2);
+                        break;
+                    case 4:
+                        getEscenario().setSeleccion(3);
+                        break;
+                    case 5:
+                        getEscenario().setSeleccion(4);
+                        break;
                 }
             }
-
             switch (getEscenario().getSeleccion()) {
                 case 1: {
                     g.drawImage(getEscenario().getOpc(), 20, 252, Graphics.VCENTER | Graphics.RIGHT);
@@ -106,8 +132,8 @@ public class Canvas extends GameCanvas implements Runnable {
                 case 3: {
                     g.drawImage(getEscenario().getOpc(), 124, 237, Graphics.VCENTER | Graphics.RIGHT);
                     if ((state & FIRE_PRESSED) != 0) {
-                        midlet.notifyDestroyed();
 
+                        midlet.destroyApp(true);
                     }
                     break;
                 }
@@ -117,13 +143,17 @@ public class Canvas extends GameCanvas implements Runnable {
                         getEscenario().setPantalla(4);
                         getEscenario().inicializa();
                         getEscenario().setFin(false);
+                        getEscenario().setNivel(0);
                     }
                     break;
                 }
                 case 5: {
                     g.drawImage(getEscenario().getOpc(), 20, 227, Graphics.VCENTER | Graphics.RIGHT);
                     if ((state & FIRE_PRESSED) != 0) {
-                        getEscenario().setPantalla(5);
+                        getEscenario().setFin(false);
+                        getEscenario().setNivel(1);
+                        getEscenario().setPantalla(4);
+                        getEscenario().inicializa();
                     }
                     break;
                 }
@@ -315,6 +345,20 @@ public class Canvas extends GameCanvas implements Runnable {
      */
     public void setEscenario(Escenario escenario) {
         this.escenario = escenario;
+    }
+
+    /**
+     * @return the fifin
+     */
+    public boolean isFifin() {
+        return fifin;
+    }
+
+    /**
+     * @param fifin the fifin to set
+     */
+    public void setFifin(boolean fifin) {
+        this.fifin = fifin;
     }
 }
 
