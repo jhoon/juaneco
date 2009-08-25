@@ -26,6 +26,8 @@ public class Escenario {
     private int puntaje;
     private int dimensiones;
     private int nivel;
+    private int pantalla;
+    private int seleccion;
     private Image Boss;
     private Image fondo;
     private boolean fin;
@@ -973,5 +975,21 @@ public class Escenario {
      */
     public void setContador(int contador) {
         this.contador = contador;
+    }
+
+    public int getPantalla() {
+        return pantalla;
+    }
+
+    public void setPantalla(int pantalla) {
+        this.pantalla = pantalla;
+    }
+
+    public int getSeleccion() {
+        return seleccion;
+    }
+
+    public void setSeleccion(int seleccion) {
+        this.seleccion = seleccion;
     }
 }
