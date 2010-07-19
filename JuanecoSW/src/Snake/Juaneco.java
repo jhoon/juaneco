@@ -43,21 +43,21 @@ public class Juaneco extends Personajes {
     }
 
     public void cargaim() {
-        this.setCabezaIzq(SnakeUtil.createImage("/cabeza1.gif"));
-        this.setCabezaAba(SnakeUtil.createImage("/cabeza4.gif"));
-        this.setCabezaDer(SnakeUtil.createImage("/cabeza3.gif"));
-        this.setCabezaArr(SnakeUtil.createImage("/cabeza2.gif"));
-        this.setTroncoH(SnakeUtil.createImage("/cuerpoh.gif"));
-        this.setTroncoV(SnakeUtil.createImage("/cuerpov.gif"));
-        this.setCodo1(SnakeUtil.createImage("/cod1.gif"));
-        this.setCodo2(SnakeUtil.createImage("/cod2.gif"));
-        this.setCodo3(SnakeUtil.createImage("/cod3.gif"));
-        this.setCodo4(SnakeUtil.createImage("/cod4.gif"));
-        this.setColaDer(SnakeUtil.createImage("/col1.gif"));
-        this.setColaAba(SnakeUtil.createImage("/col2.gif"));
-        this.setColaIzq(SnakeUtil.createImage("/col3.gif"));
-        this.setColaArr(SnakeUtil.createImage("/col4.gif"));
-        this.setBarril(SnakeUtil.createImage("/disparo.gif"));
+        this.setCabezaIzq(SnakeUtil.createImage("/cabeza1.JPG"));
+        this.setCabezaAba(SnakeUtil.createImage("/cabeza4.jpg"));
+        this.setCabezaDer(SnakeUtil.createImage("/cabeza3.jpg"));
+        this.setCabezaArr(SnakeUtil.createImage("/cabeza2.jpg"));
+        this.setTroncoH(SnakeUtil.createImage("/cuerpoh.jpg"));
+        this.setTroncoV(SnakeUtil.createImage("/cuerpov.jpg"));
+        this.setCodo1(SnakeUtil.createImage("/cod1.jpg"));
+        this.setCodo2(SnakeUtil.createImage("/cod2.jpg"));
+        this.setCodo3(SnakeUtil.createImage("/cod3.jpg"));
+        this.setCodo4(SnakeUtil.createImage("/cod4.jpg"));
+        this.setColaDer(SnakeUtil.createImage("/col1.jpg"));
+        this.setColaAba(SnakeUtil.createImage("/col2.jpg"));
+        this.setColaIzq(SnakeUtil.createImage("/col3.jpg"));
+        this.setColaArr(SnakeUtil.createImage("/col4.jpg"));
+        this.setBarril(SnakeUtil.createImage("/disparo.jpg"));
         this.setCabeza(this.getCabezaArr());
 
     }

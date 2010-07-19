@@ -73,7 +73,7 @@ public class Canvas extends GameCanvas implements Runnable {
         int state = getKeyStates();
         if (getEscenario().getPantalla() == 1) {
             getEscenario().setFondo(SnakeUtil.createImage("/pantalla1.jpg"));
-            getEscenario().setOpc(SnakeUtil.createImage("/cazador.gif"));
+            getEscenario().setOpc(SnakeUtil.createImage("/cazador.jpg"));
             g.drawImage(getEscenario().getFondo(), lado / 2, 290, Graphics.HCENTER | Graphics.BOTTOM);
 
             if ((state & DOWN_PRESSED) != 0) {

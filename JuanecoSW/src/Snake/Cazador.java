@@ -23,8 +23,8 @@ public class Cazador extends Personajes {
     }
 
     public void cargaimagen() {
-        this.setCazador(SnakeUtil.createImage("/cazador.gif"));
-        this.setBala(SnakeUtil.createImage("/bala.gif"));
+        this.setCazador(SnakeUtil.createImage("/cazador.jpg"));
+        this.setBala(SnakeUtil.createImage("/bala.jpg"));
 
     }
 
