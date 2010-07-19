@@ -28,11 +28,11 @@ public class Bonos extends Animales {
             tipo = (a.nextInt(2) + 1);
         }
         if (tipo == 1) {
-            this.setBono(SnakeUtil.createImage("/gallito.gif"));
+            this.setBono(SnakeUtil.createImage("/gallito.jpg"));
         } else if (tipo == 2) {
-            this.setBono(SnakeUtil.createImage("/conejo.gif"));
+            this.setBono(SnakeUtil.createImage("/conejo.jpg"));
         } else if (tipo == 3) {
-            this.setBono(SnakeUtil.createImage("/gato.gif"));
+            this.setBono(SnakeUtil.createImage("/gato.jpg"));
         }
     }
 

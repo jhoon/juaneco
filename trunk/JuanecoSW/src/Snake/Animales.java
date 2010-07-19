@@ -29,13 +29,13 @@ public class Animales extends Personajes {
             tipo = (a.nextInt(2) + 1);
         }
         if (tipo == 1) {
-            this.setFigura(SnakeUtil.createImage("/vizcacha.gif"));
+            this.setFigura(SnakeUtil.createImage("/vizcacha.jpg"));
         } else if (tipo == 2) {
-            this.setFigura(SnakeUtil.createImage("/cuy.gif"));
+            this.setFigura(SnakeUtil.createImage("/cuy.jpg"));
         } else if (tipo == 3) {
-            this.setFigura(SnakeUtil.createImage("/raton.gif"));
+            this.setFigura(SnakeUtil.createImage("/raton.jpg"));
         } else if (tipo == 4) {
-            this.setFigura(SnakeUtil.createImage("/barril.gif"));
+            this.setFigura(SnakeUtil.createImage("/barril.jpg"));
         }
 
 

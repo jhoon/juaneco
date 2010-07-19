@@ -24,19 +24,19 @@ public class Obstaculos extends ElementoJuego {
     public void inicializar(int tipo) {
 
         if (tipo == 1) {
-            this.setObstaculo(SnakeUtil.createImage("/rio.gif"));
-            this.setObstaculo2(SnakeUtil.createImage("/selva_obs.gif"));
+            this.setObstaculo(SnakeUtil.createImage("/rio.jpg"));
+            this.setObstaculo2(SnakeUtil.createImage("/selva_obs.jpg"));
 
         // falta la matriz
         } else if (tipo == 2) {
-            this.setObstaculo(SnakeUtil.createImage("/sierra_obs.gif"));
-            this.setObstaculo2(SnakeUtil.createImage("/huayco.gif"));
+            this.setObstaculo(SnakeUtil.createImage("/sierra_obs.jpg"));
+            this.setObstaculo2(SnakeUtil.createImage("/huayco.jpg"));
 
         // falta la matriz
         }
         if (tipo == 3) {
-            this.setObstaculo(SnakeUtil.createImage("/costa_obs.gif"));
-            this.setObstaculo2(SnakeUtil.createImage("/terremoto.gif"));
+            this.setObstaculo(SnakeUtil.createImage("/costa_obs.jpg"));
+            this.setObstaculo2(SnakeUtil.createImage("/terremoto.jpg"));
 
         // falta la matriz
         }
